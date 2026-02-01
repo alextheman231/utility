@@ -16,5 +16,4 @@ jobs:
     uses: alextheman231/github-actions/.github/workflows/package-ci.yml@bc9ba5ec23e1006779c9d2971718a32a58fc0b85 # v8.1.0
 
   actions-ci:
-    if: ${{ github.head_ref != 'alex-up-bot/change-major-version' && github.head_ref != 'alex-up-bot/change-minor-version' && github.head_ref != 'alex-up-bot/change-patch-version' }}
     uses: alextheman231/github-actions/.github/workflows/actions-ci.yml@bc9ba5ec23e1006779c9d2971718a32a58fc0b85 # v8.1.0
