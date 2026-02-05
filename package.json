@@ -55,10 +55,12 @@
     "alex-c-line": "^1.22.1",
     "dotenv-cli": "^11.0.0",
     "eslint": "^9.39.2",
+    "execa": "^9.6.1",
     "globals": "^17.2.0",
     "husky": "^9.1.7",
     "jsdom": "^27.4.0",
     "prettier": "^3.8.1",
+    "tempy": "^3.2.0",
     "tsdown": "^0.20.1",
     "typedoc": "^0.28.16",
     "typescript": "^5.9.3",
@@ -67,7 +69,7 @@
   },
   "packageManager": "pnpm@10.28.2+sha512.41872f037ad22f7348e3b1debbaf7e867cfd448f2726d9cf74c08f19507c31d2c8e7a11525b983febc2df640b5438dee6023ebb1f84ed43cc2d654d2bc326264",
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=22.3.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
