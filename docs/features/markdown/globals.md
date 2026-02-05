@@ -1,8 +1,8 @@
-[**@alextheman/utility v4.12.3**](README.md)
+[**@alextheman/utility v4.13.0**](README.md)
 
 ***
 
-# @alextheman/utility v4.12.3
+# @alextheman/utility v4.13.0
 
 ## Array Helpers
 
@@ -58,6 +58,7 @@
 - [~~incrementVersion~~](functions/incrementVersion.md)
 - [~~parseVersion~~](functions/parseVersion.md)
 - [removeUndefinedFromObject](functions/removeUndefinedFromObject.md)
+- [sayHello](functions/sayHello.md)
 - [stringifyDotenv](functions/stringifyDotenv.md)
 
 ## Parsers

@@ -1,4 +1,4 @@
-[**@alextheman/utility v4.12.3**](../README.md)
+[**@alextheman/utility v4.13.0**](../README.md)
 
 ***
 
@@ -78,7 +78,7 @@ Returns the public key and private key, properly narrowing down types depending 
 
 The format of the resulting publicKey and privateKey you would like to use.
 
-`"text"` | `"hex"` | `"base64"`
+`"hex"` | `"base64"` | `"text"`
 
 ### Returns
 
