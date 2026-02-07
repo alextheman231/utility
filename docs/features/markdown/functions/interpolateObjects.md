@@ -1,4 +1,4 @@
-[**@alextheman/utility v4.13.0**](../README.md)
+[**@alextheman/utility v4.14.0**](../README.md)
 
 ***
 
@@ -6,15 +6,23 @@
 
 # Function: interpolateObjects()
 
-> **interpolateObjects**(`strings`, ...`interpolations`): `string`
+> **interpolateObjects**\<`InterpolationsType`\>(`strings`, ...`interpolations`): `string`
 
 Returns the result of interpolating a template string, also stringifying objects.
 
 You can pass a template string directly by doing:
 
 ```typescript
-interpolateObjects`Template string here ${{ my: "object" }}`.
+interpolateObjects`Template string here ${{ my: "object" }}`;
 ```
+
+## Type Parameters
+
+### InterpolationsType
+
+`InterpolationsType` *extends* readonly `unknown`[]
+
+The type of the interpolations.
 
 ## Parameters
 
@@ -26,7 +34,7 @@ The strings from the template to process.
 
 ### interpolations
 
-...`unknown`[]
+...`InterpolationsType`
 
 An array of all interpolations from the template.
 

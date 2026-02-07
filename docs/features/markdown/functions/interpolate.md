@@ -1,4 +1,4 @@
-[**@alextheman/utility v4.13.0**](../README.md)
+[**@alextheman/utility v4.14.0**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Function: interpolate()
 
-> **interpolate**(`strings`, ...`interpolations`): `string`
+> **interpolate**\<`InterpolationsType`\>(`strings`, ...`interpolations`): `string`
 
 Returns the result of interpolating a template string when given the strings and interpolations separately.
 
@@ -18,6 +18,14 @@ interpolate`Template string here`;
 
 In this case, it will be functionally the same as if you just wrote the template string by itself.
 
+## Type Parameters
+
+### InterpolationsType
+
+`InterpolationsType` *extends* readonly `unknown`[]
+
+The type of the interpolations.
+
 ## Parameters
 
 ### strings
@@ -28,7 +36,7 @@ The strings from the template to process.
 
 ### interpolations
 
-...`unknown`[]
+...`InterpolationsType`
 
 An array of all interpolations from the template.
 
