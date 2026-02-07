@@ -13,12 +13,17 @@ import paralleliseArrays from "src/functions/arrayHelpers/paralleliseArrays";
  *
  * @category Tagged Template
  *
+ * @template InterpolationsType - The type of the interpolations.
+ *
  * @param strings - The strings from the template to process.
  * @param interpolations - An array of all interpolations from the template.
  *
  * @returns A new string with the strings and interpolations from the template applied.
  */
-function interpolate(strings: TemplateStringsArray, ...interpolations: unknown[]): string {
+function interpolate<const InterpolationsType extends readonly unknown[]>(
+  strings: TemplateStringsArray,
+  ...interpolations: InterpolationsType
+): string {
   let result = "";
   for (const [string, interpolation = ""] of paralleliseArrays(strings, interpolations)) {
     result += string + interpolation;
