@@ -1,4 +1,4 @@
-[**@alextheman/utility v4.13.0**](../README.md)
+[**@alextheman/utility v4.14.0**](../README.md)
 
 ***
 
@@ -13,7 +13,7 @@ You can pass a template string directly by doing:
 ```typescript
 normaliseIndents`Template string here
     with a new line
-    and another new line`.
+    and another new line`;
 ```
 
 You may also pass the options first, then invoke the resulting function with a template string:
@@ -21,7 +21,7 @@ You may also pass the options first, then invoke the resulting function with a t
 ```typescript
 normaliseIndents({ preserveTabs: false })`Template string here
     with a new line
-    and another new line`.
+    and another new line`;
 ```
 
 ## Param
@@ -63,7 +63,7 @@ You can pass a template string directly by doing:
 ```typescript
 normaliseIndents`Template string here
     with a new line
-    and another new line`.
+    and another new line`;
 ```
 
 ### Parameters

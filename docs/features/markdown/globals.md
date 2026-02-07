@@ -1,8 +1,8 @@
-[**@alextheman/utility v4.13.0**](README.md)
+[**@alextheman/utility v4.14.0**](README.md)
 
 ***
 
-# @alextheman/utility v4.13.0
+# @alextheman/utility v4.14.0
 
 ## Array Helpers
 
@@ -90,9 +90,11 @@
 
 - [normalizeIndents](variables/normalizeIndents.md)
 - [createTemplateStringsArray](functions/createTemplateStringsArray.md)
-- [getInterpolations](functions/getInterpolations.md)
+- [~~getInterpolations~~](functions/getInterpolations.md)
+- [getStringsAndInterpolations](functions/getStringsAndInterpolations.md)
 - [interpolate](functions/interpolate.md)
 - [interpolateObjects](functions/interpolateObjects.md)
+- [isTemplateStringsArray](functions/isTemplateStringsArray.md)
 - [normaliseIndents](functions/normaliseIndents.md)
 
 ## Types

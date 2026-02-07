@@ -1,10 +1,10 @@
-[**@alextheman/utility v4.13.0**](../README.md)
+[**@alextheman/utility v4.14.0**](../README.md)
 
 ***
 
 [@alextheman/utility](../globals.md) / getInterpolations
 
-# Function: getInterpolations()
+# ~~Function: getInterpolations()~~
 
 > **getInterpolations**(`strings`, ...`interpolations`): \[`TemplateStringsArray`, `unknown`[]\]
 
@@ -34,3 +34,7 @@ An array of all interpolations from the template.
 \[`TemplateStringsArray`, `unknown`[]\]
 
 A tuple where the first item is the strings from the template, and the second is the interpolations.
+
+## Deprecated
+
+Please use `getStringsAndInterpolations` instead.
