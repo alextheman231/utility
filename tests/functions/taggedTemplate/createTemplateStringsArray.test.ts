@@ -8,6 +8,12 @@ describe("createTemplateStringsArray", () => {
     expectTypeOf(strings).toEqualTypeOf<TemplateStringsArray>();
     expect(strings.raw).toEqual(["Hello", "world", "test"]);
   });
+  test("Returns the same TemplateStringsArray when input is already a TemplateStringsArray", () => {
+    const strings = createTemplateStringsArray(["Hello", "world", "test"]);
+    const secondCall = createTemplateStringsArray(strings);
+    expectTypeOf(secondCall).toEqualTypeOf<TemplateStringsArray>();
+    expect(secondCall.raw).toEqual(["Hello", "world", "test"]);
+  });
   describe("Immutability checks", () => {
     test("Does not mutate the input", () => {
       const input = Object.freeze(["Hello", "world", "test"]);
