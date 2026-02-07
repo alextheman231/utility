@@ -75,10 +75,10 @@ function normaliseIndents(options: NormaliseIndentsOptions): NormaliseIndentsFun
  * ```typescript
  * normaliseIndents`Template string here
  *     with a new line
- *     and another new line`.
+ *     and another new line`;
  * ```
  *
- *@category Tagged Template
+ * @template InterpolationsType - The type of the interpolations.
  *
  * @param strings - The strings from the template to process.
  * @param interpolations - An array of all interpolations from the template.
@@ -95,7 +95,7 @@ function normaliseIndents(strings: TemplateStringsArray, ...interpolations: unkn
  * ```typescript
  * normaliseIndents`Template string here
  *     with a new line
- *     and another new line`.
+ *     and another new line`;
  * ```
  *
  * You may also pass the options first, then invoke the resulting function with a template string:
@@ -103,10 +103,10 @@ function normaliseIndents(strings: TemplateStringsArray, ...interpolations: unkn
  * ```typescript
  * normaliseIndents({ preserveTabs: false })`Template string here
  *     with a new line
- *     and another new line`.
+ *     and another new line`;
  * ```
  *
- *@category Tagged Template
+ * @category Tagged Template
  *
  * @param first - The strings from the template to process, or the options to apply.
  * @param args - An array of all interpolations from the template.
