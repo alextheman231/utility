@@ -1,5 +1,6 @@
 export { default as createTemplateStringsArray } from "src/functions/taggedTemplate/createTemplateStringsArray";
 export { default as getInterpolations } from "src/functions/taggedTemplate/getInterpolations";
+export { default as getStringsAndInterpolations } from "src/functions/taggedTemplate/getStringsAndInterpolations";
 export { default as interpolate } from "src/functions/taggedTemplate/interpolate";
 export { default as interpolateObjects } from "src/functions/taggedTemplate/interpolateObjects";
 export {

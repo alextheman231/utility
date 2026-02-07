@@ -1,4 +1,5 @@
 /**
+ *
  * Gets the strings and interpolations separately from a template string.
  * You can pass a template string directly by doing:
  *
@@ -7,6 +8,8 @@
  * ```
  *
  * @category Tagged Template
+ *
+ * @deprecated Please use `getStringsAndInterpolations` instead.
  *
  * @param strings - The strings from the template to process.
  * @param interpolations - An array of all interpolations from the template.
