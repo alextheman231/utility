@@ -7,7 +7,7 @@ import { DataError } from "src/types";
  * You can pass a template string directly by doing:
  *
  * ```typescript
- * getStringsAndInterpolations`Template string here`.
+ * getStringsAndInterpolations`Template string here`;
  * ```
  *
  * @category Tagged Template
