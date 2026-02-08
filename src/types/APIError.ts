@@ -48,6 +48,10 @@ class APIError extends Error {
    * @returns `true` if the input is an APIError, and `false` otherwise. The type of the input will also be narrowed down to APIError if `true`.
    */
   public static check(input: unknown): input is APIError {
+    if (input instanceof APIError) {
+      return true;
+    }
+
     const data: any = input;
     return (
       typeof data === "object" &&

@@ -40,6 +40,10 @@ class DataError extends Error {
    * @returns `true` if the input is a DataError, and `false` otherwise. The type of the input will also be narrowed down to DataError if `true`.
    */
   public static check(input: unknown): input is DataError {
+    if (input instanceof DataError) {
+      return true;
+    }
+
     const data: any = input;
     return (
       typeof data === "object" &&
