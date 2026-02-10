@@ -1,3 +1,5 @@
+import z from "zod";
+
 import { VERSION_NUMBER_REGEX } from "src/constants";
 import { parseIntStrict, VersionType } from "src/functions";
 import DataError from "src/types/DataError";
@@ -162,5 +164,11 @@ class VersionNumber {
     return VersionNumber.formatString(rawString, options);
   }
 }
+
+export const zodVersionNumber: z.ZodType<VersionNumber> = z
+  .union([z.string(), z.tuple([z.number(), z.number(), z.number()]), z.instanceof(VersionNumber)])
+  .transform((rawVersionNumber) => {
+    return new VersionNumber(rawVersionNumber);
+  });
 
 export default VersionNumber;
