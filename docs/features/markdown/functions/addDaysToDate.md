@@ -1,4 +1,4 @@
-[**@alextheman/utility v4.14.1**](../README.md)
+[**@alextheman/utility v4.15.0**](../README.md)
 
 ***
 
@@ -6,19 +6,19 @@
 
 # Function: addDaysToDate()
 
-> **addDaysToDate**(`currentDate`, `dayIncrement`): `Date`
+> **addDaysToDate**(`currentDate?`, `dayIncrement?`): `Date`
 
 Adds a given number of days to the provided date, returning the result as a new instance of Date.
 
 ## Parameters
 
-### currentDate
+### currentDate?
 
 `Date` = `...`
 
 The starting date (defaults to today).
 
-### dayIncrement
+### dayIncrement?
 
 `number` = `1`
 

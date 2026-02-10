@@ -1,4 +1,4 @@
-[**@alextheman/utility v4.14.1**](../README.md)
+[**@alextheman/utility v4.15.0**](../README.md)
 
 ***
 
@@ -16,7 +16,7 @@ Represents errors you may get that may've been caused by a specific piece of dat
 
 ### Constructor
 
-> **new DataError**(`data`, `code`, `message`, `options?`): `DataError`
+> **new DataError**(`data`, `code?`, `message?`, `options?`): `DataError`
 
 #### Parameters
 
@@ -26,13 +26,13 @@ Represents errors you may get that may've been caused by a specific piece of dat
 
 The data that caused the error.
 
-##### code
+##### code?
 
 `string` = `"INVALID_DATA"`
 
 A standardised code (e.g. UNEXPECTED_DATA).
 
-##### message
+##### message?
 
 `string` = `"The data provided is invalid"`
 

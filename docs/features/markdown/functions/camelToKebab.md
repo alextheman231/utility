@@ -1,4 +1,4 @@
-[**@alextheman/utility v4.14.1**](../README.md)
+[**@alextheman/utility v4.15.0**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Function: camelToKebab()
 
-> **camelToKebab**(`string`, `options`): `string`
+> **camelToKebab**(`string`, `options?`): `string`
 
 Converts a string from camelCase to kebab-case
 
@@ -18,7 +18,7 @@ Converts a string from camelCase to kebab-case
 
 The string to convert.
 
-### options
+### options?
 
 [`CamelToKebabOptions`](../interfaces/CamelToKebabOptions.md) = `...`
 

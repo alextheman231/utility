@@ -1,4 +1,4 @@
-[**@alextheman/utility v4.14.1**](../README.md)
+[**@alextheman/utility v4.15.0**](../README.md)
 
 ***
 
@@ -16,11 +16,11 @@ Represents common errors you may get from a HTTP API request.
 
 ### Constructor
 
-> **new APIError**(`status`, `message?`, `options?`): `APIError`
+> **new APIError**(`status?`, `message?`, `options?`): `APIError`
 
 #### Parameters
 
-##### status
+##### status?
 
 `number` = `500`
 

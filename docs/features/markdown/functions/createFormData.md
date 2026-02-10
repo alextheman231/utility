@@ -1,4 +1,4 @@
-[**@alextheman/utility v4.14.1**](../README.md)
+[**@alextheman/utility v4.15.0**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Function: createFormData()
 
-> **createFormData**\<`DataType`\>(`data`, `options`): `FormData`
+> **createFormData**\<`DataType`\>(`data`, `options?`): `FormData`
 
 Creates FormData from a given object, resolving non-string types as appropriate.
 
@@ -26,7 +26,7 @@ The type of the given data.
 
 The data to create FormData from.
 
-### options
+### options?
 
 [`CreateFormDataOptions`](../type-aliases/CreateFormDataOptions.md)\<keyof `DataType`\> = `...`
 
