@@ -1,4 +1,4 @@
-[**@alextheman/utility v4.14.1**](../README.md)
+[**@alextheman/utility v4.15.0**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Function: truncate()
 
-> **truncate**(`stringToTruncate`, `maxLength`): `string`
+> **truncate**(`stringToTruncate`, `maxLength?`): `string`
 
 Truncates a string and appends `...` to the end of it
 
@@ -18,7 +18,7 @@ Truncates a string and appends `...` to the end of it
 
 The string to truncate.
 
-### maxLength
+### maxLength?
 
 `number` = `5`
 

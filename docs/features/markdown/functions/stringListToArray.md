@@ -1,4 +1,4 @@
-[**@alextheman/utility v4.14.1**](../README.md)
+[**@alextheman/utility v4.15.0**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Function: stringListToArray()
 
-> **stringListToArray**(`stringList`, `options`): `string`[]
+> **stringListToArray**(`stringList`, `options?`): `string`[]
 
 Converts a stringly-typed list to a proper array.
 
@@ -18,7 +18,7 @@ Converts a stringly-typed list to a proper array.
 
 The stringly-typed list to convert.
 
-### options
+### options?
 
 [`StringListToArrayOptions`](../interfaces/StringListToArrayOptions.md) = `{}`
 

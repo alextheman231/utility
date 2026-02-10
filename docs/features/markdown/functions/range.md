@@ -1,4 +1,4 @@
-[**@alextheman/utility v4.14.1**](../README.md)
+[**@alextheman/utility v4.15.0**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Function: range()
 
-> **range**(`start`, `stop`, `step`): `number`[]
+> **range**(`start`, `stop`, `step?`): `number`[]
 
 Creates an array of numbers within a given range.
 
@@ -27,7 +27,7 @@ The number to start at (inclusive).
 
 The number to stop at (exclusive).
 
-### step
+### step?
 
 `number` = `1`
 
