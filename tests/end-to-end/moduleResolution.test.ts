@@ -7,11 +7,14 @@ import { describe, expect, test as testVitest } from "vitest";
 import { cp, writeFile } from "node:fs/promises";
 import path from "node:path";
 
+import getDependenciesFromGroup from "tests/end-to-end/helpers/getDependenciesFromGroup";
 import getExpectedTgzName from "tests/end-to-end/helpers/getExpectedTgzName";
 import getPackageJsonContents from "tests/end-to-end/helpers/getPackageJsonContents";
 
 import { normaliseIndents, parseBoolean } from "src/functions";
 import { DataError } from "src/types";
+
+import utilityPackageInfo from "package.json" with { type: "json" };
 
 const ModuleType = {
   COMMON_JS: "commonjs",
@@ -89,7 +92,11 @@ describe.each<PackageManager>([PackageManager.NPM, PackageManager.PNPM])(
           }
 
           if (moduleType === ModuleType.TYPESCRIPT) {
-            await runCommandInTempDirectory`${packageManager} install --save-dev tsx`;
+            const { tsx: tsxVersion } = getDependenciesFromGroup(
+              utilityPackageInfo,
+              "devDependencies",
+            );
+            await runCommandInTempDirectory`${packageManager} install --save-dev tsx@${tsxVersion}`;
             const executable = { npm: "npx", pnpm: "pnpx" }[packageManager];
             const { exitCode, stdout: result } =
               await runCommandInTempDirectory`${executable} tsx ${codeFileName}`;
