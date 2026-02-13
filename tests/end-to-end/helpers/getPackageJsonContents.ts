@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 // eslint-disable-next-line jsdoc/require-jsdoc
-async function getPackageJsonContents(directory: string): Promise<Record<string, string> | null> {
+async function getPackageJsonContents(directory: string): Promise<Record<string, any> | null> {
   try {
     return JSON.parse(
       await readFile(
