@@ -2,7 +2,7 @@ import type { CreateEnumType } from "src/types";
 
 import { execa } from "execa";
 import { temporaryDirectoryTask } from "tempy";
-import { describe, expect, test } from "vitest";
+import { describe, expect, test as testVitest } from "vitest";
 
 import { cp, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -10,7 +10,7 @@ import path from "node:path";
 import getExpectedTgzName from "tests/end-to-end/helpers/getExpectedTgzName";
 import getPackageJsonContents from "tests/end-to-end/helpers/getPackageJsonContents";
 
-import { normaliseIndents } from "src/functions";
+import { normaliseIndents, parseBoolean } from "src/functions";
 import { DataError } from "src/types";
 
 const ModuleType = {
@@ -27,6 +27,8 @@ export const PackageManager = {
 } as const;
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export type PackageManager = CreateEnumType<typeof PackageManager>;
+
+const test = parseBoolean(process.env.RUN_END_TO_END ?? "false") ? testVitest : testVitest.skip;
 
 describe("Entrypoints", () => {
   test.each([
