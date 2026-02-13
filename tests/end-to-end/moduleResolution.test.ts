@@ -30,115 +30,78 @@ export type PackageManager = CreateEnumType<typeof PackageManager>;
 
 const test = parseBoolean(process.env.RUN_END_TO_END ?? "false") ? testVitest : testVitest.skip;
 
-describe("Entrypoints", () => {
-  test.each([
-    [
-      ModuleType.COMMON_JS,
-      PackageManager.NPM,
-      normaliseIndents`
-                const { sayHello } = require("@alextheman/utility");
+function getCodeString(moduleType: ModuleType): string {
+  return normaliseIndents`
+    ${
+      moduleType === ModuleType.COMMON_JS
+        ? 'const { sayHello } = require("@alextheman/utility");'
+        : 'import { sayHello } from "@alextheman/utility";'
+    }
 
-                console.log(sayHello());
-            `,
-    ],
-    [
-      ModuleType.ES_MODULES,
-      PackageManager.NPM,
-      normaliseIndents`
-                import { sayHello } from "@alextheman/utility";
+    console.log(sayHello());
+  `;
+}
 
-                console.log(sayHello());
-            `,
-    ],
-    [
-      ModuleType.TYPESCRIPT,
-      PackageManager.NPM,
-      normaliseIndents`
-                import { sayHello } from "@alextheman/utility";
+describe.each<PackageManager>([PackageManager.NPM, PackageManager.PNPM])(
+  "Entrypoints for %s",
+  async (packageManager) => {
+    await execa({ cwd: process.cwd() })`${packageManager} pack`;
+    const tgzFileName = await getExpectedTgzName(process.cwd(), packageManager);
 
-                console.log(sayHello());
-            `,
-    ],
-    [
-      ModuleType.COMMON_JS,
-      PackageManager.PNPM,
-      normaliseIndents`
-                const { sayHello } = require("@alextheman/utility");
+    test.each<ModuleType>([ModuleType.COMMON_JS, ModuleType.ES_MODULES, ModuleType.TYPESCRIPT])(
+      "The package resolves correctly under module %s",
+      async (moduleType) => {
+        const code = getCodeString(moduleType);
 
-                console.log(sayHello());
-            `,
-    ],
-    [
-      ModuleType.ES_MODULES,
-      PackageManager.PNPM,
-      normaliseIndents`
-                import { sayHello } from "@alextheman/utility";
+        await temporaryDirectoryTask(async (temporaryPath) => {
+          const runCommandInTempDirectory = execa({ cwd: temporaryPath });
+          await cp(path.join(process.cwd(), tgzFileName), path.join(temporaryPath, tgzFileName));
 
-                console.log(sayHello());
-            `,
-    ],
-    [
-      ModuleType.TYPESCRIPT,
-      PackageManager.PNPM,
-      normaliseIndents`
-                import { sayHello } from "@alextheman/utility";
+          if (packageManager === PackageManager.NPM) {
+            await runCommandInTempDirectory`npm init -y`;
+          } else {
+            await runCommandInTempDirectory`pnpm init`;
+          }
+          const packageInfo = await getPackageJsonContents(temporaryPath);
 
-                console.log(sayHello());
-            `,
-    ],
-  ])(
-    "The package resolves correctly under module %s with package manager %s",
-    async (moduleType, packageManager, code) => {
-      await execa({ cwd: process.cwd() })`${packageManager} pack`;
-      const tgzFileName = await getExpectedTgzName(process.cwd(), packageManager);
-      await temporaryDirectoryTask(async (temporaryPath) => {
-        const runCommandInTempDirectory = execa({ cwd: temporaryPath });
-        await cp(path.join(process.cwd(), tgzFileName), path.join(temporaryPath, tgzFileName));
+          if (packageInfo === null) {
+            throw new DataError(
+              { packageInfo },
+              "PACKAGE_JSON_NOT_FOUND",
+              "Could not find package.json in temporary directory.",
+            );
+          }
+          packageInfo.type =
+            moduleType === ModuleType.TYPESCRIPT ? ModuleType.ES_MODULES : moduleType;
 
-        if (packageManager === PackageManager.NPM) {
-          await runCommandInTempDirectory`npm init -y`;
-        } else {
-          await runCommandInTempDirectory`pnpm init`;
-        }
-        const packageInfo = await getPackageJsonContents(temporaryPath);
-
-        if (packageInfo === null) {
-          throw new DataError(
-            { packageInfo },
-            "PACKAGE_JSON_NOT_FOUND",
-            "Could not find package.json in temporary directory.",
+          await writeFile(
+            path.join(temporaryPath, "package.json"),
+            JSON.stringify(packageInfo, null, 2),
           );
-        }
-        packageInfo.type =
-          moduleType === ModuleType.TYPESCRIPT ? ModuleType.ES_MODULES : moduleType;
+          await runCommandInTempDirectory`${packageManager} install ${path.join(temporaryPath, tgzFileName)}`;
 
-        await writeFile(
-          path.join(temporaryPath, "package.json"),
-          JSON.stringify(packageInfo, null, 2),
-        );
-        await runCommandInTempDirectory`${packageManager} install ${path.join(temporaryPath, tgzFileName)}`;
+          const codeFileName = `sayHello.${moduleType === ModuleType.TYPESCRIPT ? "ts" : "js"}`;
+          await writeFile(path.join(temporaryPath, codeFileName), code);
 
-        const codeFileName = `sayHello.${moduleType === ModuleType.TYPESCRIPT ? "ts" : "js"}`;
-        await writeFile(path.join(temporaryPath, codeFileName), code);
+          function assert(exitCode: number | undefined, result: string) {
+            expect(exitCode).toBe(0);
+            expect(result.trim()).toContain("I'll commit to you");
+          }
 
-        function assert(exitCode: number | undefined, result: string) {
-          expect(exitCode).toBe(0);
-          expect(result.trim()).toContain("I'll commit to you");
-        }
-
-        if (moduleType === ModuleType.TYPESCRIPT) {
-          await runCommandInTempDirectory`${packageManager} install --save-dev tsx`;
-          const executable = { npm: "npx", pnpm: "pnpx" }[packageManager];
-          const { exitCode, stdout: result } =
-            await runCommandInTempDirectory`${executable} tsx ${codeFileName}`;
-          assert(exitCode, result);
-        } else {
-          const { exitCode, stdout: result } =
-            await runCommandInTempDirectory`node ${codeFileName}`;
-          assert(exitCode, result);
-        }
-      });
-    },
-    30000,
-  );
-});
+          if (moduleType === ModuleType.TYPESCRIPT) {
+            await runCommandInTempDirectory`${packageManager} install --save-dev tsx`;
+            const executable = { npm: "npx", pnpm: "pnpx" }[packageManager];
+            const { exitCode, stdout: result } =
+              await runCommandInTempDirectory`${executable} tsx ${codeFileName}`;
+            assert(exitCode, result);
+          } else {
+            const { exitCode, stdout: result } =
+              await runCommandInTempDirectory`node ${codeFileName}`;
+            assert(exitCode, result);
+          }
+        });
+      },
+      30000,
+    );
+  },
+);
