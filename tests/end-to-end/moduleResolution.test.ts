@@ -10,6 +10,7 @@ import path from "node:path";
 import getDependenciesFromGroup from "tests/end-to-end/helpers/getDependenciesFromGroup";
 import getExpectedTgzName from "tests/end-to-end/helpers/getExpectedTgzName";
 import getPackageJsonContents from "tests/end-to-end/helpers/getPackageJsonContents";
+import getPackageJsonPath from "tests/end-to-end/helpers/getPackageJsonPath";
 
 import { normaliseIndents, parseBoolean } from "src/functions";
 import { DataError } from "src/types";
@@ -45,6 +46,14 @@ function getCodeString(moduleType: ModuleType): string {
   `;
 }
 
+function packageJsonNotFoundError(packagePath: string) {
+  return new DataError(
+    { packagePath: getPackageJsonPath(packagePath) },
+    "PACKAGE_JSON_NOT_FOUND",
+    "Could not find package.json in temporary directory.",
+  );
+}
+
 describe.each<PackageManager>(["npm", "pnpm"])("Entrypoints for %s", (packageManager) => {
   test.each<ModuleType>(["commonjs", "module", "typescript"])(
     "The package resolves correctly under module %s",
@@ -66,11 +75,7 @@ describe.each<PackageManager>(["npm", "pnpm"])("Entrypoints for %s", (packageMan
         const packageInfo = await getPackageJsonContents(temporaryPath);
 
         if (packageInfo === null) {
-          throw new DataError(
-            { packageInfo },
-            "PACKAGE_JSON_NOT_FOUND",
-            "Could not find package.json in temporary directory.",
-          );
+          throw packageJsonNotFoundError(temporaryPath);
         }
         packageInfo.type =
           moduleType === ModuleType.TYPESCRIPT ? ModuleType.ES_MODULES : moduleType;
@@ -95,13 +100,26 @@ describe.each<PackageManager>(["npm", "pnpm"])("Entrypoints for %s", (packageMan
             "devDependencies",
           );
           await runCommandInTempDirectory`${packageManager} install --save-dev tsx@${tsxVersion}`;
-          const executable = { npm: "npx", pnpm: "pnpx" }[packageManager];
+
+          const packageInfo = await getPackageJsonContents(temporaryPath);
+
+          if (packageInfo === null) {
+            throw packageJsonNotFoundError(temporaryPath);
+          }
+
+          packageInfo.scripts = { ...(packageInfo.scripts ?? {}), execute: "tsx" };
+
+          await writeFile(
+            path.join(temporaryPath, "package.json"),
+            JSON.stringify(packageInfo, null, 2),
+          );
+
           const { exitCode, stdout: result } =
-            await runCommandInTempDirectory`${executable} tsx ${codeFileName}`;
+            await runCommandInTempDirectory`${packageManager} run execute -- ${codeFileName}`;
           assert(exitCode, result);
         } else {
           const { exitCode, stdout: result } =
-            await runCommandInTempDirectory`node ${codeFileName}`;
+            await runCommandInTempDirectory`${process.execPath} ${codeFileName}`;
           assert(exitCode, result);
         }
       });
