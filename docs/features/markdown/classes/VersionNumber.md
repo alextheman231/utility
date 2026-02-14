@@ -1,4 +1,4 @@
-[**@alextheman/utility v4.15.0**](../README.md)
+[**@alextheman/utility v4.16.0**](../README.md)
 
 ***
 
@@ -56,13 +56,13 @@ The patch number. Increments when the next release is fixing a bug or doing a sm
 
 #### Get Signature
 
-> **get** **type**(): [`VersionType`](../variables/VersionType.md)
+> **get** **type**(): [`VersionType`](../type-aliases/VersionType.md)
 
 Gets the current version type of the current instance of `VersionNumber`.
 
 ##### Returns
 
-[`VersionType`](../variables/VersionType.md)
+[`VersionType`](../type-aliases/VersionType.md)
 
 Either `"major"`, `"minor"`, or `"patch"`, depending on the version type.
 
@@ -100,7 +100,7 @@ Increments the current version number by the given increment type, returning the
 
 ##### incrementType
 
-[`VersionType`](../variables/VersionType.md)
+[`VersionType`](../type-aliases/VersionType.md)
 
 The type of increment. Can be one of the following:
 - `"major"`: Change the major version `v1.2.3` → `v2.0.0`

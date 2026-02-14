@@ -1,4 +1,4 @@
-[**@alextheman/utility v4.15.0**](../README.md)
+[**@alextheman/utility v4.16.0**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # ~~Function: determineVersionType()~~
 
-> **determineVersionType**(`version`): [`VersionType`](../variables/VersionType.md)
+> **determineVersionType**(`version`): [`VersionType`](../type-aliases/VersionType.md)
 
 Determines whether the given version is a major, minor, or patch version.
 
@@ -20,7 +20,7 @@ The version number.
 
 ## Returns
 
-[`VersionType`](../variables/VersionType.md)
+[`VersionType`](../type-aliases/VersionType.md)
 
 Either `"major"`, `"minor"`, or `"patch"`, depending on the version type.
 

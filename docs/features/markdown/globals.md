@@ -1,8 +1,8 @@
-[**@alextheman/utility v4.15.0**](README.md)
+[**@alextheman/utility v4.16.0**](README.md)
 
 ***
 
-# @alextheman/utility v4.15.0
+# @alextheman/utility v4.16.0
 
 ## Array Helpers
 
@@ -105,9 +105,11 @@
 - [ArrayElement](type-aliases/ArrayElement.md)
 - [CreateEnumType](type-aliases/CreateEnumType.md)
 - [DisallowUndefined](type-aliases/DisallowUndefined.md)
+- [Env](type-aliases/Env.md)
 - [IgnoreCase](type-aliases/IgnoreCase.md)
 - [NonUndefined](type-aliases/NonUndefined.md)
 - [OptionalOnCondition](type-aliases/OptionalOnCondition.md)
 - [RecordKey](type-aliases/RecordKey.md)
+- [VersionType](type-aliases/VersionType.md)
 - [Env](variables/Env.md)
 - [VersionType](variables/VersionType.md)

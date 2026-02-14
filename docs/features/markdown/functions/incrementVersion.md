@@ -1,4 +1,4 @@
-[**@alextheman/utility v4.15.0**](../README.md)
+[**@alextheman/utility v4.16.0**](../README.md)
 
 ***
 
@@ -20,7 +20,7 @@ The version to increment
 
 ### incrementType
 
-[`VersionType`](../variables/VersionType.md)
+[`VersionType`](../type-aliases/VersionType.md)
 
 The type of increment. Can be one of the following:
 - `"major"`: Change the major version `v1.2.3` → `v2.0.0`
