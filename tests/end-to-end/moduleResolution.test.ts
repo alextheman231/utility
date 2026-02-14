@@ -2,9 +2,10 @@ import type { CreateEnumType } from "src/types";
 
 import { execa } from "execa";
 import { temporaryDirectoryTask } from "tempy";
+import tsConfig from "tsconfig.json" with { type: "json" };
 import { describe, expect, test as testVitest } from "vitest";
 
-import { writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import getDependenciesFromGroup from "tests/end-to-end/helpers/getDependenciesFromGroup";
@@ -12,7 +13,7 @@ import getExpectedTgzName from "tests/end-to-end/helpers/getExpectedTgzName";
 import getPackageJsonContents from "tests/end-to-end/helpers/getPackageJsonContents";
 import getPackageJsonPath from "tests/end-to-end/helpers/getPackageJsonPath";
 
-import { normaliseIndents, parseBoolean } from "src/functions";
+import { normaliseIndents, omitProperties, parseBoolean } from "src/functions";
 import { DataError } from "src/types";
 
 import utilityPackageInfo from "package.json" with { type: "json" };
@@ -34,7 +35,7 @@ export type PackageManager = CreateEnumType<typeof PackageManager>;
 
 const test = parseBoolean(process.env.RUN_END_TO_END ?? "false") ? testVitest : testVitest.skip;
 
-function getCodeString(moduleType: ModuleType): string {
+function getRuntimeCodeString(moduleType: ModuleType): string {
   return normaliseIndents`
     ${
       moduleType === ModuleType.COMMON_JS
@@ -46,6 +47,19 @@ function getCodeString(moduleType: ModuleType): string {
   `;
 }
 
+function getTypeCodeString(expectedStatus: "error" | "success") {
+  const typeArgument = {
+    error: 123,
+    success: '"hello"',
+  }[expectedStatus];
+
+  return normaliseIndents`
+    import type { IsTypeArgumentString } from "@alextheman/utility";
+
+    export type Test = IsTypeArgumentString<${typeArgument}>
+  `;
+}
+
 function packageJsonNotFoundError(packagePath: string) {
   return new DataError(
     { packagePath: getPackageJsonPath(packagePath) },
@@ -54,11 +68,20 @@ function packageJsonNotFoundError(packagePath: string) {
   );
 }
 
+function versionMismatchError(packageName: string, expectedVersion: string, actualVersion: string) {
+  return new DataError({
+    [packageName]: {
+      actualVersion,
+      expectedVersion,
+    },
+  });
+}
+
 describe.each<PackageManager>(["npm", "pnpm"])("Entrypoints for %s", (packageManager) => {
   test.each<ModuleType>(["commonjs", "module", "typescript"])(
     `The package resolves correctly under module %s and package manager ${packageManager}`,
     async (moduleType) => {
-      const code = getCodeString(moduleType);
+      const code = getRuntimeCodeString(moduleType);
 
       await temporaryDirectoryTask(async (temporaryPath) => {
         await execa({
@@ -87,7 +110,9 @@ describe.each<PackageManager>(["npm", "pnpm"])("Entrypoints for %s", (packageMan
         await runCommandInTempDirectory`${packageManager} install ${path.join(temporaryPath, tgzFileName)}`;
 
         const codeFileName = `sayHello.${moduleType === ModuleType.TYPESCRIPT ? "ts" : "js"}`;
-        await writeFile(path.join(temporaryPath, codeFileName), code);
+        const codeFilePath = path.join(temporaryPath, "src", codeFileName);
+        await mkdir(path.dirname(codeFilePath), { recursive: true });
+        await writeFile(codeFilePath, code);
 
         function assert(exitCode: number | undefined, result: string) {
           expect(exitCode).toBe(0);
@@ -95,31 +120,71 @@ describe.each<PackageManager>(["npm", "pnpm"])("Entrypoints for %s", (packageMan
         }
 
         if (moduleType === ModuleType.TYPESCRIPT) {
-          const { tsx: tsxVersion } = getDependenciesFromGroup(
-            utilityPackageInfo,
-            "devDependencies",
-          );
-          await runCommandInTempDirectory`${packageManager} install --save-dev tsx@${tsxVersion}`;
+          const { tsx: tsxVersionUtility, typescript: typescriptVersionUtility } =
+            getDependenciesFromGroup(utilityPackageInfo, "devDependencies");
+          await runCommandInTempDirectory`${packageManager} install --save-dev tsx@${tsxVersionUtility} typescript@${typescriptVersionUtility}`;
 
-          const packageInfo = await getPackageJsonContents(temporaryPath);
+          const testPackageInfo = await getPackageJsonContents(temporaryPath);
 
-          if (packageInfo === null) {
+          if (testPackageInfo === null) {
             throw packageJsonNotFoundError(temporaryPath);
           }
 
-          packageInfo.scripts = { ...(packageInfo.scripts ?? {}), execute: "tsx" };
+          const { tsx: tsxVersionTest, typescript: typescriptVersionTest } =
+            getDependenciesFromGroup(testPackageInfo, "devDependencies");
 
+          if (tsxVersionTest !== tsxVersionUtility) {
+            throw versionMismatchError("tsx", tsxVersionUtility, tsxVersionTest);
+          } else if (typescriptVersionTest !== typescriptVersionUtility) {
+            throw versionMismatchError(
+              "typescript",
+              typescriptVersionUtility,
+              typescriptVersionTest,
+            );
+          }
+
+          testPackageInfo.scripts = {
+            ...(testPackageInfo.scripts ?? {}),
+            execute: "tsx",
+            lint: "tsc --noEmit",
+          };
           await writeFile(
             path.join(temporaryPath, "package.json"),
-            JSON.stringify(packageInfo, null, 2),
+            JSON.stringify(testPackageInfo, null, 2),
           );
 
-          const { exitCode, stdout: result } =
-            await runCommandInTempDirectory`${packageManager} run execute -- ${codeFileName}`;
-          assert(exitCode, result);
+          await writeFile(
+            path.join(temporaryPath, "tsconfig.json"),
+            JSON.stringify(
+              {
+                ...tsConfig,
+                compilerOptions: omitProperties(tsConfig.compilerOptions ?? {}, "types"),
+              },
+              null,
+              2,
+            ),
+          );
+
+          const { exitCode: runtimeExitCode, stdout: result } =
+            await runCommandInTempDirectory`${packageManager} run execute -- ${codeFilePath}`;
+          assert(runtimeExitCode, result);
+
+          await writeFile(codeFilePath, getTypeCodeString("success"));
+
+          const { exitCode: typeSuccessExitCode } =
+            await runCommandInTempDirectory`${packageManager} run lint`;
+          expect(typeSuccessExitCode).toBe(0);
+
+          await writeFile(codeFilePath, getTypeCodeString("error"));
+
+          // Apparently tsc errors come through on stdout, for some reason?
+          const { exitCode: typeErrorExitCode, stdout: errorMessage } =
+            await runCommandInTempDirectory({ reject: false })`${packageManager} run lint`;
+          expect(typeErrorExitCode).toBe(2);
+          expect(errorMessage).toContain("TS2344");
         } else {
           const { exitCode, stdout: result } =
-            await runCommandInTempDirectory`${process.execPath} ${codeFileName}`;
+            await runCommandInTempDirectory`${process.execPath} ${codeFilePath}`;
           assert(exitCode, result);
         }
       });
