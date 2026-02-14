@@ -56,7 +56,7 @@ function packageJsonNotFoundError(packagePath: string) {
 
 describe.each<PackageManager>(["npm", "pnpm"])("Entrypoints for %s", (packageManager) => {
   test.each<ModuleType>(["commonjs", "module", "typescript"])(
-    "The package resolves correctly under module %s",
+    `The package resolves correctly under module %s and package manager ${packageManager}`,
     async (moduleType) => {
       const code = getCodeString(moduleType);
 
