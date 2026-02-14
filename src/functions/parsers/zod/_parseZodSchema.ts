@@ -6,7 +6,7 @@ import { DataError } from "src/types";
 
 // No need for JSDoc on this one - it is only an internal helper function.
 // eslint-disable-next-line jsdoc/require-jsdoc
-function _parseZodSchema<SchemaType extends ZodType, ErrorType extends Error>(
+function _parseZodSchema<SchemaType extends ZodType, ErrorType extends Error = DataError>(
   parsedResult: ZodSafeParseResult<z.infer<SchemaType>>,
   data: unknown,
   onError?: ErrorType | ((zodError: ZodError) => ErrorType | void),

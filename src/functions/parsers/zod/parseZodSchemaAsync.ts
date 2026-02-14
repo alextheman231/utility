@@ -1,5 +1,7 @@
 import type { z, ZodError, ZodType } from "zod";
 
+import type { DataError } from "src/types";
+
 import _parseZodSchema from "src/functions/parsers/zod/_parseZodSchema";
 
 /**
@@ -18,7 +20,7 @@ import _parseZodSchema from "src/functions/parsers/zod/_parseZodSchema";
  *
  * @returns The parsed data from the Zod schema.
  */
-async function parseZodSchemaAsync<SchemaType extends ZodType, ErrorType extends Error>(
+async function parseZodSchemaAsync<SchemaType extends ZodType, ErrorType extends Error = DataError>(
   schema: SchemaType,
   data: unknown,
   onError?: ErrorType | ((zodError: ZodError) => ErrorType | void),
