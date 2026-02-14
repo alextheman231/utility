@@ -1,4 +1,4 @@
-[**@alextheman/utility v4.16.1**](../README.md)
+[**@alextheman/utility v4.16.2**](../README.md)
 
 ***
 
@@ -20,7 +20,7 @@ The Zod schema type.
 
 ### ErrorType
 
-`ErrorType` *extends* `Error`
+`ErrorType` *extends* `Error` = [`DataError`](../classes/DataError.md)
 
 The type of error to throw on invalid data.
 
