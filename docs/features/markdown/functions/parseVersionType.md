@@ -1,4 +1,4 @@
-[**@alextheman/utility v4.15.0**](../README.md)
+[**@alextheman/utility v4.16.0**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Function: parseVersionType()
 
-> **parseVersionType**(`data`): [`VersionType`](../variables/VersionType.md)
+> **parseVersionType**(`data`): [`VersionType`](../type-aliases/VersionType.md)
 
 Parses the input and verifies it is a valid software version type (i.e. `"major" | "minor" | "patch"`)
 
@@ -20,7 +20,7 @@ The data to parse.
 
 ## Returns
 
-[`VersionType`](../variables/VersionType.md)
+[`VersionType`](../type-aliases/VersionType.md)
 
 The given version type if allowed.
 
