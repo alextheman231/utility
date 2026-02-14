@@ -4,7 +4,7 @@ import { execa } from "execa";
 import { temporaryDirectoryTask } from "tempy";
 import { describe, expect, test as testVitest } from "vitest";
 
-import { cp, writeFile } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import getDependenciesFromGroup from "tests/end-to-end/helpers/getDependenciesFromGroup";
@@ -45,18 +45,18 @@ function getCodeString(moduleType: ModuleType): string {
   `;
 }
 
-describe.each<PackageManager>(["npm", "pnpm"])("Entrypoints for %s", async (packageManager) => {
-  await execa({ cwd: process.cwd() })`${packageManager} pack`;
-  const tgzFileName = await getExpectedTgzName(process.cwd(), packageManager);
-
+describe.each<PackageManager>(["npm", "pnpm"])("Entrypoints for %s", (packageManager) => {
   test.each<ModuleType>(["commonjs", "module", "typescript"])(
     "The package resolves correctly under module %s",
     async (moduleType) => {
       const code = getCodeString(moduleType);
 
       await temporaryDirectoryTask(async (temporaryPath) => {
+        await execa({
+          cwd: process.cwd(),
+        })`${packageManager} pack --pack-destination ${temporaryPath}`;
+        const tgzFileName = await getExpectedTgzName(process.cwd(), packageManager);
         const runCommandInTempDirectory = execa({ cwd: temporaryPath });
-        await cp(path.join(process.cwd(), tgzFileName), path.join(temporaryPath, tgzFileName));
 
         if (packageManager === PackageManager.NPM) {
           await runCommandInTempDirectory`npm init -y`;
