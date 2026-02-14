@@ -20,7 +20,7 @@ async function getExpectedTgzName(packagePath: string, packageManager: string): 
     new DataError(
       packedTgzData,
       "AMBIGUOUS_EXPECTED_FILE_NAME",
-      "Could not figire out the expected filename.",
+      "Could not figure out the expected filename.",
     ),
   );
 
