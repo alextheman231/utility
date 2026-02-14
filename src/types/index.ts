@@ -8,6 +8,7 @@ export type { CallReturnType } from "src/types/CallReturnType";
 export type { CreateEnumType } from "src/types/CreateEnumType";
 export type { DisallowUndefined } from "src/types/DisallowUndefined";
 export type { IgnoreCase } from "src/types/IgnoreCase";
+export type { IsTypeArgumentString } from "src/types/IsTypeArgumentString";
 export type { NonUndefined } from "src/types/NonUndefined";
 export type { OptionalOnCondition } from "src/types/OptionalOnCondition";
 export type { RecordKey } from "src/types/RecordKey";
