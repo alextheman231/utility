@@ -1,9 +1,9 @@
-import type { VersionType } from "src/functions";
+import type { VersionType } from "src/root/functions";
 
 import { describe, expect, test } from "vitest";
 
-import { parseVersionType } from "src/functions";
-import { DataError } from "src/types";
+import { parseVersionType } from "src/root/functions";
+import { DataError } from "src/root/types";
 
 describe("parseVersionType", () => {
   test("Is successful when input is a valid version type", () => {

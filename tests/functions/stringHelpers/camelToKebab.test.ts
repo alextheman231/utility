@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { camelToKebab } from "src/functions";
+import { camelToKebab } from "src/root/functions";
 
 describe("camelToKebab", () => {
   test("Converts a string from camelCase to kebab-case", () => {

@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import removeUndefinedFromObject from "src/functions/objectHelpers/removeUndefinedFromObject";
+import removeUndefinedFromObject from "src/root/functions/objectHelpers/removeUndefinedFromObject";
 
 describe("removeUndefinedFromObject", () => {
   test("Leaves an object as is if there are no undefined entries", () => {

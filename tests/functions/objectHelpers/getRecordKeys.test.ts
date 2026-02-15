@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, test } from "vitest";
 
-import { getRecordKeys } from "src/functions";
+import { getRecordKeys } from "src/root/functions";
 
 describe("getRecordKeys", () => {
   test("Returns all record keys in an array", () => {

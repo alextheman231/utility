@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { createTemplateStringsArray, interpolate } from "src/index";
+import { createTemplateStringsArray, interpolate } from "src/root/index";
 
 describe("interpolate", () => {
   test("Returns the same template string when given a template string", () => {

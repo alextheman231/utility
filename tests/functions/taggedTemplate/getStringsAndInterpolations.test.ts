@@ -5,8 +5,8 @@ import {
   getRandomNumber,
   getStringsAndInterpolations,
   interpolate,
-} from "src/functions";
-import { DataError } from "src/types";
+} from "src/root/functions";
+import { DataError } from "src/root/types";
 
 describe("getStringsAndInterpolations", () => {
   test("Returns the strings and interpolations from a given template string separately", () => {

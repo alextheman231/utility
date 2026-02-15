@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { paralleliseArrays } from "src/functions";
+import { paralleliseArrays } from "src/root/functions";
 
 describe("paralleliseArrays", () => {
   test("Creates a new array where each item is a sub-array of items in the two given arrays at that index", () => {

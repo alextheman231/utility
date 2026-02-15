@@ -2,15 +2,15 @@ import { describe, expect, test } from "vitest";
 
 import path from "node:path";
 
-import parseFilePath from "src/functions/parsers/parseFilePath";
-import { DataError } from "src/types";
+import parseFilePath from "src/root/functions/parsers/parseFilePath";
+import { DataError } from "src/root/types";
 
 describe("parseFilePath", () => {
   test("When given a valid file path, it should return an object that gives the directory name, base name, and the full path.", () => {
-    const { directory, base, fullPath } = parseFilePath("src/functions/index.ts");
-    expect(directory).toBe("src/functions");
+    const { directory, base, fullPath } = parseFilePath("src/root/functions/index.ts");
+    expect(directory).toBe("src/root/functions");
     expect(base).toBe("index.ts");
-    expect(fullPath).toBe("src/functions/index.ts");
+    expect(fullPath).toBe("src/root/functions/index.ts");
   });
 
   test("Allows just a file, where it contains a dot but no slash.", () => {

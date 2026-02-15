@@ -1,4 +1,4 @@
-import type { ArrayElement } from "src/types/ArrayElement";
+import type { ArrayElement } from "src/root/types/ArrayElement";
 
 import { describe, expectTypeOf, test } from "vitest";
 

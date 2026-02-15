@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, describe, expect, test, vi } from "vitest";
 
-import wait from "src/functions/miscellaneous/wait";
+import wait from "src/root/functions/miscellaneous/wait";
 
 beforeAll(() => {
   vi.useFakeTimers();

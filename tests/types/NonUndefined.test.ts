@@ -1,4 +1,4 @@
-import type { NonUndefined } from "src/types";
+import type { NonUndefined } from "src/root/types";
 
 import { describe, expectTypeOf, test } from "vitest";
 

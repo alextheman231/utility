@@ -16,21 +16,21 @@ export default myFunction
 
 Note that every function that gets exported from this package **must** have a type annotation. This is also enforced by ESLint. This helps to make the return types extra explicit and more intentional.
 
-Once you have this, export the function from `src/functions/index.ts` so that consumers can import your function. Also export any types you may want to export near the bottom of the file:
+Once you have this, export the function from `src/root/functions/index.ts` so that consumers can import your function. Also export any types you may want to export near the bottom of the file:
 
 ```typescript
-export { default as addDaysToDate } from "src/functions/addDaysToDate";
-export { default as appendSemicolon } from "src/functions/appendSemicolon";
-export { default as camelToKebab } from "src/functions/camelToKebab";
-export { default as convertFileToBase64 } from "src/functions/convertFileToBase64";
-export { default as createFormData } from "src/functions/createFormData";
-export { default as fillArray } from "src/functions/fillArray";
-export { default as formatDateAndTime } from "src/functions/formatDateAndTime";
+export { default as addDaysToDate } from "src/root/functions/addDaysToDate";
+export { default as appendSemicolon } from "src/root/functions/appendSemicolon";
+export { default as camelToKebab } from "src/root/functions/camelToKebab";
+export { default as convertFileToBase64 } from "src/root/functions/convertFileToBase64";
+export { default as createFormData } from "src/root/functions/createFormData";
+export { default as fillArray } from "src/root/functions/fillArray";
+export { default as formatDateAndTime } from "src/root/functions/formatDateAndTime";
 // ...
-export { default as myFunction } from "src/functions/myFunction";
+export { default as myFunction } from "src/root/functions/myFunction";
 // ...
 
-export type { MyFunctionOptions } from "src/functions/myFunction";
+export type { MyFunctionOptions } from "src/root/functions/myFunction";
 ```
 
 ### Testing
@@ -42,7 +42,7 @@ Tests are generally structured in the following way:
 ```typescript
 import { describe, expect, test } from "vitest";
 
-import myFunction from "src/functions/myFunction";
+import myFunction from "src/root/functions/myFunction";
 
 describe("myFunction", () => {
   test("Does a thing", () => {
@@ -92,10 +92,10 @@ Note the use of `.toBe()` over `.toEqual()` here. This is because in this case, 
 
 ### Creating a type
 
-Creating a type works in a similar way to creating a function, in the sense that you create a new file for it, add it to `src/types/index.ts`, and test it. Yes, test it. It is possible to test type declarations using `expectTypeOf`. As an example:
+Creating a type works in a similar way to creating a function, in the sense that you create a new file for it, add it to `src/root/types/index.ts`, and test it. Yes, test it. It is possible to test type declarations using `expectTypeOf`. As an example:
 
 ```typescript
-import type { OptionalOnCondition } from "src/types";
+import type { OptionalOnCondition } from "src/root/types";
 
 import { describe, expectTypeOf, test } from "vitest";
 

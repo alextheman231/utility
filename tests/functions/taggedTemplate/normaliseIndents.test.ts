@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { normaliseIndents, normalizeIndents } from "src/index";
+import { normaliseIndents, normalizeIndents } from "src/root/index";
 
 describe("normaliseIndents", () => {
   test("Strips weird indents when creating new lines in template strings", () => {

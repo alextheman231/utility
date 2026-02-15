@@ -1,8 +1,8 @@
 import { describe, expect, test, vi } from "vitest";
 
-import randomiseArray from "src/functions/arrayHelpers/randomiseArray";
+import randomiseArray from "src/root/functions/arrayHelpers/randomiseArray";
 // eslint-disable-next-line @alextheman/no-namespace-imports
-import * as getRandomNumber from "src/functions/miscellaneous/getRandomNumber";
+import * as getRandomNumber from "src/root/functions/miscellaneous/getRandomNumber";
 
 describe("randomiseArray", () => {
   test("Returns an array", () => {

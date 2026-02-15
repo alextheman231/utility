@@ -1,8 +1,8 @@
 import { describe, expect, test } from "vitest";
 import z from "zod";
 
-import { createFormData } from "src/functions";
-import parseFormData from "src/functions/parsers/parseFormData";
+import { createFormData } from "src/root/functions";
+import parseFormData from "src/root/functions/parsers/parseFormData";
 
 describe("parseFormData", () => {
   test("Converts formData back into an object", () => {

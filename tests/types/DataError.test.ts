@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, test } from "vitest";
 
-import { DataError } from "src/types";
+import { DataError } from "src/root/types";
 
 function testDataError(
   error: DataError,

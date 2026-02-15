@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { deepCopy, deepFreeze } from "src/functions";
+import { deepCopy, deepFreeze } from "src/root/functions";
 
 describe("deepCopy", () => {
   test("Creates a copy of the input object", () => {

@@ -1,4 +1,4 @@
-import type { RecordKey } from "src/types";
+import type { RecordKey } from "src/root/types";
 
 import { describe, expectTypeOf, test } from "vitest";
 

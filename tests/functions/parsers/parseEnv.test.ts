@@ -1,9 +1,9 @@
-import type { Env } from "src/functions/parsers/parseEnv";
+import type { Env } from "src/root/functions/parsers/parseEnv";
 
 import { describe, expect, test } from "vitest";
 
-import parseEnv from "src/functions/parsers/parseEnv";
-import { DataError } from "src/types";
+import parseEnv from "src/root/functions/parsers/parseEnv";
+import { DataError } from "src/root/types";
 
 describe("parseEnv", () => {
   test("Is successful when input is a valid environment", () => {

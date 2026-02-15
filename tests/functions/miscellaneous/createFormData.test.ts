@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { createFormData } from "src/functions";
+import { createFormData } from "src/root/functions";
 
 describe("createFormData", () => {
   test("Creates FormData given an object", () => {

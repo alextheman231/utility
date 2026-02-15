@@ -1,9 +1,9 @@
 import dotenv from "dotenv";
 import { describe, expect, test } from "vitest";
 
-import { normaliseIndents } from "src/functions";
-import stringifyDotenv from "src/functions/miscellaneous/stringifyDotenv";
-import { DataError } from "src/types";
+import { normaliseIndents } from "src/root/functions";
+import stringifyDotenv from "src/root/functions/miscellaneous/stringifyDotenv";
+import { DataError } from "src/root/types";
 
 describe("stringifyDotenv", () => {
   test("Stringifies an object into .env file format, using double-quotes by default", () => {

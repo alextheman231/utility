@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { stringListToArray } from "src/functions";
+import { stringListToArray } from "src/root/functions";
 
 describe("stringListToArray", () => {
   test("Returns empty array for empty string", () => {
