@@ -117,15 +117,34 @@ class VersionNumber {
    * - `"major"`: Change the major version `v1.2.3` → `v2.0.0`
    * - `"minor"`: Change the minor version `v1.2.3` → `v1.3.0`
    * - `"patch"`: Change the patch version `v1.2.3` → `v1.2.4`
+   * @param incrementAmount - The amount to increment by (defaults to 1).
    *
    * @returns A new instance of `VersionNumber` with the increment applied.
    */
-  public increment(incrementType: VersionType): VersionNumber {
-    return {
-      major: new VersionNumber([this.major + 1, 0, 0]),
-      minor: new VersionNumber([this.major, this.minor + 1, 0]),
-      patch: new VersionNumber([this.major, this.minor, this.patch + 1]),
-    }[incrementType];
+  public increment(incrementType: VersionType, incrementAmount: number = 1): VersionNumber {
+    const incrementBy = parseIntStrict(String(incrementAmount));
+    const calculatedRawVersion = {
+      major: [this.major + incrementBy, 0, 0],
+      minor: [this.major, this.minor + incrementBy, 0],
+      patch: [this.major, this.minor, this.patch + incrementBy],
+    }[incrementType] as [number, number, number];
+    try {
+      return new VersionNumber(calculatedRawVersion);
+    } catch (error) {
+      if (DataError.check(error) && error.code === "NEGATIVE_INPUTS") {
+        throw new DataError(
+          {
+            currentVersion: this.toString(),
+            calculatedRawVersion: `v${calculatedRawVersion.join(".")}`,
+            incrementAmount,
+          },
+          "NEGATIVE_VERSION",
+          "Cannot apply this increment amount as it would lead to a negative version number.",
+        );
+      } else {
+        throw error;
+      }
+    }
   }
   /**
    * Ensures that the VersionNumber behaves correctly when attempted to be coerced to a string.

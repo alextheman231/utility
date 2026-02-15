@@ -192,31 +192,63 @@ describe("VersionNumber", () => {
   });
 
   describe(".increment()", () => {
-    const version = new VersionNumber([1, 2, 3]);
-    test("Increments the major version", () => {
-      const newVersion = version.increment(VersionType.MAJOR);
-      expect(VersionNumber.isEqual(newVersion, new VersionNumber([2, 0, 0]))).toBe(true);
+    const inputVersion = new VersionNumber([1, 2, 3]);
+
+    test.each<[VersionType, VersionNumber]>([
+      ["major", new VersionNumber([2, 0, 0])],
+      ["minor", new VersionNumber([1, 3, 0])],
+      ["patch", new VersionNumber([1, 2, 4])],
+    ])("Increments the %s version", (versionType, expectedVersion) => {
+      const calculatedVersion = inputVersion.increment(versionType);
+      expect(VersionNumber.isEqual(calculatedVersion, expectedVersion)).toBe(true);
     });
-    test("Increments the minor version", () => {
-      const newVersion = version.increment(VersionType.MINOR);
-      expect(VersionNumber.isEqual(newVersion, new VersionNumber([1, 3, 0]))).toBe(true);
+
+    describe.each<number>([2, 1, 0, -1])("Increment amounts", (incrementAmount) => {
+      test.each<[VersionType, VersionNumber]>([
+        ["major", new VersionNumber([1 + incrementAmount, 0, 0])],
+        ["minor", new VersionNumber([1, 2 + incrementAmount, 0])],
+        ["patch", new VersionNumber([1, 2, 3 + incrementAmount])],
+      ])(`Increments the %s version by ${incrementAmount}`, (versionType, expectedVersion) => {
+        const calculatedVersion = inputVersion.increment(versionType, incrementAmount);
+        expect(VersionNumber.isEqual(calculatedVersion, expectedVersion)).toBe(true);
+      });
     });
-    test("Increments the patch version", () => {
-      const newVersion = version.increment(VersionType.PATCH);
-      expect(VersionNumber.isEqual(newVersion, new VersionNumber([1, 2, 4]))).toBe(true);
-    });
-    test("Can also pass in a raw string instead of `VersionType.type`", () => {
-      const newVersion = version.increment("minor");
-      expect(VersionNumber.isEqual(newVersion, new VersionNumber([1, 3, 0]))).toBe(true);
-    });
+
+    test.each<VersionType>(["major", "minor", "patch"])(
+      "Does not allow negative versions when decrementing %s",
+      (versionType) => {
+        const incrementAmount = -4;
+        try {
+          inputVersion.increment(versionType, incrementAmount);
+          throw new Error("DID_NOT_THROW");
+        } catch (error) {
+          if (DataError.check(error)) {
+            expect(error.data).toEqual({
+              currentVersion: inputVersion.toString(),
+              calculatedRawVersion: {
+                major: `v${inputVersion.major + incrementAmount}.0.0`,
+                minor: `v${inputVersion.major}.${inputVersion.minor + incrementAmount}.0`,
+                patch: `v${inputVersion.major}.${inputVersion.minor}.${inputVersion.patch + incrementAmount}`,
+              }[versionType],
+              incrementAmount,
+            });
+            expect(error.code).toBe("NEGATIVE_VERSION");
+          } else {
+            throw error;
+          }
+        }
+      },
+    );
+
     test("Does not mutate the original version", () => {
       // Increment by major because I know for a fact that this will affect all numbers
-      version.increment("major");
-      expect(VersionNumber.isEqual(version, new VersionNumber([1, 2, 3]))).toBe(true);
+      inputVersion.increment("major");
+      expect(VersionNumber.isEqual(inputVersion, new VersionNumber([1, 2, 3]))).toBe(true);
     });
+
     test("Returns a new reference in memory", () => {
-      const newVersion = version.increment("major");
-      expect(newVersion).not.toBe(version);
+      const newVersion = inputVersion.increment("major");
+      expect(newVersion).not.toBe(inputVersion);
     });
   });
 });
