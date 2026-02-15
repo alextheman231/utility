@@ -1,4 +1,4 @@
-[**@alextheman/utility v4.16.2**](../README.md)
+[**@alextheman/utility v4.17.0**](../README.md)
 
 ***
 
@@ -92,7 +92,7 @@ A stringified representation of the current version number, prefixed with `v`.
 
 ### increment()
 
-> **increment**(`incrementType`): `VersionNumber`
+> **increment**(`incrementType`, `incrementAmount?`): `VersionNumber`
 
 Increments the current version number by the given increment type, returning the result as a new reference in memory.
 
@@ -106,6 +106,12 @@ The type of increment. Can be one of the following:
 - `"major"`: Change the major version `v1.2.3` → `v2.0.0`
 - `"minor"`: Change the minor version `v1.2.3` → `v1.3.0`
 - `"patch"`: Change the patch version `v1.2.3` → `v1.2.4`
+
+##### incrementAmount?
+
+`number` = `1`
+
+The amount to increment by (defaults to 1).
 
 #### Returns
 
