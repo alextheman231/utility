@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { interpolateObjects } from "src/functions/taggedTemplate";
+import { interpolateObjects } from "src/root/functions/taggedTemplate";
 
 describe("interpolateObject", () => {
   test("Returns the stringified object when passed a single object in a single string", () => {

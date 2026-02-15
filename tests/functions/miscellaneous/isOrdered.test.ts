@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { isOrdered } from "src/functions";
+import { isOrdered } from "src/root/functions";
 
 describe("isOrdered", () => {
   test("Returns true if the array is sorted", () => {

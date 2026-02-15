@@ -1,4 +1,4 @@
-import type { OptionalOnCondition } from "src/types";
+import type { OptionalOnCondition } from "src/root/types";
 
 import { describe, expectTypeOf, test } from "vitest";
 

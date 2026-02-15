@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { removeDuplicates } from "src/functions";
+import { removeDuplicates } from "src/root/functions";
 
 describe("removeDuplicates", () => {
   describe("Mutation checks", () => {

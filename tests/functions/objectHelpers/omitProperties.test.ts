@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, test } from "vitest";
 
-import omitProperties from "src/functions/objectHelpers/omitProperties";
+import omitProperties from "src/root/functions/objectHelpers/omitProperties";
 
 describe("omitProperties", () => {
   test("Removes the given property from the object", () => {

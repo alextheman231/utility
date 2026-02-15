@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { isMonthlyMultiple, isSameDate } from "src/functions/date";
+import { isMonthlyMultiple, isSameDate } from "src/root/functions/date";
 
 describe("isMonthlyMultiple", () => {
   test("Returns true if two dates share the same calendar day and are not a stupid edge case", () => {

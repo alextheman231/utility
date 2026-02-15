@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 
-import { createTemplateStringsArray } from "src/functions";
-import getInterpolations from "src/functions/taggedTemplate/getInterpolations";
+import { createTemplateStringsArray } from "src/root/functions";
+import getInterpolations from "src/root/functions/taggedTemplate/getInterpolations";
 
 describe("getInterpolations", () => {
   test("Returns the strings and interpolations from a given template string separately", () => {

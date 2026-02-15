@@ -1,4 +1,4 @@
-import type { CreateEnumType } from "src/types/CreateEnumType";
+import type { CreateEnumType } from "src/root/types/CreateEnumType";
 
 import { describe, expectTypeOf, test } from "vitest";
 

@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, test } from "vitest";
 
-import APIError from "src/types/APIError";
+import APIError from "src/root/types/APIError";
 
 function testAPIError(error: APIError, expectedStatus: number, expectedMessage: string) {
   try {

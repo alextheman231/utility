@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, describe, expect, test, vi } from "vitest";
 
-import { addDaysToDate, formatDateAndTime, isSameDate } from "src/functions/date";
+import { addDaysToDate, formatDateAndTime, isSameDate } from "src/root/functions/date";
 
 beforeAll(() => {
   vi.useFakeTimers();

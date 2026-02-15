@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { VERSION_NUMBER_REGEX } from "src/constants";
+import { VERSION_NUMBER_REGEX } from "src/root/constants";
 
 describe("VERSION_NUMBER_REGEX", () => {
   const constructedRegex = RegExp(VERSION_NUMBER_REGEX);

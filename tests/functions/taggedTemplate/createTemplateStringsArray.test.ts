@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, test } from "vitest";
 
-import { createTemplateStringsArray } from "src/functions";
+import { createTemplateStringsArray } from "src/root/functions";
 
 describe("createTemplateStringsArray", () => {
   test("Returns the array of template strings", () => {

@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import appendSemicolon from "src/functions/stringHelpers/appendSemicolon";
+import appendSemicolon from "src/root/functions/stringHelpers/appendSemicolon";
 
 describe("appendSemicolon", () => {
   test("Appends a semicolon to the end of string if not present", () => {

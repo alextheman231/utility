@@ -1,4 +1,4 @@
-import type { IgnoreCase } from "src/types";
+import type { IgnoreCase } from "src/root/types";
 
 import { describe, expectTypeOf, test } from "vitest";
 

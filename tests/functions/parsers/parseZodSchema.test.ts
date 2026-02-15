@@ -1,8 +1,8 @@
 import { describe, expect, test } from "vitest";
 import z from "zod";
 
-import { parseZodSchema } from "src/functions";
-import { DataError } from "src/types";
+import { parseZodSchema } from "src/root/functions";
+import { DataError } from "src/root/types";
 
 describe("parseZodSchema", () => {
   test("Returns the data if data is valid according to Zod schema", () => {

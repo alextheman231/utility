@@ -1,4 +1,4 @@
-import type { DisallowUndefined } from "src/types";
+import type { DisallowUndefined } from "src/root/types";
 
 import { describe, expectTypeOf, test } from "vitest";
 

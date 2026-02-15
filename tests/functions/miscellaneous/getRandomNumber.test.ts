@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from "vitest";
 
-import getRandomNumber from "src/functions/miscellaneous/getRandomNumber";
+import getRandomNumber from "src/root/functions/miscellaneous/getRandomNumber";
 
 describe("getRandomNumber", () => {
   test("Returns an integer", () => {

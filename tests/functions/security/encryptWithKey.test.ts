@@ -1,8 +1,8 @@
 import sodium from "libsodium-wrappers";
 import { beforeAll, describe, expect, test } from "vitest";
 
-import encryptWithKey from "src/functions/security/encryptWithKey";
-import { DataError } from "src/types";
+import encryptWithKey from "src/root/functions/security/encryptWithKey";
+import { DataError } from "src/root/types";
 
 function assertNoPlaintextLeak(value: unknown, plaintext: string, seen = new Set<unknown>()) {
   if (value === null || value === undefined) {

@@ -1,23 +1,23 @@
 import { describe, expect, test } from "vitest";
 
-import { FILE_PATH_REGEX } from "src/constants";
+import { FILE_PATH_REGEX } from "src/root/constants";
 
 const constructedRegex = RegExp(FILE_PATH_REGEX);
 
 describe("FILE_PATH_REGEX", () => {
   test("Matches a file path", () => {
-    expect(constructedRegex.test("src/functions/index.ts")).toBe(true);
+    expect(constructedRegex.test("src/root/functions/index.ts")).toBe(true);
   });
   test("Does not require ending with file extensions", () => {
-    expect(constructedRegex.test("src/functions")).toBe(true);
+    expect(constructedRegex.test("src/root/functions")).toBe(true);
   });
   test("Does not match trailing separator", () => {
-    expect(constructedRegex.test("src/functions/")).toBe(false);
+    expect(constructedRegex.test("src/root/functions/")).toBe(false);
   });
   test("~~reluctantly~~ allows spaces", () => {
     expect(
       constructedRegex.test(
-        "src/functions/My Stupid Filename That Is Still Valid But Seriously Who Names Files Like This.ts",
+        "src/root/functions/My Stupid Filename That Is Still Valid But Seriously Who Names Files Like This.ts",
       ),
     ).toBe(true);
   });
@@ -29,9 +29,9 @@ describe("FILE_PATH_REGEX", () => {
     ).toBe(true);
   });
   test("After all the stupidity of the above, we redeem ourselves by actually giving us the final part for free!", () => {
-    const caughtParts = "src/functions/parsers/parseFilePath.ts".match(constructedRegex);
+    const caughtParts = "src/root/functions/parsers/parseFilePath.ts".match(constructedRegex);
 
     expect(caughtParts?.groups?.base).toBe("parseFilePath.ts");
-    expect(caughtParts?.groups?.directory).toBe("src/functions/parsers");
+    expect(caughtParts?.groups?.directory).toBe("src/root/functions/parsers");
   });
 });
