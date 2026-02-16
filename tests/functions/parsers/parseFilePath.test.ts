@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 
 import path from "node:path";
 
-import parseFilePath from "src/root/functions/parsers/parseFilePath";
+import parseFilePath from "src/node/functions/parseFilePath";
 import { DataError } from "src/root/types";
 
 describe("parseFilePath", () => {
