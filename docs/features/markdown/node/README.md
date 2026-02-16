@@ -1,10 +1,14 @@
-[**@alextheman/utility v5.0.1**](../README.md)
+[**@alextheman/utility v5.1.0**](../README.md)
 
 ***
 
 [@alextheman/utility](../modules.md) / node
 
 # node
+
+## Parsers
+
+- [parseFilePath](functions/parseFilePath.md)
 
 ## String Helpers
 

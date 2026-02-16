@@ -1,4 +1,4 @@
-[**@alextheman/utility v5.0.1**](../README.md)
+[**@alextheman/utility v5.1.0**](../README.md)
 
 ***
 
@@ -63,7 +63,6 @@
 
 - [parseBoolean](functions/parseBoolean.md)
 - [parseEnv](functions/parseEnv.md)
-- [parseFilePath](functions/parseFilePath.md)
 - [parseFormData](functions/parseFormData.md)
 - [parseIntStrict](functions/parseIntStrict.md)
 - [parseVersionType](functions/parseVersionType.md)
