@@ -3,7 +3,7 @@ import type { CreateEnumType } from "src/root/types";
 import { execa } from "execa";
 import { temporaryDirectoryTask } from "tempy";
 import tsConfig from "tsconfig.json" with { type: "json" };
-import { describe, expect, test as testVitest } from "vitest";
+import { beforeAll, describe, expect, test as testVitest } from "vitest";
 
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -85,6 +85,10 @@ function versionMismatchError(packageName: string, expectedVersion: string, actu
     },
   });
 }
+
+beforeAll(async () => {
+  await execa`pnpm run build`;
+});
 
 describe.each<Entrypoint>([Entrypoint.ROOT, Entrypoint.NODE, Entrypoint.INTERNAL])(
   "Entrypoint %s",
