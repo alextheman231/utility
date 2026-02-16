@@ -15,6 +15,11 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
+    "./internal": {
+      "types": "./dist/internal/index.d.ts",
+      "import": "./dist/internal/index.js",
+      "require": "./dist/internal/index.cjs"
+    },
     "./node": {
       "types": "./dist/node/index.d.ts",
       "import": "./dist/node/index.js",
@@ -55,6 +60,7 @@
   },
   "dependencies": {
     "dotenv": "^17.3.1",
+    "execa": "^9.6.1",
     "libsodium-wrappers": "^0.8.2",
     "zod": "^4.3.6"
   },
@@ -64,7 +70,6 @@
     "alex-c-line": "^1.26.2",
     "dotenv-cli": "^11.0.0",
     "eslint": "^10.0.0",
-    "execa": "^9.6.1",
     "globals": "^17.3.0",
     "husky": "^9.1.7",
     "jsdom": "^28.0.0",

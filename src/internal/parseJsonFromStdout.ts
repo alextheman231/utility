@@ -1,6 +1,5 @@
 import { DataError } from "src/root/types";
 
-// eslint-disable-next-line jsdoc/require-jsdoc
 function parseJsonFromStdout(stdout: string): Record<string, unknown> {
   const start = Math.min(
     ...["[", "{"]

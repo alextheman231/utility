@@ -1,12 +1,10 @@
 import { execa } from "execa";
 import z from "zod";
 
-import parseJsonFromStdout from "tests/end-to-end/helpers/parseJSONFromStdout";
-
+import { parseJsonFromStdout } from "src/internal";
 import { parseZodSchema } from "src/root/functions";
 import { DataError } from "src/root/types";
 
-// eslint-disable-next-line jsdoc/require-jsdoc
 async function getExpectedTgzName(packagePath: string, packageManager: string): Promise<string> {
   const { stdout: rawPackedTgzData } = await execa({
     cwd: packagePath,
