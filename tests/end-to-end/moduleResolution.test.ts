@@ -95,7 +95,7 @@ describe.each<Entrypoint>([Entrypoint.ROOT, Entrypoint.NODE, Entrypoint.INTERNAL
   (entrypoint) => {
     describe.each<PackageManager>(["npm", "pnpm"])("Package manager %s", (packageManager) => {
       test.each<ModuleType>(["commonjs", "module", "typescript"])(
-        `The package resolves correctly under entrypoint ${entrypoint}, module %s, and package manager ${packageManager}`,
+        "Module type %s",
         async (moduleType) => {
           const code = getRuntimeCodeString(moduleType, entrypoint);
 
