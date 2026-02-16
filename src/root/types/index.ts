@@ -12,4 +12,4 @@ export type { IsTypeArgumentString } from "src/root/types/IsTypeArgumentString";
 export type { NonUndefined } from "src/root/types/NonUndefined";
 export type { OptionalOnCondition } from "src/root/types/OptionalOnCondition";
 export type { RecordKey } from "src/root/types/RecordKey";
-export type { VersionNumberToStringOptions } from "src/root/types/VersionNumber";
+export type { FormatOptionsBase as VersionNumberToStringOptions } from "src/root/types/VersionNumber";

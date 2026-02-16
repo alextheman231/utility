@@ -145,10 +145,6 @@ describe("VersionNumber", () => {
       const version = new VersionNumber([1, 2, 3]);
       expect(version.toString()).toBe("v1.2.3");
     });
-    test("Allows for an option to omit the prefix", () => {
-      const version = new VersionNumber([1, 2, 3]);
-      expect(version.toString({ omitPrefix: true })).toBe("1.2.3");
-    });
     test("Implemented in a [Symbol.toPrimitive] method to allow it to nicely be coerced to the right string", () => {
       const version = new VersionNumber([1, 2, 3]);
       expect(`Version: ${version}`).toBe("Version: v1.2.3");
@@ -172,6 +168,28 @@ describe("VersionNumber", () => {
       const version = new VersionNumber([1, 2, 3]);
       expect(JSON.stringify({ version })).toBe('{"version":"v1.2.3"}');
       expect(JSON.parse(JSON.stringify({ version })).version).toBe("v1.2.3");
+    });
+  });
+
+  describe(".format()", () => {
+    const version = new VersionNumber([1, 2, 3]);
+    test("Returns the same thing as .toString() with no arguments", () => {
+      expect(version.format()).toBe(version.toString());
+    });
+    describe.each<[boolean, string]>([
+      [true, ""],
+      [false, "v"],
+    ])("With omitPrefix: %s", (omitPrefix, v) => {
+      test("Omits the minor version from the resulting string if omitMinor: true", () => {
+        expect(version.format({ omitPrefix, omitMinor: true })).toBe(`${v}1`);
+      });
+      test("Omits the patch version from the resulting string if omitPatch: true", () => {
+        expect(version.format({ omitPrefix, omitPatch: true })).toBe(`${v}1.2`);
+      });
+      test("Does not allow omitPatch when omitMinor: true", () => {
+        // @ts-expect-error: omitPatch is not allowed when omitMinor is true
+        version.format({ omitPrefix, omitMinor: true, omitPatch: false });
+      });
     });
   });
 
