@@ -16,4 +16,12 @@ export default defineConfig([
     clean: true,
     fixedExtension: false,
   },
+  {
+    entry: ["src/internal/index.ts"],
+    outDir: "dist/internal",
+    format: ["esm", "cjs"],
+    dts: true,
+    clean: true,
+    fixedExtension: false,
+  },
 ]);
