@@ -46,7 +46,7 @@ describe("VersionNumber", () => {
           expect(error.message).toBe(
             '"hello" is not a valid version number. Version numbers must be of the format "X.Y.Z" or "vX.Y.Z", where X, Y, and Z are non-negative integers.',
           );
-          expect(error.data).toBe("hello");
+          expect(error.data.input).toBe("hello");
         } else {
           throw error;
         }

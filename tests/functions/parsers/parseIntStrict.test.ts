@@ -17,13 +17,13 @@ describe("parseIntStrict", () => {
   test("Allows valid base 16 notation", () => {
     expect(parseIntStrict("1a", 16)).toBe(26);
   });
-  test("Throws a TypeError if parsed result is not an integer", () => {
+  test("Throws a DataError if parsed result is not an integer", () => {
     try {
       parseIntStrict("Hello");
       throw new Error("TEST_FAILED");
     } catch (error) {
       if (error instanceof DataError) {
-        expect(error.data).toBe("Hello");
+        expect(error.data.string).toBe("Hello");
         expect(error.code).toBe("INTEGER_PARSING_ERROR");
         expect(error.message).toBe("Only numeric values are allowed.");
       } else {
@@ -39,7 +39,7 @@ describe("parseIntStrict", () => {
         throw new Error("TEST_FAILED");
       } catch (error) {
         if (error instanceof DataError) {
-          expect(error.data).toBe(stringToParse);
+          expect(error.data.string).toBe(stringToParse);
           expect(error.code).toBe("INTEGER_PARSING_ERROR");
           expect(error.message).toBe("Only numeric values are allowed.");
         } else {
@@ -84,7 +84,7 @@ describe("parseIntStrict", () => {
       throw new Error("TEST_FAILED");
     } catch (error) {
       if (error instanceof DataError) {
-        expect(error.data).toBe("");
+        expect(error.data.string).toBe("");
         expect(error.code).toBe("INTEGER_PARSING_ERROR");
         expect(error.message).toBe("Only numeric values are allowed.");
       } else {
@@ -98,7 +98,7 @@ describe("parseIntStrict", () => {
       throw new Error("TEST_FAILED");
     } catch (error) {
       if (error instanceof DataError) {
-        expect(error.data).toBe(" ");
+        expect(error.data.string).toBe(" ");
         expect(error.code).toBe("INTEGER_PARSING_ERROR");
         expect(error.message).toBe("Only numeric values are allowed.");
       } else {

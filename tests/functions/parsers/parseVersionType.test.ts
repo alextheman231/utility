@@ -22,7 +22,7 @@ describe("parseVersionType", () => {
       throw new Error("DID_NOT_THROW");
     } catch (error: unknown) {
       if (error instanceof DataError) {
-        expect(error.data).toBe("Invalid version type");
+        expect(error.data.input).toBe("Invalid version type");
         expect(error.code).toBe("INVALID_VERSION_TYPE");
         expect(error.message).toBe(
           "The provided version type must be one of `major | minor | patch`",

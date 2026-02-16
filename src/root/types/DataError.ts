@@ -1,11 +1,17 @@
+import type { RecordKey } from "src/root/types/RecordKey";
+
 /**
  * Represents errors you may get that may've been caused by a specific piece of data.
  *
  * @category Types
+ *
+ * @template DataType - The type of the data that caused the error.
  */
-class DataError extends Error {
+class DataError<
+  DataType extends Record<RecordKey, unknown> = Record<RecordKey, unknown>,
+> extends Error {
   public code: string;
-  public data: unknown;
+  public data: DataType;
 
   /**
    * @param data - The data that caused the error.
@@ -14,7 +20,7 @@ class DataError extends Error {
    * @param options - Extra options to pass to super Error constructor.
    */
   public constructor(
-    data: unknown,
+    data: DataType,
     code: string = "INVALID_DATA",
     message: string = "The data provided is invalid",
     options?: ErrorOptions,
@@ -39,7 +45,9 @@ class DataError extends Error {
    *
    * @returns `true` if the input is a DataError, and `false` otherwise. The type of the input will also be narrowed down to DataError if `true`.
    */
-  public static check(input: unknown): input is DataError {
+  public static check<DataType extends Record<RecordKey, unknown> = Record<RecordKey, unknown>>(
+    input: unknown,
+  ): input is DataError<DataType> {
     if (input instanceof DataError) {
       return true;
     }

@@ -23,7 +23,7 @@ function parseIntStrict(string: string, radix?: number): number {
 
   if (!pattern.test(trimmedString)) {
     throw new DataError(
-      radix ? { string, radix } : string,
+      radix ? { string, radix } : { string },
       "INTEGER_PARSING_ERROR",
       `Only numeric values${radix && radix > 10 && radix <= 36 ? ` or character${radix !== 11 ? "s" : ""} A${radix !== 11 ? `-${maxAllowedAlphabeticalCharacter?.toUpperCase()} ` : " "}` : " "}are allowed.`,
     );
@@ -45,7 +45,7 @@ function parseIntStrict(string: string, radix?: number): number {
 
   const parseIntResult = parseInt(trimmedString, radix);
   if (isNaN(parseIntResult)) {
-    throw new DataError(string, "INTEGER_PARSING_ERROR", "Value is not a valid integer.");
+    throw new DataError({ string }, "INTEGER_PARSING_ERROR", "Value is not a valid integer.");
   }
 
   return parseIntResult;
