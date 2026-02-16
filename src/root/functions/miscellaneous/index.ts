@@ -1,6 +1,6 @@
+export { default as getDependenciesFromGroup } from "src/internal/getDependenciesFromGroup";
 export { default as convertFileToBase64 } from "src/root/functions/miscellaneous/convertFileToBase64";
 export { default as createFormData } from "src/root/functions/miscellaneous/createFormData";
-export { default as getDependenciesFromGroup } from "src/root/functions/miscellaneous/getDependenciesFromGroup";
 export { default as getRandomNumber } from "src/root/functions/miscellaneous/getRandomNumber";
 export { default as isOrdered } from "src/root/functions/miscellaneous/isOrdered";
 export { default as sayHello } from "src/root/functions/miscellaneous/sayHello";

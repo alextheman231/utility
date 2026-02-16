@@ -1,3 +1,4 @@
+import type { PackageManager } from "src/internal";
 import type { CreateEnumType } from "src/root/types";
 
 import { execa } from "execa";
@@ -8,7 +9,12 @@ import { beforeAll, describe, expect, test as testVitest } from "vitest";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import { getExpectedTgzName, getPackageJsonContents, getPackageJsonPath } from "src/internal";
+import {
+  getPackageJsonContents,
+  ModuleType,
+  packageJsonNotFoundError,
+  setupPackageEndToEnd,
+} from "src/internal";
 import {
   getDependenciesFromGroup,
   normaliseIndents,
@@ -18,21 +24,6 @@ import {
 import { DataError } from "src/root/types";
 
 import utilityPackageInfo from "package.json" with { type: "json" };
-
-const ModuleType = {
-  COMMON_JS: "commonjs",
-  ES_MODULES: "module",
-  TYPESCRIPT: "typescript",
-} as const;
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-type ModuleType = CreateEnumType<typeof ModuleType>;
-
-export const PackageManager = {
-  NPM: "npm",
-  PNPM: "pnpm",
-} as const;
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export type PackageManager = CreateEnumType<typeof PackageManager>;
 
 const Entrypoint = {
   ROOT: "@alextheman/utility",
@@ -69,14 +60,6 @@ function getTypeCodeString(expectedStatus: "error" | "success", entrypoint: Entr
   `;
 }
 
-function packageJsonNotFoundError(packagePath: string) {
-  return new DataError(
-    { packagePath: getPackageJsonPath(packagePath) },
-    "PACKAGE_JSON_NOT_FOUND",
-    "Could not find package.json in temporary directory.",
-  );
-}
-
 function versionMismatchError(packageName: string, expectedVersion: string, actualVersion: string) {
   return new DataError({
     [packageName]: {
@@ -84,6 +67,11 @@ function versionMismatchError(packageName: string, expectedVersion: string, actu
       expectedVersion,
     },
   });
+}
+
+function assert(exitCode: number | undefined, result: string) {
+  expect(exitCode).toBe(0);
+  expect(result.trim()).toContain("I'll commit to you");
 }
 
 beforeAll(async () => {
@@ -100,40 +88,16 @@ describe.each<Entrypoint>([Entrypoint.ROOT, Entrypoint.NODE, Entrypoint.INTERNAL
           const code = getRuntimeCodeString(moduleType, entrypoint);
 
           await temporaryDirectoryTask(async (temporaryPath) => {
-            await execa({
-              cwd: process.cwd(),
-            })`${packageManager} pack --pack-destination ${temporaryPath}`;
-            const tgzFileName = await getExpectedTgzName(process.cwd(), packageManager);
-            const runCommandInTempDirectory = execa({ cwd: temporaryPath });
-
-            if (packageManager === PackageManager.NPM) {
-              await runCommandInTempDirectory`npm init -y`;
-            } else {
-              await runCommandInTempDirectory`pnpm init`;
-            }
-            const packageInfo = await getPackageJsonContents(temporaryPath);
-
-            if (packageInfo === null) {
-              throw packageJsonNotFoundError(temporaryPath);
-            }
-            packageInfo.type =
-              moduleType === ModuleType.TYPESCRIPT ? ModuleType.ES_MODULES : moduleType;
-
-            await writeFile(
-              path.join(temporaryPath, "package.json"),
-              JSON.stringify(packageInfo, null, 2),
+            const runCommandInTempDirectory = await setupPackageEndToEnd(
+              temporaryPath,
+              packageManager,
+              moduleType,
             );
-            await runCommandInTempDirectory`${packageManager} install ${path.join(temporaryPath, tgzFileName)}`;
 
             const codeFileName = `sayHello.${moduleType === ModuleType.TYPESCRIPT ? "ts" : "js"}`;
             const codeFilePath = path.join(temporaryPath, "src", codeFileName);
             await mkdir(path.dirname(codeFilePath), { recursive: true });
             await writeFile(codeFilePath, code);
-
-            function assert(exitCode: number | undefined, result: string) {
-              expect(exitCode).toBe(0);
-              expect(result.trim()).toContain("I'll commit to you");
-            }
 
             if (moduleType === ModuleType.TYPESCRIPT) {
               const { tsx: tsxVersionUtility, typescript: typescriptVersionUtility } =
