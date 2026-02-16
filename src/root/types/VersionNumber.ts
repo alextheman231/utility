@@ -9,10 +9,26 @@ import DataError from "src/root/types/DataError";
  *
  * @category Class Options
  */
-export interface VersionNumberToStringOptions {
+export interface FormatOptionsBase {
   /** Whether you want to omit the "v" prefix or not (defaults to false). */
   omitPrefix?: boolean;
 }
+
+export interface FormatOptionsIncludeMinor extends FormatOptionsBase {
+  /** Whether you want to omit the minor version or not */
+  omitMinor?: false;
+  /** Whether you want to omit the patch version or not */
+  omitPatch?: boolean;
+}
+
+export interface FormatOptionsOmitMinor extends FormatOptionsBase {
+  /** Whether you want to omit the minor version or not */
+  omitMinor?: true;
+  /** Whether you want to omit the patch version or not */
+  omitPatch?: never;
+}
+
+export type FormatStringOptions = FormatOptionsIncludeMinor | FormatOptionsOmitMinor;
 
 /**
  * Represents a software version number, considered to be made up of a major, minor, and patch part.
@@ -87,7 +103,7 @@ class VersionNumber {
     return VersionType.PATCH;
   }
 
-  private static formatString(input: string, options?: VersionNumberToStringOptions) {
+  private static formatString(input: string, options?: { omitPrefix?: boolean }) {
     if (options?.omitPrefix) {
       return input.startsWith("v") ? input.slice(1) : input;
     }
@@ -110,6 +126,25 @@ class VersionNumber {
     );
   }
 
+  /**
+   * Get a formatted string representation of the current version number
+   *
+   * @param options - Options to apply to the string formatting.
+   *
+   * @returns A formatted string representation of the current version number with the options applied.
+   */
+  public format(options?: FormatStringOptions): string {
+    let baseOutput = `${this.major}`;
+
+    if (!options?.omitMinor) {
+      baseOutput += `.${this.minor}`;
+      if (!options?.omitPatch) {
+        baseOutput += `.${this.patch}`;
+      }
+    }
+
+    return VersionNumber.formatString(baseOutput, { omitPrefix: options?.omitPrefix });
+  }
   /**
    * Increments the current version number by the given increment type, returning the result as a new reference in memory.
    *
@@ -174,13 +209,11 @@ class VersionNumber {
   /**
    * Get a string representation of the current version number.
    *
-   * @param options - Extra additional options to apply.
-   *
-   * @returns A stringified representation of the current version number, leaving out the prefix if `omitPrefix` option was set to true.
+   * @returns A stringified representation of the current version number with the prefix.
    */
-  public toString(options?: VersionNumberToStringOptions): string {
+  public toString(): string {
     const rawString = `${this.major}.${this.minor}.${this.patch}`;
-    return VersionNumber.formatString(rawString, options);
+    return VersionNumber.formatString(rawString, { omitPrefix: false });
   }
 }
 
