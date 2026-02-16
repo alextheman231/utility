@@ -7,4 +7,3 @@ export * from "src/root/functions/recursive";
 export * from "src/root/functions/security";
 export * from "src/root/functions/stringHelpers";
 export * from "src/root/functions/taggedTemplate";
-export * from "src/root/functions/versioning";
