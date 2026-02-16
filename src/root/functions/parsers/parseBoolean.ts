@@ -15,7 +15,7 @@ function parseBoolean(inputString: string): boolean {
   const normalisedString = inputString.toLowerCase();
   if (!["true", "false"].includes(normalisedString)) {
     throw new DataError(
-      inputString,
+      { inputString },
       "INVALID_BOOLEAN_STRING",
       "The provided boolean string must be one of `true | false`",
     );

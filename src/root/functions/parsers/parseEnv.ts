@@ -24,18 +24,18 @@ export type Env = CreateEnumType<typeof Env>;
  *
  * @category Parsers
  *
- * @param data - The data to parse.
+ * @param input - The data to parse.
  *
  * @throws {DataError} If the data does not match one of the environments allowed by the Env types ("test" | "development" | "production").
  *
  * @returns The specified environment if allowed.
  */
-function parseEnv(data: unknown): Env {
+function parseEnv(input: unknown): Env {
   return parseZodSchema(
     z.enum(Env),
-    data,
+    input,
     new DataError(
-      data,
+      { input },
       "INVALID_ENV",
       "The provided environment type must be one of `test | development | production`",
     ),

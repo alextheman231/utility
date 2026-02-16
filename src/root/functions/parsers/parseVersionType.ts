@@ -24,18 +24,18 @@ export type VersionType = CreateEnumType<typeof VersionType>;
  *
  * @category Parsers
  *
- * @param data - The data to parse.
+ * @param input - The data to parse.
  *
  * @throws {DataError} If the data does not match one of the allowed version types (`"major" | "minor" | "patch"`).
  *
  * @returns The given version type if allowed.
  */
-function parseVersionType(data: unknown): VersionType {
+function parseVersionType(input: unknown): VersionType {
   return parseZodSchema(
     z.enum(VersionType),
-    data,
+    input,
     new DataError(
-      data,
+      { input },
       "INVALID_VERSION_TYPE",
       "The provided version type must be one of `major | minor | patch`",
     ),

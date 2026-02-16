@@ -16,7 +16,7 @@ describe("parseBoolean", () => {
       throw new Error("TEST_FAILED");
     } catch (error) {
       if (DataError.check(error)) {
-        expect(error.data).toBe("Yes");
+        expect(error.data.inputString).toBe("Yes");
         expect(error.code).toBe("INVALID_BOOLEAN_STRING");
         expect(error.message).toBe("The provided boolean string must be one of `true | false`");
       } else {

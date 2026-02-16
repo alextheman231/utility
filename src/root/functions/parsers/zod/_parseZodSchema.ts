@@ -8,7 +8,7 @@ import { DataError } from "src/root/types";
 // eslint-disable-next-line jsdoc/require-jsdoc
 function _parseZodSchema<SchemaType extends ZodType, ErrorType extends Error = DataError>(
   parsedResult: ZodSafeParseResult<z.infer<SchemaType>>,
-  data: unknown,
+  input: unknown,
   onError?: ErrorType | ((zodError: ZodError) => ErrorType | void),
 ): z.infer<SchemaType> {
   if (!parsedResult.success) {
@@ -31,7 +31,7 @@ function _parseZodSchema<SchemaType extends ZodType, ErrorType extends Error = D
     }
 
     throw new DataError(
-      data,
+      { input },
       Object.entries(allErrorCodes)
         .toSorted(([_, firstCount], [__, secondCount]) => {
           return secondCount - firstCount;

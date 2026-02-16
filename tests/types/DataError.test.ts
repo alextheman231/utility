@@ -56,7 +56,7 @@ describe("DataError.check()", () => {
   });
   test("The error type is narrowed down after checking", () => {
     try {
-      throw new DataError(404);
+      throw new DataError({ httpErrorCode: 404 });
     } catch (error) {
       if (DataError.check(error)) {
         expectTypeOf(error).toEqualTypeOf<DataError>();

@@ -13,7 +13,7 @@ describe("parseZodSchema", () => {
       parseZodSchema(z.string(), 1);
     } catch (error) {
       if (DataError.check(error)) {
-        expect(error.data).toBe(1);
+        expect(error.data.input).toBe(1);
         expect(error.code).toBe("INVALID_TYPE");
       } else {
         throw error;
@@ -22,11 +22,11 @@ describe("parseZodSchema", () => {
   });
   test("Takes an optional error argument to allow us to customise the error", () => {
     try {
-      parseZodSchema(z.string(), 1, new DataError(1, "TEST_CODE", "Test message"));
+      parseZodSchema(z.string(), 1, new DataError({ input: 1 }, "TEST_CODE", "Test message"));
       throw new Error("DID_NOT_THROW");
     } catch (error) {
       if (DataError.check(error)) {
-        expect(error.data).toBe(1);
+        expect(error.data.input).toBe(1);
         expect(error.code).toBe("TEST_CODE");
         expect(error.message).toBe("Test message");
       } else {
@@ -61,7 +61,7 @@ describe("parseZodSchema", () => {
     } catch (error) {
       expect(wasCalled).toBe(true);
       if (DataError.check(error)) {
-        expect(error.data).toBe(1);
+        expect(error.data.input).toBe(1);
         expect(error.code).toBe("INVALID_TYPE");
       }
     }
@@ -82,7 +82,7 @@ describe("parseZodSchema", () => {
       );
     } catch (error) {
       if (error instanceof DataError) {
-        expect(error.data).toEqual(input);
+        expect(error.data.input).toEqual(input);
         expect(error.code).toBe("INVALID_TYPE×2,UNRECOGNIZED_KEYS×1");
       }
     }

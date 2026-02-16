@@ -41,7 +41,7 @@ class VersionNumber {
     } else if (typeof input === "string") {
       if (!RegExp(VERSION_NUMBER_REGEX).test(input)) {
         throw new DataError(
-          input,
+          { input },
           "INVALID_VERSION",
           `"${input}" is not a valid version number. Version numbers must be of the format "X.Y.Z" or "vX.Y.Z", where X, Y, and Z are non-negative integers.`,
         );
@@ -57,12 +57,12 @@ class VersionNumber {
       this.patch = patch;
     } else if (Array.isArray(input)) {
       if (input.length !== 3) {
-        throw new DataError(input, "INVALID_LENGTH", VersionNumber.NON_NEGATIVE_TUPLE_ERROR);
+        throw new DataError({ input }, "INVALID_LENGTH", VersionNumber.NON_NEGATIVE_TUPLE_ERROR);
       }
       const [major, minor, patch] = input.map((number) => {
         const parsedInteger = parseIntStrict(number?.toString());
         if (parsedInteger < 0) {
-          throw new DataError(input, "NEGATIVE_INPUTS", VersionNumber.NON_NEGATIVE_TUPLE_ERROR);
+          throw new DataError({ input }, "NEGATIVE_INPUTS", VersionNumber.NON_NEGATIVE_TUPLE_ERROR);
         }
         return parsedInteger;
       });
@@ -156,7 +156,7 @@ class VersionNumber {
   public [Symbol.toPrimitive](hint: "default" | "string" | "number"): string {
     if (hint === "number") {
       throw new DataError(
-        this.toString(),
+        { thisVersiojn: this.toString() },
         "INVALID_COERCION",
         "VersionNumber cannot be coerced to a number type.",
       );

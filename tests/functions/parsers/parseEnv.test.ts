@@ -22,7 +22,7 @@ describe("parseEnv", () => {
       throw new Error("DID_NOT_THROW");
     } catch (error: unknown) {
       if (error instanceof DataError) {
-        expect(error.data).toBe("Invalid env");
+        expect(error.data.input).toBe("Invalid env");
         expect(error.code).toBe("INVALID_ENV");
         expect(error.message).toBe(
           "The provided environment type must be one of `test | development | production`",
