@@ -1,15 +1,8 @@
-import type { CreateEnumType } from "src/root/types";
+import type { DependencyGroup } from "src/internal/DependencyGroup";
 
 import z from "zod";
 
 import { parseZodSchema } from "src/root/functions";
-
-export const DependencyGroup = {
-  DEPENDENCIES: "dependencies",
-  DEV_DEPENDENCIES: "devDependencies",
-} as const;
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export type DependencyGroup = CreateEnumType<typeof DependencyGroup>;
 
 /**
  * Get the dependencies from a given dependency group in `package.json`.
