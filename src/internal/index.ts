@@ -1,4 +1,5 @@
 export { DependencyGroup } from "src/internal/DependencyGroup";
+export { default as getDependenciesFromGroup } from "src/internal/getDependenciesFromGroup";
 export { default as getExpectedTgzName } from "src/internal/getExpectedTgzName";
 export { default as getPackageJsonContents } from "src/internal/getPackageJsonContents";
 export { default as getPackageJsonPath } from "src/internal/getPackageJsonPath";
