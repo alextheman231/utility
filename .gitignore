@@ -3,6 +3,7 @@ dist
 alextheman-utility-*.tgz
 .env
 .alex-c-line.private.config.js
+.alex-c-line
 
 # Local Netlify folder
 .netlify
