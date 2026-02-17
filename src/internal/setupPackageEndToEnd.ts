@@ -14,7 +14,7 @@ import { PackageManager } from "src/internal/PackageManager";
 
 export interface SetupPackageEndToEndOptions {
   dependencyGroup?: DependencyGroup;
-  additionalDependencies?: Record<DependencyGroup, string[]>;
+  additionalDependencies?: Partial<Record<DependencyGroup, string[]>>;
 }
 
 async function setupPackageEndToEnd(
