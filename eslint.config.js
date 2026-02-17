@@ -1,3 +1,3 @@
-import plugin from "@alextheman/eslint-plugin";
+import alexPlugin from "@alextheman/eslint-plugin";
 
-export default [...plugin.configs["internal/utility"], ...plugin.configs["general/package-json"]];
+export default alexPlugin.configs["general/package-json"];
