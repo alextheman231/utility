@@ -1,8 +1,8 @@
-[**@alextheman/utility v5.1.1**](README.md)
+[**@alextheman/utility v5.1.2**](README.md)
 
 ***
 
-# @alextheman/utility v5.1.1
+# @alextheman/utility v5.1.2
 
 ## Modules
 
