@@ -14,6 +14,7 @@ import { PackageManager } from "src/internal/PackageManager";
 
 export interface SetupPackageEndToEndOptions {
   dependencyGroup?: DependencyGroup;
+  additionalDependencies?: Record<DependencyGroup, string[]>;
 }
 
 async function setupPackageEndToEnd(
@@ -43,6 +44,14 @@ async function setupPackageEndToEnd(
   packageInfo.type = moduleType === ModuleType.TYPESCRIPT ? ModuleType.ES_MODULES : moduleType;
 
   await writeFile(path.join(temporaryPath, "package.json"), JSON.stringify(packageInfo, null, 2));
+
+  if (options?.additionalDependencies?.dependencies?.length) {
+    await runCommandInTempDirectory`${packageManager} install ${options.additionalDependencies.dependencies.join(" ")}`;
+  }
+  if (options?.additionalDependencies?.devDependencies?.length) {
+    await runCommandInTempDirectory`${packageManager} install --save-dev ${options.additionalDependencies.devDependencies.join(" ")}`;
+  }
+
   await runCommandInTempDirectory`${packageManager} install ${dependencyGroup === "devDependencies" ? "--save-dev" : "--save-prod"} ${path.join(temporaryPath, tgzFileName)}`;
 
   return runCommandInTempDirectory;
