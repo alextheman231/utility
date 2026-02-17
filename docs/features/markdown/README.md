@@ -1,4 +1,4 @@
-**@alextheman/utility v5.1.2**
+**@alextheman/utility v5.1.3**
 
 ***
 
