@@ -1,3 +1,5 @@
+import { DataError } from "src/root/types";
+
 /**
  * Creates an array of numbers within a given range.
  *
@@ -10,25 +12,33 @@
  * @param stop - The number to stop at (exclusive).
  * @param step - The step size between numbers, defaulting to 1.
  *
- * @throws {Error} If `step` is `0`.
- * @throws {Error} If `step` direction does not match the order of `start` and `stop`.
+ * @throws {DataError} If `step` is `0`.
+ * @throws {DataError} If `step` direction does not match the order of `start` and `stop`.
  *
  * @returns An array of numbers satisfying the range provided.
  */
 function range(start: number, stop: number, step: number = 1): number[] {
   const numbers: number[] = [];
   if (step === 0) {
-    throw new Error("ZERO_STEP_SIZE_NOT_ALLOWED");
+    throw new DataError({ step }, "ZERO_STEP_SIZE", "Step size cannot be zero.");
   } else if (step > 0) {
     if (start > stop) {
-      throw new Error("INVALID_BOUNDARIES");
+      throw new DataError(
+        { start, stop, step },
+        "INVALID_BOUNDARIES",
+        "The starting value cannot be bigger than the final value if step is positive",
+      );
     }
     for (let i = start; i < stop; i += step) {
       numbers.push(i);
     }
   } else if (step < 0) {
     if (start < stop) {
-      throw new Error("INVALID_BOUNDARIES");
+      throw new DataError(
+        { start, stop, step },
+        "INVALID_BOUNDARIES",
+        "The final value cannot be bigger than the starting value if step is negative",
+      );
     }
     for (let i = start; i > stop; i += step) {
       numbers.push(i);

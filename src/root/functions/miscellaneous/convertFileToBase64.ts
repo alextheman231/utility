@@ -1,3 +1,5 @@
+import { DataError } from "src/root/types";
+
 /**
  * Asynchronously converts a file to a base 64 string
  *
@@ -5,7 +7,7 @@
  *
  * @param file - The file to convert.
  *
- * @throws {Error} If the file reader gives an error.
+ * @throws {Error | DataError} If the file reader gives an error.
  *
  * @returns A promise that resolves to the encoded base 64 string.
  */
@@ -15,7 +17,13 @@ function convertFileToBase64(file: File): Promise<string> {
     reader.readAsDataURL(file);
     reader.onload = () => {
       if (reader.result === null) {
-        reject(new Error("FILE_CONVERSION_ERROR"));
+        reject(
+          new DataError(
+            { result: reader.result },
+            "FILE_CONVERSION_ERROR",
+            "Could not convert the given file.",
+          ),
+        );
         return;
       }
       resolve(reader.result as string);

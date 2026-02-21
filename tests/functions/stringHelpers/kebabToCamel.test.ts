@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 
+import { DataError } from "src/root";
 import kebabToCamel from "src/root/functions/stringHelpers/kebabToCamel";
 
 describe("kebabToCamel", () => {
@@ -7,14 +8,12 @@ describe("kebabToCamel", () => {
     expect(kebabToCamel("hello-world")).toBe("helloWorld");
   });
   test("Throws an error on invalid kebab-case input", () => {
-    try {
+    const error = DataError.expectError(() => {
       kebabToCamel("helloWorld");
-      throw new Error("TEST_FAILED");
-    } catch (error) {
-      if (error instanceof Error) {
-        expect(error.message).toBe("INVALID_KEBAB_CASE_INPUT");
-      }
-    }
+    });
+
+    expect(error.data.input).toBe("helloWorld");
+    expect(error.code).toBe("UPPERCASE_INPUT");
   });
   test("Ignores non-alphabetic characters", () => {
     expect(kebabToCamel("hello-world2")).toBe("helloWorld2");
@@ -22,32 +21,16 @@ describe("kebabToCamel", () => {
   test("Capitalises the first letter if the option is provided", () => {
     expect(kebabToCamel("hello-world", { startWithUpper: true })).toBe("HelloWorld");
   });
-  test("Errors on bad dash placement", () => {
-    try {
-      kebabToCamel("hello--world");
-      throw new Error("TEST_FAILED");
-    } catch (error) {
-      if (error instanceof Error) {
-        expect(error.message).toBe("INVALID_KEBAB_CASE_INPUT");
-      }
-    }
+  test.each<[string, string, string]>([
+    ["consecutive dashes", "hello--world", "CONSECUTIVE_DASHES"],
+    ["dash at start of string", "-hello-world", "TRAILING_DASHES"],
+    ["dash at end of string", "hello-world-", "TRAILING_DASHES"],
+  ])("Errors on %s", (_, input, code) => {
+    const error = DataError.expectError(() => {
+      kebabToCamel(input);
+    });
 
-    try {
-      kebabToCamel("-hello-world");
-      throw new Error("TEST_FAILED");
-    } catch (error) {
-      if (error instanceof Error) {
-        expect(error.message).toBe("INVALID_KEBAB_CASE_INPUT");
-      }
-    }
-
-    try {
-      kebabToCamel("hello-world-");
-      throw new Error("TEST_FAILED");
-    } catch (error) {
-      if (error instanceof Error) {
-        expect(error.message).toBe("INVALID_KEBAB_CASE_INPUT");
-      }
-    }
+    expect(error.data.input).toBe(input);
+    expect(error.code).toBe(code);
   });
 });

@@ -1,5 +1,7 @@
 import type { RecordKey } from "src/root/types";
 
+import { DataError } from "src/root/types";
+
 export type FormDataNullableResolutionStrategy = "stringify" | "empty" | "omit";
 export type FormDataArrayResolutionStrategy = "stringify" | "multiple";
 
@@ -79,6 +81,10 @@ function getNullableResolutionStrategy(
   return (typeof strategy === "object" ? strategy[key] : strategy) ?? "empty";
 }
 
+function isPrimitive(item: unknown): boolean {
+  return typeof item === "string" || typeof item === "number" || typeof item === "boolean";
+}
+
 /**
  * Creates FormData from a given object, resolving non-string types as appropriate.
  *
@@ -106,16 +112,20 @@ function createFormData<DataType extends Record<RecordKey, unknown>>(
     resolutionStrategy: FormDataNullableResolutionStrategy,
   ) {
     switch (resolutionStrategy) {
-      case "empty":
+      case "empty": {
         formData.append(String(key), "");
         break;
-      case "stringify":
+      }
+      case "stringify": {
         formData.append(String(key), JSON.stringify(value));
         break;
-      case "omit":
+      }
+      case "omit": {
         break;
-      default:
-        throw new TypeError("SLOPPY_PURE_JAVASCRIPT_USER_ERROR");
+      }
+      default: {
+        throw resolutionStrategy satisfies never;
+      }
     }
   }
 
@@ -167,7 +177,11 @@ function createFormData<DataType extends Record<RecordKey, unknown>>(
             (typeof options.arrayResolution === "object" &&
               options.arrayResolution[key] === "stringify"))
         ) {
-          throw new TypeError("CANNOT_STRINGIFY_BLOB");
+          throw new DataError(
+            { value },
+            "CANNOT_STRINGIFY_BLOB",
+            'Files/blobs cannot be stringified. Please change the resolution option for this item to "multiple" instead.',
+          );
         }
         if (
           options.arrayResolution === "multiple" ||
@@ -175,8 +189,12 @@ function createFormData<DataType extends Record<RecordKey, unknown>>(
             options.arrayResolution[key] === "multiple")
         ) {
           for (const item of value) {
-            if ((typeof item === "object" || !item) && !(item instanceof Blob)) {
-              throw new TypeError("NON_PRIMITIVE_ARRAY_ITEMS_FOUND");
+            if (!isPrimitive(item) && !(item instanceof Blob)) {
+              throw new DataError(
+                { item },
+                "NON_PRIMITIVE_ARRAY_ITEMS_FOUND",
+                'Cannot directly add non-primitive data to FormData. Please change the resolution option for this item to "stringify" instead.',
+              );
             }
             if (item instanceof Blob) {
               formData.append(String(key), item);
