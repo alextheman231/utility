@@ -1,4 +1,4 @@
-[**@alextheman/utility v5.1.4**](../../README.md)
+[**@alextheman/utility v5.2.0**](../../README.md)
 
 ***
 
@@ -6,13 +6,13 @@
 
 # Function: kebabToCamel()
 
-> **kebabToCamel**(`string`, `options?`): `string`
+> **kebabToCamel**(`input`, `options?`): `string`
 
 Converts a string from kebab-case to camelCase
 
 ## Parameters
 
-### string
+### input
 
 `string`
 
