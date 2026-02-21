@@ -38,7 +38,6 @@ describe("parseZodSchema", () => {
     try {
       const input = { hello: 1 };
       parseZodSchema(z.object({ hello: z.string() }), input, (zodError) => {
-        // eslint-disable-next-line @alextheman/standardise-error-messages
         return new Error(zodError.issues[0].code.toUpperCase());
       });
       throw new Error("DID_NOT_THROW");
