@@ -58,17 +58,12 @@ describe("stringifyDotenv", () => {
     ["=", { ALSO_INVALID: "Hello=world" }],
     ["\\", { BACKSLASHES_TOO_UGH: "Hello\\world" }],
   ])("If quoteStyle is none, reject values with %s", (_, input) => {
-    try {
+    const error = DataError.expectError(() => {
       stringifyDotenv(input, { quoteStyle: "none" });
-      throw new Error("DID_NOT_THROW");
-    } catch (error) {
-      if (DataError.check(error)) {
-        expect(error.data).toEqual(input);
-        expect(error.code).toBe("INCOMPATIBLE_QUOTE_STYLE");
-      } else {
-        throw error;
-      }
-    }
+    });
+
+    expect(error.data).toEqual(input);
+    expect(error.code).toBe("INCOMPATIBLE_QUOTE_STYLE");
   });
 
   test.each<"double" | "single">(["double", "single"])(
@@ -102,19 +97,14 @@ describe("stringifyDotenv", () => {
   });
 
   test("Does not allow spaces in key names", () => {
-    try {
+    const error = DataError.expectError(() => {
       stringifyDotenv({
         "HELLO WORLD": "my world",
       });
-      throw new Error("DID_NOT_THROW");
-    } catch (error) {
-      if (DataError.check(error)) {
-        expect(error.data).toEqual({ "HELLO WORLD": "my world" });
-        expect(error.code).toBe("INVALID_KEY");
-      } else {
-        throw error;
-      }
-    }
+    });
+
+    expect(error.data).toEqual({ "HELLO WORLD": "my world" });
+    expect(error.code).toBe("INVALID_KEY");
   });
 
   test.each<"double" | "single">(["double", "single"])(

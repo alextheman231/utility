@@ -11,18 +11,13 @@ describe("parseBoolean", () => {
     expect(parseBoolean("false")).toBe(false);
   });
   test("Throws an error for any other input", () => {
-    try {
+    const error = DataError.expectError(() => {
       parseBoolean("Yes");
-      throw new Error("TEST_FAILED");
-    } catch (error) {
-      if (DataError.check(error)) {
-        expect(error.data.inputString).toBe("Yes");
-        expect(error.code).toBe("INVALID_BOOLEAN_STRING");
-        expect(error.message).toBe("The provided boolean string must be one of `true | false`");
-      } else {
-        throw error;
-      }
-    }
+    });
+
+    expect(error.data.inputString).toBe("Yes");
+    expect(error.code).toBe("INVALID_BOOLEAN_STRING");
+    expect(error.message).toBe("The provided boolean string must be one of `true | false`");
   });
   test("Case insensitivity", () => {
     expect(parseBoolean("TruE")).toBe(true);

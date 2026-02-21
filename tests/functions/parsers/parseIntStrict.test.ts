@@ -18,92 +18,61 @@ describe("parseIntStrict", () => {
     expect(parseIntStrict("1a", 16)).toBe(26);
   });
   test("Throws a DataError if parsed result is not an integer", () => {
-    try {
+    const error = DataError.expectError(() => {
       parseIntStrict("Hello");
-      throw new Error("TEST_FAILED");
-    } catch (error) {
-      if (error instanceof DataError) {
-        expect(error.data.string).toBe("Hello");
-        expect(error.code).toBe("INTEGER_PARSING_ERROR");
-        expect(error.message).toBe("Only numeric values are allowed.");
-      } else {
-        throw error;
-      }
-    }
+    });
+
+    expect(error.data.string).toBe("Hello");
+    expect(error.code).toBe("INTEGER_PARSING_ERROR");
+    expect(error.message).toBe("Only numeric values are allowed.");
   });
   test.each(["3.14", "3a", "a3", "3+1"])(
     "Fails if the input contains any non-numeric characters other than '-' (testing %s)",
     (stringToParse: string) => {
-      try {
+      const error = DataError.expectError(() => {
         parseIntStrict(stringToParse);
-        throw new Error("TEST_FAILED");
-      } catch (error) {
-        if (error instanceof DataError) {
-          expect(error.data.string).toBe(stringToParse);
-          expect(error.code).toBe("INTEGER_PARSING_ERROR");
-          expect(error.message).toBe("Only numeric values are allowed.");
-        } else {
-          throw error;
-        }
-      }
+      });
+
+      expect(error.data.string).toBe(stringToParse);
+      expect(error.code).toBe("INTEGER_PARSING_ERROR");
+      expect(error.message).toBe("Only numeric values are allowed.");
     },
   );
   test("Fails if the letter is outside what is allowed in the base system", () => {
-    try {
+    const error = DataError.expectError(() => {
       parseIntStrict("1g", 16);
-      throw new Error("TEST_FAILED");
-    } catch (error) {
-      if (error instanceof DataError) {
-        expect(error.data).toEqual({ string: "1g", radix: 16 });
-        expect(error.code).toBe("INTEGER_PARSING_ERROR");
-        expect(error.message).toBe("Only numeric values or characters A-F are allowed.");
-      } else {
-        throw error;
-      }
-    }
+    });
+
+    expect(error.data).toEqual({ string: "1g", radix: 16 });
+    expect(error.code).toBe("INTEGER_PARSING_ERROR");
+    expect(error.message).toBe("Only numeric values or characters A-F are allowed.");
   });
   test("Fails if the number is outside the base system", () => {
-    try {
+    const error = DataError.expectError(() => {
       parseIntStrict("12", 2);
-      throw new Error("TEST_FAILED");
-    } catch (error) {
-      if (error instanceof DataError) {
-        expect(error.data).toEqual({ string: "12", radix: 2 });
-        expect(error.code).toBe("INTEGER_PARSING_ERROR");
-        expect(error.message).toBe(
-          "Value contains one or more digits outside of the range of the given radix.",
-        );
-      } else {
-        throw error;
-      }
-    }
+    });
+    expect(error.data).toEqual({ string: "12", radix: 2 });
+    expect(error.code).toBe("INTEGER_PARSING_ERROR");
+    expect(error.message).toBe(
+      "Value contains one or more digits outside of the range of the given radix.",
+    );
   });
   test("Fails if given an empty string", () => {
-    try {
+    const error = DataError.expectError(() => {
       parseIntStrict("");
-      throw new Error("TEST_FAILED");
-    } catch (error) {
-      if (error instanceof DataError) {
-        expect(error.data.string).toBe("");
-        expect(error.code).toBe("INTEGER_PARSING_ERROR");
-        expect(error.message).toBe("Only numeric values are allowed.");
-      } else {
-        throw error;
-      }
-    }
+    });
+
+    expect(error.data.string).toBe("");
+    expect(error.code).toBe("INTEGER_PARSING_ERROR");
+    expect(error.message).toBe("Only numeric values are allowed.");
   });
   test("Fails if given a string that trims to be an empty string", () => {
-    try {
+    const error = DataError.expectError(() => {
       parseIntStrict(" ");
-      throw new Error("TEST_FAILED");
-    } catch (error) {
-      if (error instanceof DataError) {
-        expect(error.data.string).toBe(" ");
-        expect(error.code).toBe("INTEGER_PARSING_ERROR");
-        expect(error.message).toBe("Only numeric values are allowed.");
-      } else {
-        throw error;
-      }
-    }
+    });
+
+    expect(error.data.string).toBe(" ");
+    expect(error.code).toBe("INTEGER_PARSING_ERROR");
+    expect(error.message).toBe("Only numeric values are allowed.");
   });
 });

@@ -14,14 +14,9 @@ describe("isLeapYear", () => {
     expect(isLeapYear(1900)).toBe(false);
   });
   test("Throws an error for non-integer inputs (because what the hell is year 2025.5?)", () => {
-    try {
+    const error = DataError.expectError(() => {
       isLeapYear(2025.5);
-    } catch (error: unknown) {
-      if (DataError.check(error)) {
-        expect(error.code).toBe("INTEGER_PARSING_ERROR");
-        return;
-      }
-    }
-    throw new Error("TEST_FAILED");
+    });
+    expect(error.code).toBe("INTEGER_PARSING_ERROR");
   });
 });

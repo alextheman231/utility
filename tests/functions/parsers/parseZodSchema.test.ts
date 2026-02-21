@@ -9,32 +9,24 @@ describe("parseZodSchema", () => {
     expect(parseZodSchema(z.string(), "Hello")).toBe("Hello");
   });
   test("Throws a DataError if Zod schema is invalid", () => {
-    try {
+    const error = DataError.expectError(() => {
       parseZodSchema(z.string(), 1);
-    } catch (error) {
-      if (DataError.check(error)) {
-        expect(error.data.input).toBe(1);
-        expect(error.code).toBe("INVALID_TYPE");
-      } else {
-        throw error;
-      }
-    }
+    });
+
+    expect(error.data.input).toBe(1);
+    expect(error.code).toBe("INVALID_TYPE");
   });
   test("Takes an optional error argument to allow us to customise the error", () => {
-    try {
+    const error = DataError.expectError(() => {
       parseZodSchema(z.string(), 1, new DataError({ input: 1 }, "TEST_CODE", "Test message"));
-      throw new Error("DID_NOT_THROW");
-    } catch (error) {
-      if (DataError.check(error)) {
-        expect(error.data.input).toBe(1);
-        expect(error.code).toBe("TEST_CODE");
-        expect(error.message).toBe("Test message");
-      } else {
-        throw error;
-      }
-    }
+    });
+
+    expect(error.data.input).toBe(1);
+    expect(error.code).toBe("TEST_CODE");
+    expect(error.message).toBe("Test message");
   });
   test("The error argument may be a function that accepts a zodError, and returns the error", () => {
+    // Must use the old pattern as it throws a regular error.
     try {
       const input = { hello: 1 };
       parseZodSchema(z.object({ hello: z.string() }), input, (zodError) => {
@@ -51,19 +43,15 @@ describe("parseZodSchema", () => {
   });
   test("The error function can return nothing", () => {
     let wasCalled = false;
-    try {
-      expect(wasCalled).toBe(false);
+    const error = DataError.expectError(() => {
       parseZodSchema(z.string(), 1, () => {
         wasCalled = true;
       });
-      throw new Error("DID_NOT_THROW");
-    } catch (error) {
-      expect(wasCalled).toBe(true);
-      if (DataError.check(error)) {
-        expect(error.data.input).toBe(1);
-        expect(error.code).toBe("INVALID_TYPE");
-      }
-    }
+    });
+
+    expect(wasCalled).toBe(true);
+    expect(error.data.input).toBe(1);
+    expect(error.code).toBe("INVALID_TYPE");
   });
   test("If multiple Zod errors found, the error code should be a comma-separated string list sorted by frequency", () => {
     const input = {
@@ -71,7 +59,7 @@ describe("parseZodSchema", () => {
       shouldBeNumber: "But is not",
       extraProperty: "hi",
     };
-    try {
+    const error = DataError.expectError(() => {
       parseZodSchema(
         z.strictObject({
           hello: z.string(),
@@ -79,11 +67,9 @@ describe("parseZodSchema", () => {
         }),
         input,
       );
-    } catch (error) {
-      if (error instanceof DataError) {
-        expect(error.data.input).toEqual(input);
-        expect(error.code).toBe("INVALID_TYPE×2,UNRECOGNIZED_KEYS×1");
-      }
-    }
+    });
+
+    expect(error.data.input).toEqual(input);
+    expect(error.code).toBe("INVALID_TYPE×2,UNRECOGNIZED_KEYS×1");
   });
 });
