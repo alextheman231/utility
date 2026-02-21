@@ -17,19 +17,11 @@ describe("parseVersionType", () => {
     expect(parseVersionType(patchInput)).toBe("patch");
   });
   test("Throws an error when input is not a valid version type", () => {
-    try {
+    const error = DataError.expectError(() => {
       parseVersionType("Invalid version type");
-      throw new Error("DID_NOT_THROW");
-    } catch (error: unknown) {
-      if (error instanceof DataError) {
-        expect(error.data.input).toBe("Invalid version type");
-        expect(error.code).toBe("INVALID_VERSION_TYPE");
-        expect(error.message).toBe(
-          "The provided version type must be one of `major | minor | patch`",
-        );
-      } else {
-        throw error;
-      }
-    }
+    });
+    expect(error.data.input).toBe("Invalid version type");
+    expect(error.code).toBe("INVALID_VERSION_TYPE");
+    expect(error.message).toBe("The provided version type must be one of `major | minor | patch`");
   });
 });
