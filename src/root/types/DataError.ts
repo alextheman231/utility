@@ -44,6 +44,23 @@ class DataError<
     Object.setPrototypeOf(this, new.target.prototype);
   }
 
+  private static checkCaughtError(error: unknown, options?: ExpectErrorOptions): DataError {
+    if (DataError.check(error)) {
+      if (options?.expectedCode && error.code !== options.expectedCode) {
+        throw new Error(
+          normaliseIndents`The error code on the thrown error does not match the expected error code.
+            
+            Expected: ${options.expectedCode}
+            Received: ${error.code}
+            `,
+          { cause: error },
+        );
+      }
+      return error;
+    }
+    throw error;
+  }
+
   /**
    * Checks whether the given input may have been caused by a DataError.
    *
@@ -82,20 +99,29 @@ class DataError<
     try {
       errorFunction();
     } catch (error) {
-      if (DataError.check(error)) {
-        if (options?.expectedCode && error.code !== options.expectedCode) {
-          throw new Error(
-            normaliseIndents`The error code on the thrown error does not match the expected error code.
-            
-            Expected: ${options.expectedCode}
-            Received: ${error.code}
-            `,
-            { cause: error },
-          );
-        }
-        return error;
-      }
-      throw error;
+      return DataError.checkCaughtError(error, options);
+    }
+    throw new Error("Expected a DataError to be thrown but none was thrown");
+  }
+  /**
+   * Gets the thrown `DataError` from a given asynchronous function if one was thrown, and re-throws any other errors, or throws a default `DataError` if no error thrown.
+   *
+   * @param errorFunction - The function expected to throw the error.
+   * @param options - Extra options to apply.
+   *
+   * @throws {Error} Any other errors thrown by the `errorFunction` that are not a `DataError`.
+   * @throws {DataError} If no `DataError` was thrown by the `errorFunction`
+   *
+   * @returns The `DataError` that was thrown by the `errorFunction`
+   */
+  public static async expectErrorAsync(
+    errorFunction: () => Promise<unknown>,
+    options?: ExpectErrorOptions,
+  ): Promise<DataError> {
+    try {
+      await errorFunction();
+    } catch (error) {
+      return DataError.checkCaughtError(error, options);
     }
     throw new Error("Expected a DataError to be thrown but none was thrown");
   }

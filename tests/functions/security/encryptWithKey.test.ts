@@ -94,18 +94,12 @@ describe("encryptWithKey", () => {
 
   test("If any of this errors, the error message MUST NOT display the plaintext value", async () => {
     const plaintextValue = "gdfssdehrhrt";
-    try {
+    const error = await DataError.expectErrorAsync(async () => {
       await encryptWithKey("Invalid public key", plaintextValue);
-      throw new Error("DID_NOT_THROW");
-    } catch (error) {
-      if (DataError.check(error)) {
-        assertNoPlaintextLeak(error, plaintextValue);
-        expect(error.message).toBe(
-          "Encryption failed. Please double-check that the given key is a valid base 64 string.",
-        );
-      } else {
-        throw error;
-      }
-    }
+    });
+    assertNoPlaintextLeak(error, plaintextValue);
+    expect(error.message).toBe(
+      "Encryption failed. Please double-check that the given key is a valid base 64 string.",
+    );
   });
 });
