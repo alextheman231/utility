@@ -1,4 +1,3 @@
-export { default as getDependenciesFromGroup } from "src/internal/getDependenciesFromGroup";
 export { default as convertFileToBase64 } from "src/root/functions/miscellaneous/convertFileToBase64";
 export { default as createFormData } from "src/root/functions/miscellaneous/createFormData";
 export { default as getRandomNumber } from "src/root/functions/miscellaneous/getRandomNumber";
