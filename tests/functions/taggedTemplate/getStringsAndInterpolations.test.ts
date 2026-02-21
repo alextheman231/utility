@@ -50,24 +50,15 @@ describe("getStringsAndInterpolations", () => {
         ["world", 1, 2],
       ],
     ])("Throws an error if %s", (_, strings, interpolations) => {
-      try {
+      const error = DataError.expectError(() => {
         getStringsAndInterpolations(strings, ...interpolations);
-        throw new Error("DID_NOT_THROW");
-      } catch (error) {
-        if (DataError.check(error)) {
-          // TODO for v5 - make DataError take a Record<RecordType, unknown> for data only
-          const { data } = error as { data: Record<string, unknown> };
-          if (typeof data === "object") {
-            expect(data?.stringsLength).toBe(strings.length);
-            expect(data.interpolationsLength).toBe(interpolations.length);
-            expect(data.strings).toEqual(strings);
-            expect(data.interpolations).toEqual(interpolations);
-            expect(error.code).toBe("INVALID_STRINGS_AND_INTERPOLATIONS_LENGTH");
-          }
-        } else {
-          throw error;
-        }
-      }
+      });
+
+      expect(error.data?.stringsLength).toBe(strings.length);
+      expect(error.data.interpolationsLength).toBe(interpolations.length);
+      expect(error.data.strings).toEqual(strings);
+      expect(error.data.interpolations).toEqual(interpolations);
+      expect(error.code).toBe("INVALID_STRINGS_AND_INTERPOLATIONS_LENGTH");
     });
   });
 });

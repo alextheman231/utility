@@ -21,16 +21,12 @@ describe("parseFilePath", () => {
   });
 
   test("Does not allow a file name with no dot or no slash.", () => {
-    try {
+    const error = DataError.expectError(() => {
       parseFilePath("index");
-    } catch (error) {
-      if (error instanceof DataError) {
-        expect(error.data).toEqual({ filePath: "index" });
-        expect(error.code).toBe("INVALID_FILE_PATH");
-      } else {
-        throw error;
-      }
-    }
+    });
+
+    expect(error.data).toEqual({ filePath: "index" });
+    expect(error.code).toBe("INVALID_FILE_PATH");
   });
 
   test("Normalises the full path using node:path.", () => {

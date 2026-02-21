@@ -37,20 +37,14 @@ describe("VersionNumber", () => {
       expect(versionCopy).not.toBe(version);
     });
     test("Throws a DataError if the version string is not valid", () => {
-      try {
+      const error = DataError.expectError(() => {
         new VersionNumber("hello");
-        throw new Error("DID_NOT_THROW");
-      } catch (error) {
-        if (DataError.check(error)) {
-          expect(error.code).toBe("INVALID_VERSION");
-          expect(error.message).toBe(
-            '"hello" is not a valid version number. Version numbers must be of the format "X.Y.Z" or "vX.Y.Z", where X, Y, and Z are non-negative integers.',
-          );
-          expect(error.data.input).toBe("hello");
-        } else {
-          throw error;
-        }
-      }
+      });
+      expect(error.code).toBe("INVALID_VERSION");
+      expect(error.message).toBe(
+        '"hello" is not a valid version number. Version numbers must be of the format "X.Y.Z" or "vX.Y.Z", where X, Y, and Z are non-negative integers.',
+      );
+      expect(error.data.input).toBe("hello");
     });
     describe("VersionNumber.isEqual()", () => {
       test("Considers the same instance of VersionNumber to be equal", () => {
@@ -87,56 +81,18 @@ describe("VersionNumber", () => {
         expect(VersionNumber.isEqual(secondVersion, firstVersion)).toBe(false);
       });
     });
-    test("Does not allow an invalid tuple.", () => {
-      try {
-        // @ts-expect-error: Not numbers
-        new VersionNumber(["hello", "there", "world"]);
-        throw new Error("DID_NOT_THROW");
-      } catch (error) {
-        if (DataError.check(error)) {
-          expect(error.code).toBe("INTEGER_PARSING_ERROR");
-        } else {
-          throw error;
-        }
-      }
+    test.each<[string, unknown[], string]>([
+      ["does not contain numbers", ["hello", "there", "world"], "INTEGER_PARSING_ERROR"],
+      ["contains too many numbers", [1, 2, 3, 4], "INVALID_LENGTH"],
+      ["contains too few numbers", [1, 2], "INVALID_LENGTH"],
+      ["contains negative numbers", [-1, -2, -3], "NEGATIVE_INPUTS"],
+    ])("Fails when tuple %s", (_, tuple, code) => {
+      const error = DataError.expectError(() => {
+        // @ts-expect-error: We are testing what happens if the type system allows invalid inputs anyway.
+        new VersionNumber(tuple);
+      });
 
-      try {
-        // @ts-expect-error: Too many numbers
-        new VersionNumber([1, 2, 3, 4]);
-        throw new Error("DID_NOT_THROW");
-      } catch (error) {
-        if (DataError.check(error)) {
-          expect(error.code).toBe("INVALID_LENGTH");
-          expect(error.message).toBe("Input array must be a tuple of three non-negative integers.");
-        } else {
-          throw error;
-        }
-      }
-
-      try {
-        // @ts-expect-error: Too few numbers
-        new VersionNumber([1, 2]);
-        throw new Error("DID_NOT_THROW");
-      } catch (error) {
-        if (DataError.check(error)) {
-          expect(error.code).toBe("INVALID_LENGTH");
-          expect(error.message).toBe("Input array must be a tuple of three non-negative integers.");
-        } else {
-          throw error;
-        }
-      }
-
-      try {
-        new VersionNumber([-1, -2, -3]);
-        throw new Error("DID_NOT_THROW");
-      } catch (error) {
-        if (DataError.check(error)) {
-          expect(error.code).toBe("NEGATIVE_INPUTS");
-          expect(error.message).toBe("Input array must be a tuple of three non-negative integers.");
-        } else {
-          throw error;
-        }
-      }
+      expect(error.code).toBe(code);
     });
   });
 
@@ -152,17 +108,11 @@ describe("VersionNumber", () => {
       expect("Version: " + version).toBe("Version: v1.2.3");
       expect(String(version)).toBe("v1.2.3");
 
-      try {
+      const error = DataError.expectError(() => {
         Number(new VersionNumber([1, 2, 3]));
-        throw new Error("DID_NOT_THROW");
-      } catch (error) {
-        if (DataError.check(error)) {
-          expect(error.code).toBe("INVALID_COERCION");
-          expect(error.message).toBe("VersionNumber cannot be coerced to a number type.");
-        } else {
-          throw error;
-        }
-      }
+      });
+      expect(error.code).toBe("INVALID_COERCION");
+      expect(error.message).toBe("VersionNumber cannot be coerced to a number type.");
     });
     test("Implemented in a .toJSON() method to allow it to nicely be coerced to the right string", () => {
       const version = new VersionNumber([1, 2, 3]);
@@ -236,25 +186,20 @@ describe("VersionNumber", () => {
       "Does not allow negative versions when decrementing %s",
       (versionType) => {
         const incrementAmount = -4;
-        try {
+        const error = DataError.expectError(() => {
           inputVersion.increment(versionType, incrementAmount);
-          throw new Error("DID_NOT_THROW");
-        } catch (error) {
-          if (DataError.check(error)) {
-            expect(error.data).toEqual({
-              currentVersion: inputVersion.toString(),
-              calculatedRawVersion: {
-                major: `v${inputVersion.major + incrementAmount}.0.0`,
-                minor: `v${inputVersion.major}.${inputVersion.minor + incrementAmount}.0`,
-                patch: `v${inputVersion.major}.${inputVersion.minor}.${inputVersion.patch + incrementAmount}`,
-              }[versionType],
-              incrementAmount,
-            });
-            expect(error.code).toBe("NEGATIVE_VERSION");
-          } else {
-            throw error;
-          }
-        }
+        });
+
+        expect(error.data).toEqual({
+          currentVersion: inputVersion.toString(),
+          calculatedRawVersion: {
+            major: `v${inputVersion.major + incrementAmount}.0.0`,
+            minor: `v${inputVersion.major}.${inputVersion.minor + incrementAmount}.0`,
+            patch: `v${inputVersion.major}.${inputVersion.minor}.${inputVersion.patch + incrementAmount}`,
+          }[versionType],
+          incrementAmount,
+        });
+        expect(error.code).toBe("NEGATIVE_VERSION");
       },
     );
 

@@ -17,19 +17,14 @@ describe("parseEnv", () => {
     expect(parseEnv(productionInput)).toBe("production");
   });
   test("Throws an error when input is not a valid environment", () => {
-    try {
+    const error = DataError.expectError(() => {
       parseEnv("Invalid env");
-      throw new Error("DID_NOT_THROW");
-    } catch (error: unknown) {
-      if (error instanceof DataError) {
-        expect(error.data.input).toBe("Invalid env");
-        expect(error.code).toBe("INVALID_ENV");
-        expect(error.message).toBe(
-          "The provided environment type must be one of `test | development | production`",
-        );
-      } else {
-        throw error;
-      }
-    }
+    });
+
+    expect(error.data.input).toBe("Invalid env");
+    expect(error.code).toBe("INVALID_ENV");
+    expect(error.message).toBe(
+      "The provided environment type must be one of `test | development | production`",
+    );
   });
 });

@@ -1,5 +1,6 @@
 import { describe, expect, test, vi } from "vitest";
 
+import { DataError } from "src/root";
 import getRandomNumber from "src/root/functions/miscellaneous/getRandomNumber";
 
 describe("getRandomNumber", () => {
@@ -20,11 +21,9 @@ describe("getRandomNumber", () => {
     expect(randomNumber).toBe(5);
   });
   test("Throw an error if inputs are not integers", () => {
-    try {
+    const error = DataError.expectError(() => {
       getRandomNumber(0.5, 10.5);
-      throw new Error("TEST_FAILED");
-    } catch (error: any) {
-      expect(error?.code).toBe("INTEGER_PARSING_ERROR");
-    }
+    });
+    expect(error.code).toBe("INTEGER_PARSING_ERROR");
   });
 });
