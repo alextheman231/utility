@@ -1,4 +1,5 @@
 import parseIntStrict from "src/root/functions/parsers/parseIntStrict";
+import { DataError } from "src/root/types";
 
 /**
  * Options to apply to the conversion from kebab-case to camelCase
@@ -15,42 +16,49 @@ export interface KebabToCamelOptions {
  *
  * @category String Helpers
  *
- * @param string - The string to convert.
+ * @param input - The string to convert.
  * @param options - Options to apply to the conversion.
  *
  * @returns The string converted to camelCase.
  */
-function kebabToCamel(string: string, options?: KebabToCamelOptions): string {
-  if (string !== string.toLowerCase()) {
-    throw new Error("INVALID_KEBAB_CASE_INPUT");
+function kebabToCamel(input: string, options?: KebabToCamelOptions): string {
+  if (input !== input.toLowerCase()) {
+    throw new DataError({ input }, "UPPERCASE_INPUT", "Kebab-case must be purely lowercase.");
   }
-  if (string.startsWith("-") || string.endsWith("-") || string.includes("--")) {
-    throw new Error("INVALID_KEBAB_CASE_INPUT");
+  if (input.startsWith("-") || input.endsWith("-")) {
+    throw new DataError(
+      { input },
+      "TRAILING_DASHES",
+      "Dashes at the start and/or end are not allowed.",
+    );
+  }
+  if (input.includes("--")) {
+    throw new DataError({ input }, "CONSECUTIVE_DASHES", "Consecutive dashes are not allowed.");
   }
 
   let outputString = "";
   let skip = false;
-  for (const stringIndex in [...string]) {
+  for (const stringIndex in [...input]) {
     if (skip) {
       skip = false;
       continue;
     }
     const index = parseIntStrict(stringIndex);
     if (index === 0 && options?.startWithUpper) {
-      outputString += string[index].toUpperCase();
+      outputString += input[index].toUpperCase();
       continue;
     }
 
-    if (index === string.length - 1) {
-      outputString += string[index];
+    if (index === input.length - 1) {
+      outputString += input[index];
       break;
     }
 
-    if (string[index] === "-" && /^[a-zA-Z]+$/.test(string[index + 1])) {
-      outputString += string[index + 1].toUpperCase();
+    if (input[index] === "-" && /^[a-zA-Z]+$/.test(input[index + 1])) {
+      outputString += input[index + 1].toUpperCase();
       skip = true;
     } else {
-      outputString += string[index];
+      outputString += input[index];
     }
   }
   return outputString;

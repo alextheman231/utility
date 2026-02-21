@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 
+import { DataError, normaliseIndents } from "src/root";
 import appendSemicolon from "src/root/functions/stringHelpers/appendSemicolon";
 
 describe("appendSemicolon", () => {
@@ -16,15 +17,16 @@ describe("appendSemicolon", () => {
     expect(output).toBe('console.log("Hello world");');
   });
   test("Throw an error if more than one line is given", () => {
-    try {
-      appendSemicolon(
-        `console.log("Hello world")
-            const myVariable = "Hello world"`,
-      );
-      throw new Error("TEST_FAILED");
-    } catch (error: any) {
-      expect(error?.message).toBe("MULTIPLE_LINE_ERROR");
-    }
+    const input = normaliseIndents`
+          console.log("Hello world")
+          const myVariable = "Hello world"
+        `;
+    const error = DataError.expectError(() => {
+      appendSemicolon(input);
+    });
+
+    expect(error.data.stringToAppendTo).toBe(input);
+    expect(error.code).toBe("MULTIPLE_LINE_ERROR");
   });
   test("Return an empty string if given an empty string", () => {
     const output = appendSemicolon("");

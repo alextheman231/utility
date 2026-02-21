@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 
+import { DataError } from "src/root";
 import range from "src/root/functions/arrayHelpers/range";
 
 describe("range", () => {
@@ -19,14 +20,11 @@ describe("range", () => {
       });
     });
     test("Throw an error if start is bigger than stop", () => {
-      try {
+      const error = DataError.expectError(() => {
         range(10, 0);
-        throw new Error("TEST_FAILED");
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          expect(error.message).toBe("INVALID_BOUNDARIES");
-        }
-      }
+      });
+      expect(error.data).toEqual({ start: 10, stop: 0, step: 1 });
+      expect(error.code).toBe("INVALID_BOUNDARIES");
     });
   });
   describe("Negative step sizes", () => {
@@ -38,14 +36,11 @@ describe("range", () => {
       });
     });
     test("Throw an error if start is less than stop", () => {
-      try {
+      const error = DataError.expectError(() => {
         range(0, 10, -1);
-        throw new Error("TEST_FAILED");
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          expect(error.message).toBe("INVALID_BOUNDARIES");
-        }
-      }
+      });
+      expect(error.data).toEqual({ start: 0, stop: 10, step: -1 });
+      expect(error.code).toBe("INVALID_BOUNDARIES");
     });
   });
   describe("Weird edge cases", () => {
@@ -53,14 +48,11 @@ describe("range", () => {
       expect(range(10, 10).length).toBe(0);
     });
     test("Throw an error if step is 0", () => {
-      try {
+      const error = DataError.expectError(() => {
         range(0, 10, 0);
-        throw new Error("TEST_FAILED");
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          expect(error.message).toBe("ZERO_STEP_SIZE_NOT_ALLOWED");
-        }
-      }
+      });
+      expect(error.data.step).toBe(0);
+      expect(error.code).toBe("ZERO_STEP_SIZE");
     });
   });
 });

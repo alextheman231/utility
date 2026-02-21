@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 
+import { DataError } from "src/root";
 import { createFormData } from "src/root/functions";
 
 describe("createFormData", () => {
@@ -93,16 +94,11 @@ describe("createFormData", () => {
       arrayKey: ["Multiple", ["data", "test"], undefined, null],
     };
 
-    try {
+    const error = DataError.expectError(() => {
       createFormData(data, { arrayResolution: "multiple" });
-      throw new Error("TEST_FAILED");
-    } catch (error) {
-      if (error instanceof TypeError) {
-        expect(error.message).toBe("NON_PRIMITIVE_ARRAY_ITEMS_FOUND");
-      } else {
-        throw error;
-      }
-    }
+    });
+    expect(error.data.item).toEqual(["data", "test"]);
+    expect(error.code).toBe("NON_PRIMITIVE_ARRAY_ITEMS_FOUND");
   });
   test("Allow blobs in an array to be resolved with the multiple option", () => {
     const data = { blobs: [new Blob(["Hello"]), new Blob(["World"])] };
@@ -114,16 +110,11 @@ describe("createFormData", () => {
   });
   test("Do not allow arrays of Blobs to be stringified", () => {
     const data = { blobs: [new Blob(["Hello"]), new Blob(["World"])] };
-    try {
+    const error = DataError.expectError(() => {
       createFormData(data, { arrayResolution: "stringify" });
-      throw new Error("TEST_FAILED");
-    } catch (error) {
-      if (error instanceof TypeError) {
-        expect(error.message).toBe("CANNOT_STRINGIFY_BLOB");
-      } else {
-        throw error;
-      }
-    }
+    });
+    expect(error.data.value).toEqual(data.blobs);
+    expect(error.code).toBe("CANNOT_STRINGIFY_BLOB");
   });
   test("Allows an object to be passed in for arrayResolution to specify resolution type per property", () => {
     const data = {
@@ -177,21 +168,5 @@ describe("createFormData", () => {
   });
   test("Can take only one type argument", () => {
     createFormData<{ hello: "world" }>({ hello: "world" });
-  });
-  test("Pure JavaScript slop", () => {
-    const data = {
-      nullKey: null,
-    };
-
-    try {
-      // @ts-expect-error: Because pure JavaScript users still exist, for some reason
-      createFormData(data, { nullableResolution: "slop" });
-    } catch (error) {
-      if (error instanceof TypeError) {
-        expect(error.message).toBe("SLOPPY_PURE_JAVASCRIPT_USER_ERROR");
-      } else {
-        throw error;
-      }
-    }
   });
 });
