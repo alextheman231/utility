@@ -16,7 +16,6 @@ export const Env = {
   PRODUCTION: "production",
 };
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export type Env = CreateEnumType<typeof Env>;
 
 /**

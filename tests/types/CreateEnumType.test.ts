@@ -6,7 +6,7 @@ const TestObject = {
   HELLO: "HELLO",
   WORLD: "WORLD",
 } as const;
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
 type TestObject = CreateEnumType<typeof TestObject>;
 
 describe("CreateEnumType", () => {

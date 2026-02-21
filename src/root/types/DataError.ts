@@ -1,5 +1,11 @@
 import type { RecordKey } from "src/root/types/RecordKey";
 
+import { normaliseIndents } from "src/root/functions";
+
+export interface ExpectErrorOptions {
+  expectedCode?: string;
+}
+
 /**
  * Represents errors you may get that may've been caused by a specific piece of data.
  *
@@ -60,6 +66,38 @@ class DataError<
       typeof data.code === "string" &&
       "data" in data
     );
+  }
+  /**
+   * Gets the thrown `DataError` from a given function if one was thrown, and re-throws any other errors, or throws a default `DataError` if no error thrown.
+   *
+   * @param errorFunction - The function expected to throw the error.
+   * @param options - Extra options to apply.
+   *
+   * @throws {Error} Any other errors thrown by the `errorFunction` that are not a `DataError`.
+   * @throws {DataError} If no `DataError` was thrown by the `errorFunction`
+   *
+   * @returns The `DataError` that was thrown by the `errorFunction`
+   */
+  public static expectError(errorFunction: () => unknown, options?: ExpectErrorOptions): DataError {
+    try {
+      errorFunction();
+    } catch (error) {
+      if (DataError.check(error)) {
+        if (options?.expectedCode && error.code !== options.expectedCode) {
+          throw new Error(
+            normaliseIndents`The error code on the thrown error does not match the expected error code.
+            
+            Expected: ${options.expectedCode}
+            Received: ${error.code}
+            `,
+            { cause: error },
+          );
+        }
+        return error;
+      }
+      throw error;
+    }
+    throw new Error("Expected a DataError to be thrown but none was thrown");
   }
 }
 

@@ -2,57 +2,30 @@ import { describe, expect, expectTypeOf, test } from "vitest";
 
 import { DataError } from "src/root/types";
 
-function testDataError(
-  error: DataError,
-  expectedData: unknown,
-  expectedCode: string,
-  expectedMessage: string,
-) {
-  try {
-    throw error;
-  } catch (error) {
-    if (error instanceof DataError) {
-      expect(error.message).toBe(expectedMessage);
-      if (typeof error.data === "object") {
-        expect(error.data).toEqual(expectedData);
-      } else {
-        expect(error.data).toBe(expectedData);
-      }
-      expect(error.code).toBe(expectedCode);
-      expect(error.name).toBe("DataError");
-      expect(error.stack).toBeDefined();
-    } else {
-      throw error;
-    }
-  }
-}
-
 describe("DataError", () => {
   test("Takes an error with the given data", () => {
-    testDataError(
-      new DataError({ testData: "Hello" }, "NOT_VALID", "This is not valid"),
-      { testData: "Hello" },
-      "NOT_VALID",
-      "This is not valid",
-    );
+    const error = DataError.expectError(() => {
+      throw new DataError({ testData: "Hello" }, "NOT_VALID", "This is not valid");
+    });
+    expect(error.data).toEqual({ testData: "Hello" });
+    expect(error.code).toBe("NOT_VALID");
+    expect(error.message).toBe("This is not valid");
   });
   test("Provides sensible default message and code", () => {
-    testDataError(
-      new DataError({ testData: "Hello" }),
-      { testData: "Hello" },
-      "INVALID_DATA",
-      "The data provided is invalid",
-    );
+    const error = DataError.expectError(() => {
+      throw new DataError({ testData: "Hello" });
+    });
+    expect(error.code).toBe("INVALID_DATA");
+    expect(error.message).toBe("The data provided is invalid");
   });
 });
 
 describe("DataError.check()", () => {
   test("Returns true if given an actual instance of DataError", () => {
-    try {
+    const error = DataError.expectError(() => {
       throw new DataError({ hello: "world" });
-    } catch (error) {
-      expect(DataError.check(error)).toBe(true);
-    }
+    });
+    expect(DataError.check(error)).toBe(true);
   });
   test("The error type is narrowed down after checking", () => {
     try {
@@ -60,6 +33,8 @@ describe("DataError.check()", () => {
     } catch (error) {
       if (DataError.check(error)) {
         expectTypeOf(error).toEqualTypeOf<DataError>();
+      } else {
+        throw error;
       }
     }
   });
@@ -75,12 +50,14 @@ describe("DataError.check()", () => {
       expect(DataError.check(error)).toBe(false);
     }
   });
-  test("The error type does not resolve to be APIError if the check is false", () => {
+  test("The error type does not resolve to be DataError if the check is false", () => {
     try {
       throw new Error("SHOULD_BE_FALSE");
     } catch (error) {
       if (!DataError.check(error)) {
         expectTypeOf(error).not.toEqualTypeOf<DataError>();
+      } else {
+        throw error;
       }
     }
   });
@@ -93,5 +70,64 @@ describe("DataError.check()", () => {
   });
   test("Returns false if code or message is not a string", () => {
     expect(DataError.check({ code: 1, message: 2 })).toBe(false);
+  });
+});
+
+describe("DataError.expectError()", () => {
+  test("Returns the DataError if the provided function threw one", () => {
+    const error = DataError.expectError(() => {
+      throw new DataError({ input: "Test data" }, "TEST_ERROR", "This is a test error");
+    });
+    expect(error.data.input).toBe("Test data");
+    expect(error.code).toBe("TEST_ERROR");
+    expect(error.message).toBe("This is a test error");
+  });
+  test("Re-throws on any other error", () => {
+    try {
+      DataError.expectError(() => {
+        throw new Error("Not a DataError");
+      });
+      throw new ReferenceError("Not the expected error");
+    } catch (error) {
+      expect(DataError.check(error)).toBe(false);
+      if (error instanceof Error) {
+        expect(error.message).toBe("Not a DataError");
+      } else {
+        throw error;
+      }
+    }
+  });
+  test("Throws a default Error if no error was thrown at all", () => {
+    try {
+      DataError.expectError(() => {
+        return "This is fine!";
+      });
+      throw new Error("Test failed because error was not thrown");
+    } catch (error) {
+      if (error instanceof Error) {
+        expect(error.message).toBe("Expected a DataError to be thrown but none was thrown");
+      } else {
+        throw error;
+      }
+    }
+  });
+  test("Can assert against an error code", () => {
+    const testDataError = new DataError({ input: "Test" }, "INVALID_CODE");
+    try {
+      DataError.expectError(
+        () => {
+          throw testDataError;
+        },
+        { expectedCode: "VALID_CODE" },
+      );
+      throw new Error("No thrown error");
+    } catch (error) {
+      if (error instanceof Error) {
+        expect(error.message).toContain("Expected: VALID_CODE");
+        expect(error.message).toContain("Received: INVALID_CODE");
+      } else {
+        throw error;
+      }
+    }
   });
 });

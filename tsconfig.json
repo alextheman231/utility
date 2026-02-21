@@ -21,7 +21,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "declaration": true
+    "declaration": true,
+    "useUnknownInCatchVariables": true
   },
   "include": ["src", "tests"]
 }

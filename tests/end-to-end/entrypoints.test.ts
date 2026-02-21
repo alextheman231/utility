@@ -26,7 +26,7 @@ const Entrypoint = {
   NODE: "@alextheman/utility/node",
   INTERNAL: "@alextheman/utility/internal",
 } as const;
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
 type Entrypoint = CreateEnumType<typeof Entrypoint>;
 
 const test = parseBoolean(process.env.RUN_END_TO_END ?? "false") ? testVitest : testVitest.skip;

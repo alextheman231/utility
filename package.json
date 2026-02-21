@@ -65,7 +65,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@alextheman/eslint-plugin": "^5.7.1",
+    "@alextheman/eslint-plugin": "^5.8.2",
     "@types/node": "^25.3.0",
     "alex-c-line": "^1.28.0",
     "dotenv-cli": "^11.0.0",
