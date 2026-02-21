@@ -1,4 +1,4 @@
-[**@alextheman/utility v5.1.3**](../README.md)
+[**@alextheman/utility v5.1.4**](../README.md)
 
 ***
 
@@ -41,7 +41,6 @@
 
 - [convertFileToBase64](functions/convertFileToBase64.md)
 - [createFormData](functions/createFormData.md)
-- [getDependenciesFromGroup](functions/getDependenciesFromGroup.md)
 - [getRandomNumber](functions/getRandomNumber.md)
 - [isOrdered](functions/isOrdered.md)
 - [stringListToArray](functions/stringListToArray.md)
