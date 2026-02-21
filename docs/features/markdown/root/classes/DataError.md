@@ -1,4 +1,4 @@
-[**@alextheman/utility v5.1.4**](../../README.md)
+[**@alextheman/utility v5.2.0**](../../README.md)
 
 ***
 
@@ -175,6 +175,78 @@ The input to check.
 `input is DataError<DataType>`
 
 `true` if the input is a DataError, and `false` otherwise. The type of the input will also be narrowed down to DataError if `true`.
+
+***
+
+### expectError()
+
+> `static` **expectError**(`errorFunction`, `options?`): `DataError`
+
+Gets the thrown `DataError` from a given function if one was thrown, and re-throws any other errors, or throws a default `DataError` if no error thrown.
+
+#### Parameters
+
+##### errorFunction
+
+() => `unknown`
+
+The function expected to throw the error.
+
+##### options?
+
+`ExpectErrorOptions`
+
+Extra options to apply.
+
+#### Returns
+
+`DataError`
+
+The `DataError` that was thrown by the `errorFunction`
+
+#### Throws
+
+Any other errors thrown by the `errorFunction` that are not a `DataError`.
+
+#### Throws
+
+If no `DataError` was thrown by the `errorFunction`
+
+***
+
+### expectErrorAsync()
+
+> `static` **expectErrorAsync**(`errorFunction`, `options?`): `Promise`\<`DataError`\<`Record`\<[`RecordKey`](../type-aliases/RecordKey.md), `unknown`\>\>\>
+
+Gets the thrown `DataError` from a given asynchronous function if one was thrown, and re-throws any other errors, or throws a default `DataError` if no error thrown.
+
+#### Parameters
+
+##### errorFunction
+
+() => `Promise`\<`unknown`\>
+
+The function expected to throw the error.
+
+##### options?
+
+`ExpectErrorOptions`
+
+Extra options to apply.
+
+#### Returns
+
+`Promise`\<`DataError`\<`Record`\<[`RecordKey`](../type-aliases/RecordKey.md), `unknown`\>\>\>
+
+The `DataError` that was thrown by the `errorFunction`
+
+#### Throws
+
+Any other errors thrown by the `errorFunction` that are not a `DataError`.
+
+#### Throws
+
+If no `DataError` was thrown by the `errorFunction`
 
 ***
 
