@@ -10,17 +10,13 @@ import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import {
+  getDependenciesFromGroup,
   getPackageJsonContents,
   ModuleType,
   packageJsonNotFoundError,
   setupPackageEndToEnd,
 } from "src/internal";
-import {
-  getDependenciesFromGroup,
-  normaliseIndents,
-  omitProperties,
-  parseBoolean,
-} from "src/root/functions";
+import { normaliseIndents, omitProperties, parseBoolean } from "src/root/functions";
 import { DataError } from "src/root/types";
 
 import utilityPackageInfo from "package.json" with { type: "json" };
