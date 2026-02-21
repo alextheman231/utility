@@ -91,7 +91,7 @@ class DataError<
    * @param options - Extra options to apply.
    *
    * @throws {Error} Any other errors thrown by the `errorFunction` that are not a `DataError`.
-   * @throws {DataError} If no `DataError` was thrown by the `errorFunction`
+   * @throws {Error} If no `DataError` was thrown by the `errorFunction`
    *
    * @returns The `DataError` that was thrown by the `errorFunction`
    */
@@ -110,7 +110,7 @@ class DataError<
    * @param options - Extra options to apply.
    *
    * @throws {Error} Any other errors thrown by the `errorFunction` that are not a `DataError`.
-   * @throws {DataError} If no `DataError` was thrown by the `errorFunction`
+   * @throws {Error} If no `DataError` was thrown by the `errorFunction`
    *
    * @returns The `DataError` that was thrown by the `errorFunction`
    */
