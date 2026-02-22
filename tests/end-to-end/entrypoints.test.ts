@@ -86,18 +86,21 @@ describe.each<Entrypoint>([Entrypoint.ROOT, Entrypoint.NODE, Entrypoint.INTERNAL
           const code = getRuntimeCodeString(moduleType, entrypoint);
 
           await temporaryDirectoryTask(async (temporaryPath) => {
+            console.info("Setting up local package in temporary directory...");
             const runCommandInTempDirectory = await setupPackageEndToEnd(
               temporaryPath,
               packageManager,
               moduleType,
             );
 
+            console.info("Writing the code file into temporary directory...");
             const codeFileName = `sayHello.${moduleType === ModuleType.TYPESCRIPT ? "ts" : "js"}`;
             const codeFilePath = path.join(temporaryPath, "src", codeFileName);
             await mkdir(path.dirname(codeFilePath), { recursive: true });
             await writeFile(codeFilePath, code);
 
             if (moduleType === ModuleType.TYPESCRIPT) {
+              console.info("Installing TypeScript dependencies");
               const { tsx: tsxVersionUtility, typescript: typescriptVersionUtility } =
                 getDependenciesFromGroup(utilityPackageInfo, "devDependencies");
               await runCommandInTempDirectory`${packageManager} install --save-dev tsx@${tsxVersionUtility} typescript@${typescriptVersionUtility}`;
@@ -121,6 +124,7 @@ describe.each<Entrypoint>([Entrypoint.ROOT, Entrypoint.NODE, Entrypoint.INTERNAL
                 );
               }
 
+              console.info("Adding the relevant package scripts...");
               testPackageInfo.scripts = {
                 ...(testPackageInfo.scripts ?? {}),
                 execute: "tsx",
@@ -131,6 +135,7 @@ describe.each<Entrypoint>([Entrypoint.ROOT, Entrypoint.NODE, Entrypoint.INTERNAL
                 JSON.stringify(testPackageInfo, null, 2),
               );
 
+              console.info("Adding the tsconfig.json file...");
               await writeFile(
                 path.join(temporaryPath, "tsconfig.json"),
                 JSON.stringify(
@@ -143,28 +148,35 @@ describe.each<Entrypoint>([Entrypoint.ROOT, Entrypoint.NODE, Entrypoint.INTERNAL
                 ),
               );
 
+              console.info("Executing the code...");
               const { exitCode: runtimeExitCode, stdout: result } =
                 await runCommandInTempDirectory`${packageManager} run execute -- ${codeFilePath}`;
               assert(runtimeExitCode, result);
 
+              console.info("Writing a valid TypeScript file with types...");
               await writeFile(codeFilePath, getTypeCodeString("success", entrypoint));
 
+              console.info("Checking the types...");
               const { exitCode: typeSuccessExitCode } =
                 await runCommandInTempDirectory`${packageManager} run lint`;
               expect(typeSuccessExitCode).toBe(0);
 
+              console.info("Writing an invalid TypeScript file with types...");
               await writeFile(codeFilePath, getTypeCodeString("error", entrypoint));
 
+              console.info("Checking for type errors...");
               // Apparently tsc errors come through on stdout, for some reason?
               const { exitCode: typeErrorExitCode, stdout: errorMessage } =
                 await runCommandInTempDirectory({ reject: false })`${packageManager} run lint`;
               expect(typeErrorExitCode).toBe(2);
               expect(errorMessage).toContain("TS2344");
             } else {
+              console.info("Executing the code...");
               const { exitCode, stdout: result } =
                 await runCommandInTempDirectory`${process.execPath} ${codeFilePath}`;
               assert(exitCode, result);
             }
+            console.info("Success! No issues found.");
           });
         },
         30000,
