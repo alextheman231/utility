@@ -4,7 +4,7 @@ import type { CreateEnumType } from "src/root/types";
 import { execa } from "execa";
 import { temporaryDirectoryTask } from "tempy";
 import tsConfig from "tsconfig.json" with { type: "json" };
-import { beforeAll, describe, expect, test as testVitest } from "vitest";
+import { beforeAll, describe as describeVitest, expect, test } from "vitest";
 
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -29,7 +29,9 @@ const Entrypoint = {
 
 type Entrypoint = CreateEnumType<typeof Entrypoint>;
 
-const test = parseBoolean(process.env.RUN_END_TO_END ?? "false") ? testVitest : testVitest.skip;
+const describe = parseBoolean(process.env.RUN_END_TO_END ?? "false")
+  ? describeVitest
+  : describeVitest.skip;
 
 function getRuntimeCodeString(moduleType: ModuleType, entrypoint: Entrypoint): string {
   return normaliseIndents`
