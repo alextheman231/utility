@@ -1,4 +1,4 @@
-[**@alextheman/utility v5.4.1**](../README.md)
+[**@alextheman/utility v5.5.0**](../README.md)
 
 ***
 
@@ -53,6 +53,7 @@
 
 ## Other
 
+- [calculateMonthlyDifference](functions/calculateMonthlyDifference.md)
 - [encryptWithKey](functions/encryptWithKey.md)
 - [removeUndefinedFromObject](functions/removeUndefinedFromObject.md)
 - [sayHello](functions/sayHello.md)
