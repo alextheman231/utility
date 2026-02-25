@@ -1,4 +1,4 @@
-[**@alextheman/utility v5.4.0**](../README.md)
+[**@alextheman/utility v5.4.1**](../README.md)
 
 ***
 
@@ -64,6 +64,7 @@
 - [parseEnv](functions/parseEnv.md)
 - [parseFormData](functions/parseFormData.md)
 - [parseIntStrict](functions/parseIntStrict.md)
+- [parseUUID](functions/parseUUID.md)
 - [parseVersionType](functions/parseVersionType.md)
 - [parseZodSchema](functions/parseZodSchema.md)
 - [parseZodSchemaAsync](functions/parseZodSchemaAsync.md)
