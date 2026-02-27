@@ -3,7 +3,6 @@ import type { CreateEnumType } from "src/root/types";
 
 import { execa } from "execa";
 import { temporaryDirectoryTask } from "tempy";
-import tsConfig from "tsconfig.json" with { type: "json" };
 import { beforeAll, describe as describeVitest, expect, test } from "vitest";
 
 import { mkdir, writeFile } from "node:fs/promises";
@@ -20,6 +19,7 @@ import { normaliseIndents, omitProperties, parseBoolean } from "src/root/functio
 import { DataError } from "src/root/types";
 
 import utilityPackageInfo from "package.json" with { type: "json" };
+import tsConfig from "tsconfig.json" with { type: "json" };
 
 const Entrypoint = {
   ROOT: "@alextheman/utility",
