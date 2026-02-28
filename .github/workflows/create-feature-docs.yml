@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   create-feature-docs:
-    uses: alextheman231/github-actions/.github/workflows/create-feature-docs.yml@f07e4455c803bbc180ba3525684b943a9e32e613 # v9.0.1
+    uses: alextheman231/github-actions/.github/workflows/create-feature-docs.yml@a00c59786bf2f81fe88d9084008fc05452dc45b2 # v9.0.2
     secrets:
       APP_ID: ${{ secrets.ALEX_UP_BOT_APP_ID }}
       APP_PRIVATE_KEY: ${{ secrets.ALEX_UP_BOT_PRIVATE_KEY }}
