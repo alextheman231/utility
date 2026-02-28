@@ -31,8 +31,8 @@ importers:
         specifier: ^25.3.2
         version: 25.3.2
       alex-c-line:
-        specifier: ^1.31.0
-        version: 1.31.0(@types/node@25.3.2)
+        specifier: ^1.33.3
+        version: 1.33.3(@types/node@25.3.2)
       cross-env:
         specifier: ^10.1.0
         version: 10.1.0
@@ -1286,8 +1286,8 @@ packages:
   ajv@6.14.0:
     resolution: {integrity: sha512-IWrosm/yrn43eiKqkfkHis7QioDleaXQHdDVPKg0FSwwd/DuvyX79TZnFOnYpB7dcsFAMmtFztZuXPDvSePkFw==}
 
-  alex-c-line@1.31.0:
-    resolution: {integrity: sha512-DQFIPWgiKFzvYEigKjG5aZCUf67BvklFKfuKNNjUslB2bHraaf5NfnMaHuISoRb8JFToxcI22t2D9Mip3lEWHQ==}
+  alex-c-line@1.33.3:
+    resolution: {integrity: sha512-UJhonKQYPXhW3SwSR+2Qs9jtDQjr9srlOj2gPSXY39rJFIzX9VixlgWmTJbO9A8NMZe5fZrBioMbVu4sMcPtBg==}
     engines: {node: '>=22.0.0'}
     hasBin: true
 
@@ -1653,8 +1653,8 @@ packages:
   end-of-stream@1.4.5:
     resolution: {integrity: sha512-ooEGc6HP26xXq/N+GCGOT0JKCLDGrq2bQUZrQ7gyrJiZANJ/8YDTxTpQBXGMn+WbIQXNVpyWymm7KYVICQnyOg==}
 
-  enhanced-resolve@5.19.0:
-    resolution: {integrity: sha512-phv3E1Xl4tQOShqSte26C7Fl84EwUdZsyOuSSk9qtAGyyQs2s3jJzComh+Abf4g187lUUAvH+H26omrqia2aGg==}
+  enhanced-resolve@5.20.0:
+    resolution: {integrity: sha512-/ce7+jQ1PQ6rVXwe+jKEg5hW5ciicHwIQUagZkp6IufBoY3YDgdTTY1azVs0qoRgVmvsNB+rbjLJxDAeHHtwsQ==}
     engines: {node: '>=10.13.0'}
 
   entities@4.5.0:
@@ -4129,8 +4129,8 @@ snapshots:
 
   '@typescript-eslint/project-service@8.56.0(typescript@5.9.3)':
     dependencies:
-      '@typescript-eslint/tsconfig-utils': 8.56.1(typescript@5.9.3)
-      '@typescript-eslint/types': 8.56.1
+      '@typescript-eslint/tsconfig-utils': 8.56.0(typescript@5.9.3)
+      '@typescript-eslint/types': 8.56.0
       debug: 4.4.3
       typescript: 5.9.3
     transitivePeerDependencies:
@@ -4354,7 +4354,7 @@ snapshots:
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
 
-  alex-c-line@1.31.0(@types/node@25.3.2):
+  alex-c-line@1.33.3(@types/node@25.3.2):
     dependencies:
       '@alextheman/utility': 5.5.0
       '@inquirer/prompts': 8.3.0(@types/node@25.3.2)
@@ -4369,6 +4369,7 @@ snapshots:
       figlet: 1.10.0
       gray-matter: 4.0.3
       libsodium-wrappers: 0.8.2
+      semver: 7.7.4
       supports-color: 10.2.2
       zod: 4.3.6
     transitivePeerDependencies:
@@ -4733,7 +4734,7 @@ snapshots:
     dependencies:
       once: 1.4.0
 
-  enhanced-resolve@5.19.0:
+  enhanced-resolve@5.20.0:
     dependencies:
       graceful-fs: 4.2.11
       tapable: 2.3.0
@@ -5016,7 +5017,7 @@ snapshots:
   eslint-plugin-n@17.24.0(eslint@10.0.2(jiti@2.6.1))(typescript@5.9.3):
     dependencies:
       '@eslint-community/eslint-utils': 4.9.1(eslint@10.0.2(jiti@2.6.1))
-      enhanced-resolve: 5.19.0
+      enhanced-resolve: 5.20.0
       eslint: 10.0.2(jiti@2.6.1)
       eslint-plugin-es-x: 7.8.0(eslint@10.0.2(jiti@2.6.1))
       get-tsconfig: 4.13.6
