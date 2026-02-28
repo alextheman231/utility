@@ -9,7 +9,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    uses: alextheman231/github-actions/.github/workflows/commit-version-change.yml@c8d6ab30f745aab1b49da751e9b020cbe73779ce # v9.0.0
+    uses: alextheman231/github-actions/.github/workflows/commit-version-change.yml@f07e4455c803bbc180ba3525684b943a9e32e613 # v9.0.1
     with:
       version-type: major
       create-feature-docs: true
@@ -21,7 +21,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    uses: alextheman231/github-actions/.github/workflows/commit-version-change.yml@c8d6ab30f745aab1b49da751e9b020cbe73779ce # v9.0.0
+    uses: alextheman231/github-actions/.github/workflows/commit-version-change.yml@f07e4455c803bbc180ba3525684b943a9e32e613 # v9.0.1
     with:
       version-type: minor
       create-feature-docs: true
@@ -33,7 +33,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    uses: alextheman231/github-actions/.github/workflows/commit-version-change.yml@c8d6ab30f745aab1b49da751e9b020cbe73779ce # v9.0.0
+    uses: alextheman231/github-actions/.github/workflows/commit-version-change.yml@f07e4455c803bbc180ba3525684b943a9e32e613 # v9.0.1
     with:
       version-type: patch
       create-feature-docs: true
