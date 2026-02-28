@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  tsdown: <0.21.0
-
 importers:
 
   .:
@@ -58,7 +55,7 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0
       tsdown:
-        specifier: <0.21.0
+        specifier: ^0.20.3
         version: 0.20.3(synckit@0.11.12)(typescript@5.9.3)
       tsx:
         specifier: ^4.21.0
@@ -4129,8 +4126,8 @@ snapshots:
 
   '@typescript-eslint/project-service@8.56.0(typescript@5.9.3)':
     dependencies:
-      '@typescript-eslint/tsconfig-utils': 8.56.0(typescript@5.9.3)
-      '@typescript-eslint/types': 8.56.0
+      '@typescript-eslint/tsconfig-utils': 8.56.1(typescript@5.9.3)
+      '@typescript-eslint/types': 8.56.1
       debug: 4.4.3
       typescript: 5.9.3
     transitivePeerDependencies:
