@@ -18,7 +18,7 @@ jobs:
   actions-ci:
     uses: alextheman231/github-actions/.github/workflows/actions-ci.yml@f07e4455c803bbc180ba3525684b943a9e32e613 # v9.0.1
 
-  end-to-end-ci:
+  end-to-end-ci-steps:
     if: ${{ github.head_ref != 'alex-up-bot/change-major-version' && github.head_ref != 'alex-up-bot/change-minor-version' && github.head_ref != 'alex-up-bot/change-patch-version' }}
     strategy:
       matrix:
@@ -46,3 +46,16 @@ jobs:
 
       - name: Run end-to-end tests
         run: pnpm run test-end-to-end
+
+  end-to-end-ci:
+    needs: end-to-end-ci-steps
+    runs-on: ubuntu-latest
+    if: always()
+    env:
+      CI_STATUS: ${{ needs.end-to-end-ci-steps.result }}
+    steps:
+      - name: Report on any matrix failures
+        run: |
+          if [ "$CI_STATUS" == "failure" ] || [ "$CI_STATUS" == "cancelled" ]; then
+            exit 1
+          fi
