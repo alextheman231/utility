@@ -1,4 +1,4 @@
-[**@alextheman/utility v5.5.0**](../README.md)
+[**@alextheman/utility v5.6.0**](../README.md)
 
 ***
 
@@ -103,6 +103,7 @@
 - [Env](type-aliases/Env.md)
 - [IgnoreCase](type-aliases/IgnoreCase.md)
 - [NonUndefined](type-aliases/NonUndefined.md)
+- [NullableOnCondition](type-aliases/NullableOnCondition.md)
 - [OptionalOnCondition](type-aliases/OptionalOnCondition.md)
 - [RecordKey](type-aliases/RecordKey.md)
 - [VersionType](type-aliases/VersionType.md)
