@@ -17,10 +17,10 @@ export type ParallelTuple<A, B> = [A, B | undefined];
  * @returns An array of `[firstItem, secondItem]` tuples for each index in `firstArray`.
  */
 function paralleliseArrays<FirstArrayItem, SecondArrayItem>(
-  firstArray: readonly FirstArrayItem[],
-  secondArray: readonly SecondArrayItem[],
-): ParallelTuple<FirstArrayItem, SecondArrayItem>[] {
-  const outputArray: ParallelTuple<FirstArrayItem, SecondArrayItem>[] = [];
+  firstArray: ReadonlyArray<FirstArrayItem>,
+  secondArray: ReadonlyArray<SecondArrayItem>,
+): Array<ParallelTuple<FirstArrayItem, SecondArrayItem>> {
+  const outputArray: Array<ParallelTuple<FirstArrayItem, SecondArrayItem>> = [];
 
   for (let i = 0; i < firstArray.length; i++) {
     outputArray.push([firstArray[i], secondArray[i]]);

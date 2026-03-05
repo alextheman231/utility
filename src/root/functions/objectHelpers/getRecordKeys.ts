@@ -13,8 +13,8 @@ import type { RecordKey } from "src/root/types";
  */
 function getRecordKeys<InputRecordType extends Record<RecordKey, unknown>>(
   record: InputRecordType & object,
-): (keyof InputRecordType)[] {
-  return Object.keys(record) as (keyof InputRecordType)[];
+): Array<keyof InputRecordType> {
+  return Object.keys(record) as Array<keyof InputRecordType>;
 }
 
 export default getRecordKeys;

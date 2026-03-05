@@ -81,7 +81,7 @@ describe("VersionNumber", () => {
         expect(VersionNumber.isEqual(secondVersion, firstVersion)).toBe(false);
       });
     });
-    test.each<[string, unknown[], string]>([
+    test.each<[string, Array<unknown>, string]>([
       ["does not contain numbers", ["hello", "there", "world"], "INTEGER_PARSING_ERROR"],
       ["contains too many numbers", [1, 2, 3, 4], "INVALID_LENGTH"],
       ["contains too few numbers", [1, 2], "INVALID_LENGTH"],

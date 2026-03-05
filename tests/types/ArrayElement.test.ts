@@ -13,6 +13,6 @@ describe("ArrayElement", () => {
   });
   test("Allows for nested arrays", () => {
     const _nestedArray = [1, 2, [3, 4]];
-    expectTypeOf<ArrayElement<typeof _nestedArray>>().toEqualTypeOf<number | number[]>();
+    expectTypeOf<ArrayElement<typeof _nestedArray>>().toEqualTypeOf<number | Array<number>>();
   });
 });

@@ -14,7 +14,7 @@
 function fillArray<ItemType>(
   callback: (index: number) => Promise<ItemType>,
   length?: number,
-): Promise<ItemType[]>;
+): Promise<Array<ItemType>>;
 
 /**
  * Creates a new array where each element is the result of the provided synchronous callback.
@@ -29,7 +29,10 @@ function fillArray<ItemType>(
  *
  * @returns An array of the callback results.
  */
-function fillArray<ItemType>(callback: (index: number) => ItemType, length?: number): ItemType[];
+function fillArray<ItemType>(
+  callback: (index: number) => ItemType,
+  length?: number,
+): Array<ItemType>;
 
 /**
  * Creates a new array where each element is the result of the provided callback.
@@ -49,7 +52,7 @@ function fillArray<ItemType>(callback: (index: number) => ItemType, length?: num
 function fillArray<ItemType>(
   callback: (index: number) => ItemType | Promise<ItemType>,
   length: number = 1,
-): ItemType[] | Promise<ItemType[]> {
+): Array<ItemType> | Promise<Array<ItemType>> {
   const outputArray = new Array(length).fill(null).map((_, index) => {
     return callback(index);
   });
@@ -61,7 +64,7 @@ function fillArray<ItemType>(
     return Promise.all(outputArray);
   }
 
-  return outputArray as ItemType[];
+  return outputArray as Array<ItemType>;
 }
 
 export default fillArray;

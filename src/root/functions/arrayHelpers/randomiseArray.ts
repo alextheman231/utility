@@ -11,7 +11,7 @@ import getRandomNumber from "src/root/functions/miscellaneous/getRandomNumber";
  *
  * @returns A new array with the items randomised.
  */
-function randomiseArray<ItemType>(array: ItemType[]): ItemType[] {
+function randomiseArray<ItemType>(array: Array<ItemType>): Array<ItemType> {
   const mutableArray = [...array];
   const outputArray = [];
   do {

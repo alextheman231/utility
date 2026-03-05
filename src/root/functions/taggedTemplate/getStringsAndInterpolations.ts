@@ -30,7 +30,7 @@ import { DataError } from "src/root/types";
  * interpolate(...getStringsAndInterpolations`The package ${packageName} uses the ${packageManager} package manager.`);
  * ```
  */
-function getStringsAndInterpolations<const InterpolationsType extends readonly unknown[]>(
+function getStringsAndInterpolations<const InterpolationsType extends ReadonlyArray<unknown>>(
   strings: TemplateStringsArray,
   ...interpolations: InterpolationsType
 ): [TemplateStringsArray, ...InterpolationsType] {

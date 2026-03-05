@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 
 import deepFreeze from "src/root/functions/recursive/deepFreeze";
 
-function expectError<ErrorClassType extends new (...args: any[]) => Error>(
+function expectError<ErrorClassType extends new (...args: Array<any>) => Error>(
   errorFunction: () => unknown,
   ErrorClass: ErrorClassType,
 ): InstanceType<ErrorClassType> {
