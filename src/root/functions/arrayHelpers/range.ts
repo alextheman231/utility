@@ -17,8 +17,8 @@ import { DataError } from "src/root/types";
  *
  * @returns An array of numbers satisfying the range provided.
  */
-function range(start: number, stop: number, step: number = 1): number[] {
-  const numbers: number[] = [];
+function range(start: number, stop: number, step: number = 1): Array<number> {
+  const numbers: Array<number> = [];
   if (step === 0) {
     throw new DataError({ step }, "ZERO_STEP_SIZE", "Step size cannot be zero.");
   } else if (step > 0) {

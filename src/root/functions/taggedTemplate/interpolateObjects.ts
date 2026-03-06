@@ -16,7 +16,7 @@
  *
  * @returns A new string with the strings and interpolations from the template applied, with objects stringified.
  */
-function interpolateObjects<const InterpolationsType extends readonly unknown[]>(
+function interpolateObjects<const InterpolationsType extends ReadonlyArray<unknown>>(
   strings: TemplateStringsArray,
   ...interpolations: InterpolationsType
 ): string {

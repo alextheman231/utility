@@ -16,7 +16,7 @@ function omitProperties<
   KeysToOmit extends keyof ObjectType,
 >(
   object: ObjectType,
-  keysToOmit: KeysToOmit | readonly KeysToOmit[],
+  keysToOmit: KeysToOmit | ReadonlyArray<KeysToOmit>,
 ): Omit<ObjectType, KeysToOmit> {
   const outputObject: Record<string, unknown> = { ...object };
   const keysArray = Array.isArray(keysToOmit) ? keysToOmit : [keysToOmit];

@@ -9,7 +9,7 @@ import deepFreeze from "src/root/functions/recursive/deepFreeze";
  *
  * @returns A template strings array that can be passed as the first argument of any tagged template function.
  */
-function createTemplateStringsArray(strings: readonly string[]): TemplateStringsArray {
+function createTemplateStringsArray(strings: ReadonlyArray<string>): TemplateStringsArray {
   return deepFreeze(Object.assign([...strings], { raw: [...strings] })) as TemplateStringsArray;
 }
 

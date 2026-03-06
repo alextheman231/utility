@@ -161,7 +161,7 @@ function createFormData<DataType extends Record<RecordKey, unknown>>(
     }
   }
 
-  const entries = Object.entries(data) as [keyof DataType, unknown][];
+  const entries = Object.entries(data) as Array<[keyof DataType, unknown]>;
   for (const [key, value] of entries) {
     if (value instanceof Blob) {
       formData.append(String(key), value);

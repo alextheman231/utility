@@ -9,8 +9,10 @@
  *
  * @returns A new array with a different reference in memory, with the duplicates removed.
  */
-function removeDuplicates<ItemType>(array: ItemType[] | readonly ItemType[]): ItemType[] {
-  const outputArray: ItemType[] = [];
+function removeDuplicates<ItemType>(
+  array: Array<ItemType> | ReadonlyArray<ItemType>,
+): Array<ItemType> {
+  const outputArray: Array<ItemType> = [];
   for (const item of array) {
     if (!outputArray.includes(item)) {
       outputArray.push(item);
