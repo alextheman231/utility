@@ -71,7 +71,7 @@
     "alex-c-line": "^2.0.1",
     "cross-env": "^10.1.0",
     "dotenv-cli": "^11.0.0",
-    "eslint": "^10.0.2",
+    "eslint": "^10.0.3",
     "globals": "^17.4.0",
     "husky": "^9.1.7",
     "jsdom": "^28.1.0",
