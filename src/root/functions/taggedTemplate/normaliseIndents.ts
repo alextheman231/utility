@@ -25,14 +25,17 @@ function calculateTabSize(line: string, whitespaceLength: number): number {
   return tabSize < 0 ? 0 : tabSize;
 }
 
-function getWhitespaceLength(lines: string[]): number {
+function getWhitespaceLength(lines: Array<string>): number {
   const [firstNonEmptyLine] = lines.filter((line) => {
     return line.trim() !== "";
   });
   return firstNonEmptyLine.length - firstNonEmptyLine.trimStart().length;
 }
 
-function reduceLines(lines: string[], { preserveTabs = true }: NormaliseIndentsOptions): string {
+function reduceLines(
+  lines: Array<string>,
+  { preserveTabs = true }: NormaliseIndentsOptions,
+): string {
   const slicedLines = lines.slice(1);
   const isFirstLineEmpty = lines[0].trim() === "";
   const whitespaceLength = getWhitespaceLength(isFirstLineEmpty ? lines : slicedLines);
@@ -53,7 +56,7 @@ function reduceLines(lines: string[], { preserveTabs = true }: NormaliseIndentsO
 
 export type NormaliseIndentsFunction = (
   strings: TemplateStringsArray,
-  ...interpolations: unknown[]
+  ...interpolations: Array<unknown>
 ) => string;
 export type NormalizeIndentsFunction = NormaliseIndentsFunction;
 
@@ -85,7 +88,7 @@ function normaliseIndents(options: NormaliseIndentsOptions): NormaliseIndentsFun
  *
  * @returns A new string with the strings and interpolations from the template applied, and extraneous indents removed.
  */
-function normaliseIndents(strings: TemplateStringsArray, ...interpolations: unknown[]): string;
+function normaliseIndents(strings: TemplateStringsArray, ...interpolations: Array<unknown>): string;
 
 /**
  * Applies any options if provided, then removes any extraneous indents from a multi-line template string.
@@ -115,11 +118,11 @@ function normaliseIndents(strings: TemplateStringsArray, ...interpolations: unkn
  */
 function normaliseIndents(
   first: TemplateStringsArray | NormaliseIndentsOptions,
-  ...args: unknown[]
+  ...args: Array<unknown>
 ): string | NormaliseIndentsFunction {
   if (typeof first === "object" && first !== null && !Array.isArray(first)) {
     const options = first as NormaliseIndentsOptions;
-    return (strings: TemplateStringsArray, ...interpolations: unknown[]) => {
+    return (strings: TemplateStringsArray, ...interpolations: Array<unknown>) => {
       return normaliseIndents(strings, ...interpolations, options);
     };
   }

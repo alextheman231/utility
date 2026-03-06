@@ -25,7 +25,7 @@ export interface StringListToArrayOptions {
 function stringListToArray(
   stringList: string,
   { separator = ",", trimWhitespace = true }: StringListToArrayOptions = {},
-): string[] {
+): Array<string> {
   if (trimWhitespace && stringList.trim() === "") {
     return [];
   }

@@ -12,7 +12,7 @@ describe("getRecordKeys", () => {
   test("The type of the output array corresponds to the Record keys", () => {
     expectTypeOf(
       getRecordKeys({ firstKey: "First property", secondKey: "Second property" }),
-    ).toEqualTypeOf<("firstKey" | "secondKey")[]>();
+    ).toEqualTypeOf<Array<"firstKey" | "secondKey">>();
   });
   test("Cannot pass in non-record types", () => {
     // @ts-expect-error: This will give a compile-time error because it's not a record.

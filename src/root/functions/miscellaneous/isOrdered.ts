@@ -7,7 +7,7 @@
  *
  * @returns `true` if the array is sorted in ascending order, and `false` otherwise.
  */
-function isOrdered(array: readonly number[]): boolean {
+function isOrdered(array: ReadonlyArray<number>): boolean {
   const newArray = [...array];
   newArray.sort();
 

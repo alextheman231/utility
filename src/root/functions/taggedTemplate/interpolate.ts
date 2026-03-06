@@ -20,7 +20,7 @@ import paralleliseArrays from "src/root/functions/arrayHelpers/paralleliseArrays
  *
  * @returns A new string with the strings and interpolations from the template applied.
  */
-function interpolate<const InterpolationsType extends readonly unknown[]>(
+function interpolate<const InterpolationsType extends ReadonlyArray<unknown>>(
   strings: TemplateStringsArray,
   ...interpolations: InterpolationsType
 ): string {

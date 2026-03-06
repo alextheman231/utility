@@ -38,13 +38,13 @@ describe("fillArray", () => {
       fillArray(() => {
         return "Hello";
       }),
-    ).toEqualTypeOf<string[]>();
+    ).toEqualTypeOf<Array<string>>();
 
     expectTypeOf(
       fillArray(async () => {
         await wait(0.1);
         return "Hello";
       }),
-    ).toEqualTypeOf<Promise<string[]>>();
+    ).toEqualTypeOf<Promise<Array<string>>>();
   });
 });
