@@ -1,3 +1,3 @@
-import { packageConfig } from "alex-c-line/configs/internal";
+import alexCLineConfig from "./.alex-c-line/config/index.js";
 
-export default packageConfig();
+export default alexCLineConfig;

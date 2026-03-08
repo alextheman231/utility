@@ -24,5 +24,5 @@
     "declaration": true,
     "useUnknownInCatchVariables": true
   },
-  "include": ["src", "tests"]
+  "include": ["src", "tests", "configs"]
 }
