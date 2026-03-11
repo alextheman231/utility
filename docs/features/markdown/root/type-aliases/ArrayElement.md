@@ -1,4 +1,4 @@
-[**@alextheman/utility v5.6.1**](../../README.md)
+[**@alextheman/utility v5.6.2**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Type Alias: ArrayElement\<ArrayType\>
 
-> **ArrayElement**\<`ArrayType`\> = `ArrayType` *extends* readonly infer ElementType[] ? `ElementType` : `never`
+> **ArrayElement**\<`ArrayType`\> = `ArrayType` *extends* `ReadonlyArray`\<infer ElementType\> ? `ElementType` : `never`
 
 Gets the individual element types from an array type.
 
@@ -14,6 +14,6 @@ Gets the individual element types from an array type.
 
 ### ArrayType
 
-`ArrayType` *extends* readonly `unknown`[]
+`ArrayType` *extends* `ReadonlyArray`\<`unknown`\>
 
 The type of the array itself.
