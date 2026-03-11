@@ -32,7 +32,7 @@ function parseIntStrict(string: string, radix?: number): number {
   if (
     radix &&
     radix < 10 &&
-    [...trimmedString].some((character) => {
+    [...trimmedString.replace(/^[+-]/, "")].some((character) => {
       return parseInt(character) >= radix;
     })
   ) {
