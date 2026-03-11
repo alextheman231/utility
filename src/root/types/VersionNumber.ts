@@ -55,7 +55,7 @@ class VersionNumber {
       this.minor = input.minor;
       this.patch = input.patch;
     } else if (typeof input === "string") {
-      if (!RegExp(VERSION_NUMBER_REGEX).test(input)) {
+      if (!VERSION_NUMBER_REGEX.test(input)) {
         throw new DataError(
           { input },
           "INVALID_VERSION",
