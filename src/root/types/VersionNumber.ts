@@ -1,7 +1,7 @@
 import z from "zod";
 
 import { VERSION_NUMBER_REGEX } from "src/root/constants";
-import { parseIntStrict, VersionType } from "src/root/functions";
+import { normaliseIndents, parseIntStrict, VersionType } from "src/root/functions";
 import DataError from "src/root/types/DataError";
 
 /**
@@ -85,6 +85,15 @@ class VersionNumber {
       this.major = major;
       this.minor = minor;
       this.patch = patch;
+    } else {
+      throw new DataError(
+        { input },
+        "INVALID_INPUT",
+        normaliseIndents`
+        The provided input can not be parsed into a valid version number.
+        Expected either a string of format X.Y.Z or vX.Y.Z, a tuple of three numbers, or another \`VersionNumber\` instance.
+      `,
+      );
     }
   }
 

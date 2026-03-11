@@ -94,6 +94,14 @@ describe("VersionNumber", () => {
 
       expect(error.code).toBe(code);
     });
+    test("Throws an error at runtime even for inputs not allowed by the type system", () => {
+      const error = DataError.expectError(() => {
+        // @ts-expect-error: We are testing what happens if the type system allows invalid inputs anyway.
+        new VersionNumber(true);
+      });
+      expect(error.data.input).toBe(true);
+      expect(error.code).toBe("INVALID_INPUT");
+    });
   });
 
   describe(".toString()", () => {
