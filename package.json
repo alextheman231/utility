@@ -67,8 +67,8 @@
   },
   "devDependencies": {
     "@alextheman/eslint-plugin": "^5.10.1",
-    "@types/node": "^25.3.5",
-    "alex-c-line": "^2.0.2",
+    "@types/node": "^25.5.0",
+    "alex-c-line": "^2.2.3",
     "cross-env": "^10.1.0",
     "dotenv-cli": "^11.0.0",
     "eslint": "^10.0.3",
@@ -77,12 +77,12 @@
     "jsdom": "^28.1.0",
     "prettier": "^3.8.1",
     "tempy": "^3.2.0",
-    "tsdown": "^0.21.0",
+    "tsdown": "^0.21.2",
     "tsx": "^4.21.0",
     "typedoc": "^0.28.17",
     "typescript": "^5.9.3",
     "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^4.0.18"
+    "vitest": "^4.1.0"
   },
   "packageManager": "pnpm@10.32.1+sha512.a706938f0e89ac1456b6563eab4edf1d1faf3368d1191fc5c59790e96dc918e4456ab2e67d613de1043d2e8c81f87303e6b40d4ffeca9df15ef1ad567348f2be",
   "engines": {
