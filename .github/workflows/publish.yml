@@ -27,6 +27,7 @@ jobs:
       pages: write
       id-token: write
     needs: create-github-release
+    if: needs.create-github-release.outputs.did_release == 'true'
     uses: ./.github/workflows/publish-github-pages.yml
     secrets:
       APP_ID: ${{ secrets.ALEX_UP_BOT_APP_ID }}
