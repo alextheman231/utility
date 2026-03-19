@@ -7,3 +7,4 @@ alextheman-utility-*.tgz
 
 # Local Netlify folder
 .netlify
+docs/features
