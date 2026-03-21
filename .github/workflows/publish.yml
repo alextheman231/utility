@@ -33,4 +33,4 @@ jobs:
       APP_ID: ${{ secrets.ALEX_UP_BOT_APP_ID }}
       APP_PRIVATE_KEY: ${{ secrets.ALEX_UP_BOT_PRIVATE_KEY }}
     with:
-      path: docs/feature/html
+      path: docs/features/html
