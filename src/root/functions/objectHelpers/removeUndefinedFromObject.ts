@@ -1,6 +1,4 @@
-import type { RecordKey } from "src/root/types";
-
-export type RemoveUndefined<RecordType extends Record<RecordKey, unknown>> = {
+export type RemoveUndefined<RecordType extends Record<PropertyKey, unknown>> = {
   [Key in keyof RecordType]: Exclude<RecordType[Key], undefined>;
 };
 
@@ -11,7 +9,7 @@ export type RemoveUndefined<RecordType extends Record<RecordKey, unknown>> = {
  *
  * @returns An object with a new reference in memory, with undefined entries removed.
  */
-function removeUndefinedFromObject<RecordType extends Record<RecordKey, unknown>>(
+function removeUndefinedFromObject<RecordType extends Record<PropertyKey, unknown>>(
   object: RecordType,
 ): RemoveUndefined<RecordType> {
   return Object.fromEntries(

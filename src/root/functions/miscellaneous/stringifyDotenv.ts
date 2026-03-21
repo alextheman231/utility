@@ -1,7 +1,5 @@
 import type { DotenvParseOutput } from "dotenv";
 
-import type { RecordKey } from "src/root/types";
-
 import { DataError } from "src/root/types";
 
 export type QuoteStyle = "double" | "single" | "none";
@@ -20,7 +18,7 @@ export interface StringifyDotenvOptions {
  * @returns A string representation of the object in .env file format.
  */
 function stringifyDotenv(
-  contents: Record<RecordKey, string> | DotenvParseOutput,
+  contents: Record<PropertyKey, string> | DotenvParseOutput,
   options?: StringifyDotenvOptions,
 ): string {
   const { ...contentsCopy } = contents;

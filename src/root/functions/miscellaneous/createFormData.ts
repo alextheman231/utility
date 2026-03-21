@@ -1,5 +1,3 @@
-import type { RecordKey } from "src/root/types";
-
 import { DataError } from "src/root/types";
 
 export type FormDataNullableResolutionStrategy = "stringify" | "empty" | "omit";
@@ -12,7 +10,7 @@ export type FormDataArrayResolutionStrategy = "stringify" | "multiple";
  *
  * @template Key - The type of the key of the input record.
  */
-export interface CreateFormDataOptionsBase<Key extends RecordKey> {
+export interface CreateFormDataOptionsBase<Key extends PropertyKey> {
   /** How to resolve any arrays provided in the data (can either stringify them or add them multiple times). */
   arrayResolution?:
     | FormDataArrayResolutionStrategy
@@ -27,7 +25,7 @@ export interface CreateFormDataOptionsBase<Key extends RecordKey> {
  * @template Key - The type of the key of the input record.
  */
 export interface CreateFormDataOptionsUndefinedOrNullResolution<
-  Key extends RecordKey,
+  Key extends PropertyKey,
 > extends CreateFormDataOptionsBase<Key> {
   /** How to resolve undefined data (May either stringify to 'undefined', resolve to an empty string, or omit entirely). */
   undefinedResolution?:
@@ -49,7 +47,7 @@ export interface CreateFormDataOptionsUndefinedOrNullResolution<
  * @template Key - The type of the key of the input record.
  */
 export interface CreateFormDataOptionsNullableResolution<
-  Key extends RecordKey,
+  Key extends PropertyKey,
 > extends CreateFormDataOptionsBase<Key> {
   /** @note This must not be provided at the same time as nullableResolution. */
   undefinedResolution?: never;
@@ -68,15 +66,15 @@ export interface CreateFormDataOptionsNullableResolution<
  *
  * @template Key - The type of the key of the input record.
  */
-export type CreateFormDataOptions<Key extends RecordKey> =
+export type CreateFormDataOptions<Key extends PropertyKey> =
   | CreateFormDataOptionsUndefinedOrNullResolution<Key>
   | CreateFormDataOptionsNullableResolution<Key>;
 
 function getNullableResolutionStrategy(
-  key: RecordKey,
+  key: PropertyKey,
   strategy:
     | FormDataNullableResolutionStrategy
-    | Partial<Record<RecordKey, FormDataNullableResolutionStrategy>>,
+    | Partial<Record<PropertyKey, FormDataNullableResolutionStrategy>>,
 ) {
   return (typeof strategy === "object" ? strategy[key] : strategy) ?? "empty";
 }
@@ -97,7 +95,7 @@ function isPrimitive(item: unknown): boolean {
  *
  * @returns A FormData object with the data applied.
  */
-function createFormData<DataType extends Record<RecordKey, unknown>>(
+function createFormData<DataType extends Record<PropertyKey, unknown>>(
   data: DataType,
   options: CreateFormDataOptions<keyof DataType> = {
     arrayResolution: "stringify",
