@@ -1,5 +1,3 @@
-import type { RecordKey } from "src/root/types/RecordKey";
-
 import { normaliseIndents } from "src/root/functions";
 
 export interface ExpectErrorOptions {
@@ -14,7 +12,7 @@ export interface ExpectErrorOptions {
  * @template DataType - The type of the data that caused the error.
  */
 class DataError<
-  DataType extends Record<RecordKey, unknown> = Record<RecordKey, unknown>,
+  DataType extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
 > extends Error {
   public code: string;
   public data: DataType;
@@ -68,7 +66,7 @@ class DataError<
    *
    * @returns `true` if the input is a DataError, and `false` otherwise. The type of the input will also be narrowed down to DataError if `true`.
    */
-  public static check<DataType extends Record<RecordKey, unknown> = Record<RecordKey, unknown>>(
+  public static check<DataType extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>>(
     input: unknown,
   ): input is DataError<DataType> {
     if (input instanceof DataError) {
