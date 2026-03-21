@@ -1,9 +1,8 @@
 import type { PackageManager } from "src/internal";
 import type { CreateEnumType } from "src/root/types";
 
-import { execa } from "execa";
 import { temporaryDirectoryTask } from "tempy";
-import { beforeAll, describe as describeVitest, expect, test } from "vitest";
+import { describe as describeVitest, expect, test } from "vitest";
 
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -71,10 +70,6 @@ function assert(exitCode: number | undefined, result: string) {
   expect(exitCode).toBe(0);
   expect(result.trim()).toContain("I'll commit to you");
 }
-
-beforeAll(async () => {
-  await execa`pnpm run build`;
-});
 
 describe.each<Entrypoint>([Entrypoint.ROOT, Entrypoint.NODE, Entrypoint.INTERNAL])(
   "Entrypoint %s",
