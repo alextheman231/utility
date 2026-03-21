@@ -2,8 +2,6 @@ export { default as APIError, httpErrorCodeLookup } from "src/root/types/APIErro
 export { default as DataError } from "src/root/types/DataError";
 export { default as VersionNumber, zodVersionNumber } from "src/root/types/VersionNumber";
 
-// eslint-disable-next-line @typescript-eslint/no-deprecated
-export type { RecordKey } from "src/root/deprecated/RecordKey";
 export type { HTTPErrorCode } from "src/root/types/APIError";
 export type { ArrayElement } from "src/root/types/ArrayElement";
 export type { CallReturnType } from "src/root/types/CallReturnType";
