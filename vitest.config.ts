@@ -1,3 +1,13 @@
-import { vitestConfig } from "@alextheman/eslint-plugin";
+import type { UserProjectConfigExport } from "vitest/config";
+import tsconfigPaths from "vite-tsconfig-paths";
 
-export default vitestConfig();
+const vitestConfig: UserProjectConfigExport = {
+  plugins: [tsconfigPaths()],
+  test: {
+    environment: "jsdom",
+    include: ["**/tests/**/*.test.ts"],
+    globalSetup: ["tests/setup.ts"],
+  },
+};
+
+export default vitestConfig;
