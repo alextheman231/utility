@@ -35,6 +35,6 @@ const myVariable: NonUndefined<string> = formatDateAndTime(new Date());
 
 ## Documentation
 
-You can find the relevant documentation of all features of the package in the [docs/features/markdown](https://github.com/alextheman231/utility/tree/main/docs/features/markdown) directory of the repository. The hosted documentation site can be found [here](https://alextheman231.github.io/utility/).
+You can find the relevant documentation of all features of the package in the hosted documentation site [here](https://alextheman231.github.io/utility/).
 
 See the GitHub repository [here](https://github.com/alextheman231/utility).
