@@ -31,8 +31,8 @@ importers:
         specifier: ^25.5.0
         version: 25.5.0
       alex-c-line:
-        specifier: ^2.3.0
-        version: 2.3.0(@types/node@25.5.0)
+        specifier: ^2.4.0
+        version: 2.4.0(@types/node@25.5.0)
       cross-env:
         specifier: ^10.1.0
         version: 10.1.0
@@ -1178,8 +1178,8 @@ packages:
   ajv@6.14.0:
     resolution: {integrity: sha512-IWrosm/yrn43eiKqkfkHis7QioDleaXQHdDVPKg0FSwwd/DuvyX79TZnFOnYpB7dcsFAMmtFztZuXPDvSePkFw==}
 
-  alex-c-line@2.3.0:
-    resolution: {integrity: sha512-dH/v2aOERPjGpqvdlY7jES+SIOQuge2ylawdkUqaiNV7qIHMAMsJRR5bw/YdYO7wxP3Y/YF1yXmAfC3k5Db6dg==}
+  alex-c-line@2.4.0:
+    resolution: {integrity: sha512-DxE0p19bJus479KqU7gxCPRFmGgPrFCZNep3w8Wj+zleekc2gSfHvcJAeeH/b8/9QRSzPlG/cWpw7UCmKid6wA==}
     engines: {node: '>=22.0.0'}
     hasBin: true
 
@@ -1291,8 +1291,8 @@ packages:
   base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
 
-  baseline-browser-mapping@2.10.11:
-    resolution: {integrity: sha512-DAKrHphkJyiGuau/cFieRYhcTFeK/lBuD++C7cZ6KZHbMhBrisoi+EvhQ5RZrIfV5qwsW8kgQ07JIC+MDJRAhg==}
+  baseline-browser-mapping@2.10.12:
+    resolution: {integrity: sha512-qyq26DxfY4awP2gIRXhhLWfwzwI+N5Nxk6iQi8EFizIaWIjqicQTE4sLnZZVdeKPRcVNoJOkkpfzoIYuvCKaIQ==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
@@ -4175,7 +4175,7 @@ snapshots:
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
 
-  alex-c-line@2.3.0(@types/node@25.5.0):
+  alex-c-line@2.4.0(@types/node@25.5.0):
     dependencies:
       '@alextheman/utility': 5.7.0
       '@inquirer/prompts': 8.3.2(@types/node@25.5.0)
@@ -4323,7 +4323,7 @@ snapshots:
 
   base64-js@1.5.1: {}
 
-  baseline-browser-mapping@2.10.11: {}
+  baseline-browser-mapping@2.10.12: {}
 
   bidi-js@1.0.3:
     dependencies:
@@ -4359,7 +4359,7 @@ snapshots:
 
   browserslist@4.28.1:
     dependencies:
-      baseline-browser-mapping: 2.10.11
+      baseline-browser-mapping: 2.10.12
       caniuse-lite: 1.0.30001781
       electron-to-chromium: 1.5.328
       node-releases: 2.0.36
