@@ -4,6 +4,5 @@ export * from "src/root/functions/miscellaneous";
 export * from "src/root/functions/objectHelpers";
 export * from "src/root/functions/parsers";
 export * from "src/root/functions/recursive";
-export * from "src/root/functions/security";
 export * from "src/root/functions/stringHelpers";
 export * from "src/root/functions/taggedTemplate";

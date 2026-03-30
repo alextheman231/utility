@@ -4,3 +4,5 @@ export {
 } from "src/node/functions/normalizeImportPath";
 export { default as parseFilePath } from "src/node/functions/parseFilePath";
 export { default as sayHello } from "src/node/functions/sayHello";
+
+export * from "src/node/functions/security";
