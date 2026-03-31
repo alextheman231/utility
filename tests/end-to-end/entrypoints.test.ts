@@ -1,4 +1,3 @@
-import type { PackageManager } from "src/internal";
 import type { CreateEnumType } from "src/root/types";
 
 import { temporaryDirectoryTask } from "tempy";
@@ -12,6 +11,7 @@ import {
   getPackageJsonContents,
   ModuleType,
   packageJsonNotFoundError,
+  PackageManager,
   setupPackageEndToEnd,
 } from "src/internal";
 import { normaliseIndents, omitProperties, parseBoolean } from "src/root/functions";
@@ -106,17 +106,22 @@ describe.each<Entrypoint>([Entrypoint.ROOT, Entrypoint.NODE, Entrypoint.INTERNAL
                 throw packageJsonNotFoundError(temporaryPath);
               }
 
-              const { tsx: tsxVersionTest, typescript: typescriptVersionTest } =
-                getDependenciesFromGroup(testPackageInfo, "devDependencies");
+              // This version mismatch check only works for PNPM because `pnpm install package@version` always installs at the specified version, whereas
+              // NPM tends to append the `^` prefix.
+              // Skipping the check with NPM for now until a solution is found.
+              if (packageManager === PackageManager.PNPM) {
+                const { tsx: tsxVersionTest, typescript: typescriptVersionTest } =
+                  getDependenciesFromGroup(testPackageInfo, "devDependencies");
 
-              if (tsxVersionTest !== tsxVersionUtility) {
-                throw versionMismatchError("tsx", tsxVersionUtility, tsxVersionTest);
-              } else if (typescriptVersionTest !== typescriptVersionUtility) {
-                throw versionMismatchError(
-                  "typescript",
-                  typescriptVersionUtility,
-                  typescriptVersionTest,
-                );
+                if (tsxVersionTest !== tsxVersionUtility) {
+                  throw versionMismatchError("tsx", tsxVersionUtility, tsxVersionTest);
+                } else if (typescriptVersionTest !== typescriptVersionUtility) {
+                  throw versionMismatchError(
+                    "typescript",
+                    typescriptVersionUtility,
+                    typescriptVersionTest,
+                  );
+                }
               }
 
               console.info("Adding the relevant package scripts...");
