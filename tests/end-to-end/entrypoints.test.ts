@@ -1,9 +1,10 @@
+import type { PackageManager } from "src/internal";
 import type { CreateEnumType } from "src/root/types";
 
 import { temporaryDirectoryTask } from "tempy";
 import { describe as describeVitest, expect, test } from "vitest";
 
-import { mkdir, writeFile } from "node:fs/promises";
+import { cp, mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import {
@@ -11,7 +12,6 @@ import {
   getPackageJsonContents,
   ModuleType,
   packageJsonNotFoundError,
-  PackageManager,
   setupPackageEndToEnd,
 } from "src/internal";
 import { normaliseIndents, omitProperties, parseBoolean } from "src/root/functions";
@@ -88,6 +88,8 @@ describe.each<Entrypoint>([Entrypoint.ROOT, Entrypoint.NODE, Entrypoint.INTERNAL
               moduleType,
             );
 
+            await cp(path.join(process.cwd(), ".npmrc"), path.join(temporaryPath, ".npmrc"));
+
             console.info("Writing the code file into temporary directory...");
             const codeFileName = `sayHello.${moduleType === ModuleType.TYPESCRIPT ? "ts" : "js"}`;
             const codeFilePath = path.join(temporaryPath, "src", codeFileName);
@@ -106,22 +108,17 @@ describe.each<Entrypoint>([Entrypoint.ROOT, Entrypoint.NODE, Entrypoint.INTERNAL
                 throw packageJsonNotFoundError(temporaryPath);
               }
 
-              // This version mismatch check only works for PNPM because `pnpm install package@version` always installs at the specified version, whereas
-              // NPM tends to append the `^` prefix.
-              // Skipping the check with NPM for now until a solution is found.
-              if (packageManager === PackageManager.PNPM) {
-                const { tsx: tsxVersionTest, typescript: typescriptVersionTest } =
-                  getDependenciesFromGroup(testPackageInfo, "devDependencies");
+              const { tsx: tsxVersionTest, typescript: typescriptVersionTest } =
+                getDependenciesFromGroup(testPackageInfo, "devDependencies");
 
-                if (tsxVersionTest !== tsxVersionUtility) {
-                  throw versionMismatchError("tsx", tsxVersionUtility, tsxVersionTest);
-                } else if (typescriptVersionTest !== typescriptVersionUtility) {
-                  throw versionMismatchError(
-                    "typescript",
-                    typescriptVersionUtility,
-                    typescriptVersionTest,
-                  );
-                }
+              if (tsxVersionTest !== tsxVersionUtility) {
+                throw versionMismatchError("tsx", tsxVersionUtility, tsxVersionTest);
+              } else if (typescriptVersionTest !== typescriptVersionUtility) {
+                throw versionMismatchError(
+                  "typescript",
+                  typescriptVersionUtility,
+                  typescriptVersionTest,
+                );
               }
 
               console.info("Adding the relevant package scripts...");
