@@ -10,14 +10,14 @@ jobs:
     permissions:
       id-token: write
     if: ${{ github.repository == 'alextheman231/utility' }}
-    uses: alextheman231/github-actions/.github/workflows/npm-registry-publish.yml@ec0a721b5d0c0f9fd8b86437636f9bcbc64218ef # v11.0.1
+    uses: alextheman231/github-actions/.github/workflows/npm-registry-publish.yml@d7dc056201417cb361b653afa9a09b5900e245e4 # v11.0.4
 
   create-github-release:
     needs: npm-registry-publish
     permissions:
       contents: write
     if: needs.npm-registry-publish.outputs.did_publish == 'true'
-    uses: alextheman231/github-actions/.github/workflows/create-github-release.yml@ec0a721b5d0c0f9fd8b86437636f9bcbc64218ef # v11.0.1
+    uses: alextheman231/github-actions/.github/workflows/create-github-release.yml@d7dc056201417cb361b653afa9a09b5900e245e4 # v11.0.4
     secrets:
       APP_ID: ${{ secrets.ALEX_UP_BOT_APP_ID }}
       APP_PRIVATE_KEY: ${{ secrets.ALEX_UP_BOT_PRIVATE_KEY }}
@@ -28,7 +28,7 @@ jobs:
       id-token: write
     needs: create-github-release
     if: needs.create-github-release.outputs.did_release == 'true'
-    uses: alextheman231/github-actions/.github/workflows/publish-github-pages.yml@ec0a721b5d0c0f9fd8b86437636f9bcbc64218ef # v11.0.1
+    uses: alextheman231/github-actions/.github/workflows/publish-github-pages.yml@d7dc056201417cb361b653afa9a09b5900e245e4 # v11.0.4
     secrets:
       APP_ID: ${{ secrets.ALEX_UP_BOT_APP_ID }}
       APP_PRIVATE_KEY: ${{ secrets.ALEX_UP_BOT_PRIVATE_KEY }}

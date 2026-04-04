@@ -13,7 +13,7 @@ jobs:
       pages: write
       id-token: write
     if: ${{ github.repository == 'alextheman231/utility' }}
-    uses: alextheman231/github-actions/.github/workflows/publish-github-pages.yml@ec0a721b5d0c0f9fd8b86437636f9bcbc64218ef # v11.0.1
+    uses: alextheman231/github-actions/.github/workflows/publish-github-pages.yml@d7dc056201417cb361b653afa9a09b5900e245e4 # v11.0.4
     secrets:
       APP_ID: ${{ secrets.ALEX_UP_BOT_APP_ID }}
       APP_PRIVATE_KEY: ${{ secrets.ALEX_UP_BOT_PRIVATE_KEY }}
