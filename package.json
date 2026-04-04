@@ -31,6 +31,7 @@
   ],
   "scripts": {
     "build": "tsdown",
+    "build-configs": "tsdown --config tsdown.configs.config.ts",
     "create-feature-docs": "typedoc",
     "create-local-package": "pnpm run build && rm -f alextheman-utility-*.tgz && pnpm pack",
     "create-release-note": "bash -c 'git pull origin main && alex-c-line template release-note create $@' --",
@@ -48,7 +49,7 @@
     "lint-prettier-typescript": "prettier --check --parser typescript \"./**/*.ts\"",
     "lint-prettier-yml": "prettier --check \"./**/*.{yml,yaml}\"",
     "lint-tsc": "tsc --noEmit",
-    "pre-commit": "alex-c-line pre-commit",
+    "pre-commit": "pnpm run build-configs && alex-c-line pre-commit",
     "prepare": "husky",
     "prepare-live-eslint-plugin": "pnpm uninstall @alextheman/eslint-plugin && pnpm install --save-dev @alextheman/eslint-plugin",
     "prepare-local-eslint-plugin": "dotenv -e .env -- sh -c 'ESLINT_PLUGIN_PATH=${LOCAL_ESLINT_PLUGIN_PATH:-../eslint-plugin}; pnpm --prefix \"$ESLINT_PLUGIN_PATH\" run build && pnpm uninstall @alextheman/eslint-plugin && pnpm install --save-dev file:\"$ESLINT_PLUGIN_PATH\"'",

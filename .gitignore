@@ -1,5 +1,6 @@
 node_modules
 dist
+dist-configs
 alextheman-utility-*.tgz
 .env
 .alex-c-line.private.config.js
