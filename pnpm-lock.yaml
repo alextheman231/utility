@@ -22,8 +22,8 @@ importers:
         version: 4.3.6
     devDependencies:
       '@alextheman/eslint-plugin':
-        specifier: 5.11.0
-        version: 5.11.0(d98b0525d652c275a2b298fa16c95b58)
+        specifier: 5.12.0
+        version: 5.12.0(107670ac154ff86960ac1326d401573b)
       '@types/node':
         specifier: 25.5.2
         version: 25.5.2
@@ -78,8 +78,8 @@ importers:
 
 packages:
 
-  '@alextheman/eslint-plugin@5.11.0':
-    resolution: {integrity: sha512-l8qmwNGeXxyDzDe9SN3CTvYPXDbIi2TBY9fmF9mj7QEgF1V4DwO4zlGHShTD6O1I2YHB9hK6b20CdMbNulO4tQ==}
+  '@alextheman/eslint-plugin@5.12.0':
+    resolution: {integrity: sha512-TWtxLeUCg4+XtJn3NLQmVUeJm89h4HXVOX7t6P+aa3jwbulkL+Wqzc5sjjrnSOiEd92K7v2IKXzUVV2qs3pkHA==}
     peerDependencies:
       '@eslint/js': '>=9.0.0'
       eslint: '>=9.0.0'
@@ -99,12 +99,6 @@ packages:
       typedoc-plugin-markdown: '>=4.9.0'
       typedoc-rhineai-theme: '>=1.2.0'
       typescript-eslint: '>=8.0.0'
-      vite-tsconfig-paths: '>=5.1.4'
-      vitest: '>=4.0.13'
-
-  '@alextheman/utility@5.8.0':
-    resolution: {integrity: sha512-uU2URao/Xme3dDaDwbg/s0eA/ftmJ4LUBZtVqMXSOFROrsUJEQvjphm2Futfs671OIb2KZolSdzCgvZW9Iv8iw==}
-    engines: {node: '>=22.3.0'}
 
   '@alextheman/utility@5.9.0':
     resolution: {integrity: sha512-ALMb9uCOiV3AxavIgcB8rb4B04jfwGU7zLmvzX1Y078oOzQ000MyHG44MVyKvRVT/oXjIPAmizm/E/9BL85Vng==}
@@ -113,12 +107,12 @@ packages:
   '@altano/repository-tools@2.0.3':
     resolution: {integrity: sha512-cSR/ZYDF6Wp9OeAJMyLYYN1GenAAhV17W+w38ELP+3c5Ltsy9jkkCymi33nz/qnXyef3n6Fbr1h2yt3dvUN5sQ==}
 
-  '@asamuzakjp/css-color@5.1.4':
-    resolution: {integrity: sha512-503MoTEmPSyEJ7zQ+5vlkwPtkyxDhbDwR9ajk/jpPGrCLiUFHzgEG4iViUPKdGlZPRT1mWSPSbDL2qkOoLU4vg==}
+  '@asamuzakjp/css-color@5.1.5':
+    resolution: {integrity: sha512-8cMAA1bE66Mb/tfmkhcfJLjEPgyT7SSy6lW6id5XL113ai1ky76d/1L27sGnXCMsLfq66DInAU3OzuahB4lu9Q==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0}
 
-  '@asamuzakjp/dom-selector@7.0.4':
-    resolution: {integrity: sha512-jXR6x4AcT3eIrS2fSNAwJpwirOkGcd+E7F7CP3zjdTqz9B/2huHOL8YJZBgekKwLML+u7qB/6P1LXQuMScsx0w==}
+  '@asamuzakjp/dom-selector@7.0.6':
+    resolution: {integrity: sha512-Tgmk6EQM0nc9xvp7sEHRVavbknhb/vGKht+04yAT3t5KQwZ02CSobCtcFgaHH04ZrjD1BhEKNA8tRhzFV20gkA==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0}
 
   '@asamuzakjp/nwsapi@2.3.9':
@@ -438,8 +432,8 @@ packages:
     resolution: {integrity: sha512-EriSTlt5OC9/7SXkRSCAhfSxxoSUgBm33OH+IkwbdpgoqsSsUg7y3uh+IICI/Qg4BBWr3U2i39RpmycbxMq4ew==}
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
 
-  '@eslint/compat@2.0.3':
-    resolution: {integrity: sha512-SjIJhGigp8hmd1YGIBwh7Ovri7Kisl42GYFjrOyHhtfYGGoLW6teYi/5p8W50KSsawUPpuLOSmsq1bD0NGQLBw==}
+  '@eslint/compat@2.0.4':
+    resolution: {integrity: sha512-o598tCGstJv9Kk4XapwP+oDij9HD9Qr3V37ABzTfdzVvbFciV+sfg9zSW6olj6G/IXj7p89SwSzPnZ+JUEPIPg==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
     peerDependencies:
       eslint: ^8.40 || 9 || 10
@@ -2855,11 +2849,11 @@ packages:
     resolution: {integrity: sha512-Bf+ILmBgretUrdJxzXM0SgXLZ3XfiaUuOj/IKQHuTXip+05Xn+uyEYdVg0kYDipTBcLrCVyUzAPz7QmArb0mmw==}
     engines: {node: '>=14.0.0'}
 
-  tldts-core@7.0.27:
-    resolution: {integrity: sha512-YQ7uPjgWUibIK6DW5lrKujGwUKhLevU4hcGbP5O6TcIUb+oTjJYJVWPS4nZsIHrEEEG6myk/oqAJUEQmpZrHsg==}
+  tldts-core@7.0.28:
+    resolution: {integrity: sha512-7W5Efjhsc3chVdFhqtaU0KtK32J37Zcr9RKtID54nG+tIpcY79CQK/veYPODxtD/LJ4Lue66jvrQzIX2Z2/pUQ==}
 
-  tldts@7.0.27:
-    resolution: {integrity: sha512-I4FZcVFcqCRuT0ph6dCDpPuO4Xgzvh+spkcTr1gK7peIvxWauoloVO0vuy1FQnijT63ss6AsHB6+OIM4aXHbPg==}
+  tldts@7.0.28:
+    resolution: {integrity: sha512-+Zg3vWhRUv8B1maGSTFdev9mjoo8Etn2Ayfs4cnjlD3CsGkxXX4QyW3j2WJ0wdjYcYmy7Lx2RDsZMhgCWafKIw==}
     hasBin: true
 
   to-valid-identifier@1.0.0:
@@ -3244,10 +3238,10 @@ packages:
 
 snapshots:
 
-  '@alextheman/eslint-plugin@5.11.0(d98b0525d652c275a2b298fa16c95b58)':
+  '@alextheman/eslint-plugin@5.12.0(107670ac154ff86960ac1326d401573b)':
     dependencies:
-      '@alextheman/utility': 5.8.0
-      '@eslint/compat': 2.0.3(eslint@10.2.0(jiti@2.6.1))
+      '@alextheman/utility': 5.9.0
+      '@eslint/compat': 2.0.4(eslint@10.2.0(jiti@2.6.1))
       '@eslint/js': 10.0.1(eslint@10.2.0(jiti@2.6.1))
       '@typescript-eslint/types': 8.58.0
       '@typescript-eslint/utils': 8.58.0(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.2)
@@ -3270,19 +3264,10 @@ snapshots:
       typedoc-plugin-markdown: 4.10.0(typedoc@0.28.18(typescript@6.0.2))
       typedoc-rhineai-theme: 1.2.0(typedoc@0.28.18(typescript@6.0.2))
       typescript-eslint: 8.58.0(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.2)
-      vite-tsconfig-paths: 6.1.1(typescript@6.0.2)(vite@7.3.1(@types/node@25.5.2)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
-      vitest: 4.1.2(@opentelemetry/api@1.9.0)(@types/node@25.5.2)(jsdom@29.0.1(canvas@3.2.3))(vite@7.3.1(@types/node@25.5.2)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
       zod: 4.3.6
     transitivePeerDependencies:
       - supports-color
       - typescript
-
-  '@alextheman/utility@5.8.0':
-    dependencies:
-      dotenv: 17.4.0
-      execa: 9.6.1
-      libsodium-wrappers: 0.8.2
-      zod: 4.3.6
 
   '@alextheman/utility@5.9.0':
     dependencies:
@@ -3293,7 +3278,7 @@ snapshots:
 
   '@altano/repository-tools@2.0.3': {}
 
-  '@asamuzakjp/css-color@5.1.4':
+  '@asamuzakjp/css-color@5.1.5':
     dependencies:
       '@csstools/css-calc': 3.1.1(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.0))(@csstools/css-tokenizer@4.0.0)
       '@csstools/css-color-parser': 4.0.2(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.0))(@csstools/css-tokenizer@4.0.0)
@@ -3301,7 +3286,7 @@ snapshots:
       '@csstools/css-tokenizer': 4.0.0
       lru-cache: 11.2.7
 
-  '@asamuzakjp/dom-selector@7.0.4':
+  '@asamuzakjp/dom-selector@7.0.6':
     dependencies:
       '@asamuzakjp/nwsapi': 2.3.9
       bidi-js: 1.0.3
@@ -3574,7 +3559,7 @@ snapshots:
 
   '@eslint-community/regexpp@4.12.2': {}
 
-  '@eslint/compat@2.0.3(eslint@10.2.0(jiti@2.6.1))':
+  '@eslint/compat@2.0.4(eslint@10.2.0(jiti@2.6.1))':
     dependencies:
       '@eslint/core': 1.2.0
     optionalDependencies:
@@ -5420,8 +5405,8 @@ snapshots:
 
   jsdom@29.0.1(canvas@3.2.3):
     dependencies:
-      '@asamuzakjp/css-color': 5.1.4
-      '@asamuzakjp/dom-selector': 7.0.4
+      '@asamuzakjp/css-color': 5.1.5
+      '@asamuzakjp/dom-selector': 7.0.6
       '@bramus/specificity': 2.4.2
       '@csstools/css-syntax-patches-for-csstree': 1.1.2(css-tree@3.2.1)
       '@exodus/bytes': 1.15.0
@@ -6169,11 +6154,11 @@ snapshots:
 
   tinyrainbow@3.1.0: {}
 
-  tldts-core@7.0.27: {}
+  tldts-core@7.0.28: {}
 
-  tldts@7.0.27:
+  tldts@7.0.28:
     dependencies:
-      tldts-core: 7.0.27
+      tldts-core: 7.0.28
 
   to-valid-identifier@1.0.0:
     dependencies:
@@ -6182,7 +6167,7 @@ snapshots:
 
   tough-cookie@6.0.1:
     dependencies:
-      tldts: 7.0.27
+      tldts: 7.0.28
 
   tr46@6.0.0:
     dependencies:
