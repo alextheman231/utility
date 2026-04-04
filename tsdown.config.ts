@@ -1,6 +1,6 @@
-import { defineConfig } from "tsdown";
+import type { UserConfig } from "tsdown";
 
-export default defineConfig([
+const config: Array<UserConfig> = [
   {
     entry: ["src/root/index.ts"],
     format: ["esm", "cjs"],
@@ -24,12 +24,6 @@ export default defineConfig([
     clean: true,
     fixedExtension: false,
   },
-  {
-    entry: ["configs/alex-c-line/index.ts"],
-    outDir: ".alex-c-line/config",
-    format: ["esm"],
-    dts: true,
-    clean: true,
-    fixedExtension: false,
-  },
-]);
+];
+
+export default config;

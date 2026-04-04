@@ -1,3 +1,3 @@
-import alexCLineConfig from "./.alex-c-line/config/index.js";
+import alexCLineConfig from "./dist-configs/index.js";
 
 export default alexCLineConfig;
