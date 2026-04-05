@@ -16,6 +16,8 @@ export interface ToTitleCaseOptions {
  *
  * The comparison for preserved words is case-insensitive, but the original casing provided in `preserveWords` is retained in the output.
  *
+ * @category String Helpers
+ *
  * @param input - The string to convert.
  * @param options - Additional options to apply.
  *
