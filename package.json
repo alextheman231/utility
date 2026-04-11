@@ -68,7 +68,7 @@
   "devDependencies": {
     "@alextheman/eslint-plugin": "5.12.0",
     "@types/node": "25.6.0",
-    "alex-c-line": "2.5.0",
+    "alex-c-line": "2.6.1",
     "cross-env": "10.1.0",
     "dotenv-cli": "11.0.0",
     "eslint": "10.2.0",
