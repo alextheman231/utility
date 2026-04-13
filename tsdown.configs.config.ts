@@ -1,7 +1,7 @@
 import type { UserConfig } from "tsdown";
 
 const config: UserConfig = {
-  entry: ["configs/alex-c-line/index.ts"],
+  entry: ["configs/alex-c-line/index.ts", "configs/typedoc.ts"],
   outDir: "dist-configs",
   format: ["esm"],
   dts: true,

@@ -20,7 +20,7 @@ importers:
     devDependencies:
       '@alextheman/eslint-plugin':
         specifier: 5.12.0
-        version: 5.12.0(df02b76792312afc8ef144a69211858a)
+        version: 5.12.0(1dfb556ae4758b106f4db60f33e10629)
       '@types/node':
         specifier: 25.6.0
         version: 25.6.0
@@ -60,6 +60,12 @@ importers:
       typedoc:
         specifier: 0.28.18
         version: 0.28.18(typescript@6.0.2)
+      typedoc-plugin-markdown:
+        specifier: 4.11.0
+        version: 4.11.0(typedoc@0.28.18(typescript@6.0.2))
+      typedoc-rhineai-theme:
+        specifier: 1.2.0
+        version: 1.2.0(typedoc@0.28.18(typescript@6.0.2))
       typescript:
         specifier: 6.0.2
         version: 6.0.2
@@ -2924,8 +2930,8 @@ packages:
     resolution: {integrity: sha512-3KS2b+kL7fsuk/eJZ7EQdnEmQoaho/r6KUef7hxvltNA5DR8NAUM+8wJMbJyZ4G9/7i3v5zPBIMN5aybAh2/Jg==}
     engines: {node: '>= 0.4'}
 
-  typedoc-plugin-markdown@4.10.0:
-    resolution: {integrity: sha512-psrg8Rtnv4HPWCsoxId+MzEN8TVK5jeKCnTbnGAbTBqcDapR9hM41bJT/9eAyKn9C2MDG9Qjh3MkltAYuLDoXg==}
+  typedoc-plugin-markdown@4.11.0:
+    resolution: {integrity: sha512-2iunh2ALyfyh204OF7h2u0kuQ84xB3jFZtFyUr01nThJkLvR8oGGSSDlyt2gyO4kXhvUxDcVbO0y43+qX+wFbw==}
     engines: {node: '>= 18'}
     peerDependencies:
       typedoc: 0.28.x
@@ -3193,7 +3199,7 @@ packages:
 
 snapshots:
 
-  '@alextheman/eslint-plugin@5.12.0(df02b76792312afc8ef144a69211858a)':
+  '@alextheman/eslint-plugin@5.12.0(1dfb556ae4758b106f4db60f33e10629)':
     dependencies:
       '@alextheman/utility': 5.9.0
       '@eslint/compat': 2.0.4(eslint@10.2.0(jiti@2.6.1))
@@ -3216,7 +3222,7 @@ snapshots:
       eslint-plugin-react-refresh: 0.5.0(eslint@10.2.0(jiti@2.6.1))
       prettier: 3.8.1
       typedoc: 0.28.18(typescript@6.0.2)
-      typedoc-plugin-markdown: 4.10.0(typedoc@0.28.18(typescript@6.0.2))
+      typedoc-plugin-markdown: 4.11.0(typedoc@0.28.18(typescript@6.0.2))
       typedoc-rhineai-theme: 1.2.0(typedoc@0.28.18(typescript@6.0.2))
       typescript-eslint: 8.58.1(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.2)
       zod: 4.3.6
@@ -6141,7 +6147,7 @@ snapshots:
       possible-typed-array-names: 1.1.0
       reflect.getprototypeof: 1.0.10
 
-  typedoc-plugin-markdown@4.10.0(typedoc@0.28.18(typescript@6.0.2)):
+  typedoc-plugin-markdown@4.11.0(typedoc@0.28.18(typescript@6.0.2)):
     dependencies:
       typedoc: 0.28.18(typescript@6.0.2)
 

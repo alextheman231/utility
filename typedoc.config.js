@@ -1,3 +1,3 @@
-import { typeDocConfig } from "@alextheman/eslint-plugin";
+import typeDocConfig from "./dist-configs/typedoc.js";
 
-export default typeDocConfig(["./src/root/index.ts", "./src/node/index.ts"]);
+export default typeDocConfig;
