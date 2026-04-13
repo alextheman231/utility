@@ -1,8 +1,9 @@
 import type { UserProjectConfigExport } from "vitest/config";
-import tsconfigPaths from "vite-tsconfig-paths";
 
 const vitestConfig: UserProjectConfigExport = {
-  plugins: [tsconfigPaths()],
+  resolve: {
+    tsconfigPaths: true,
+  },
   test: {
     environment: "jsdom",
     include: ["**/tests/**/*.test.ts"],
