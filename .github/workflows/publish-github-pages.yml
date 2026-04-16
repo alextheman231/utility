@@ -7,7 +7,7 @@ jobs:
     permissions:
       pages: write
       id-token: write
-    uses: alextheman231/github-actions/.github/workflows/publish-github-pages.yml@690ddbb17a4591efc36cd68216623b77977ebdc8 # v11.1.0
+    uses: alextheman231/github-actions/.github/workflows/publish-github-pages.yml@2e41fee3271c96b410b398994b6df72997e18c02 # v11.2.1
     secrets:
       APP_ID: ${{ secrets.ALEX_UP_BOT_APP_ID }}
       APP_PRIVATE_KEY: ${{ secrets.ALEX_UP_BOT_PRIVATE_KEY }}
