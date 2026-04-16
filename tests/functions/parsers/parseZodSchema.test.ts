@@ -41,7 +41,7 @@ describe("parseZodSchema", () => {
       }
     }
   });
-  test("The error function can return nothing", () => {
+  test("The error function can return nothing but still gets run if an error is expected", () => {
     let wasCalled = false;
     const error = DataError.expectError(() => {
       parseZodSchema(z.string(), 1, () => {
@@ -52,6 +52,15 @@ describe("parseZodSchema", () => {
     expect(wasCalled).toBe(true);
     expect(error.data.input).toBe(1);
     expect(error.code).toBe("INVALID_TYPE");
+  });
+  test("The error function must not be run if parsing was successful", () => {
+    let wasCalled = false;
+    const result = parseZodSchema(z.string(), "hello", () => {
+      wasCalled = true;
+    });
+
+    expect(wasCalled).toBe(false);
+    expect(result).toBe("hello");
   });
   test("If multiple Zod errors found, the error code should be a comma-separated string list sorted by frequency", () => {
     const input = {
