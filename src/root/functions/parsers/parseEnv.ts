@@ -14,7 +14,7 @@ export const Env = {
   TEST: "test",
   DEVELOPMENT: "development",
   PRODUCTION: "production",
-};
+} as const;
 
 export type Env = CreateEnumType<typeof Env>;
 
