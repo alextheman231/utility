@@ -24,6 +24,7 @@ const Entrypoint = {
   ROOT: "@alextheman/utility",
   NODE: "@alextheman/utility/node",
   INTERNAL: "@alextheman/utility/internal",
+  V6: "@alextheman/utility/v6",
 } as const;
 
 type Entrypoint = CreateEnumType<typeof Entrypoint>;
@@ -71,7 +72,7 @@ function assert(exitCode: number | undefined, result: string) {
   expect(result.trim()).toContain("I'll commit to you");
 }
 
-describe.each<Entrypoint>([Entrypoint.ROOT, Entrypoint.NODE, Entrypoint.INTERNAL])(
+describe.each<Entrypoint>([Entrypoint.ROOT, Entrypoint.NODE, Entrypoint.INTERNAL, Entrypoint.V6])(
   "Entrypoint %s",
   (entrypoint) => {
     describe.each<PackageManager>(["npm", "pnpm"])("Package manager %s", (packageManager) => {

@@ -24,6 +24,14 @@ const config: Array<UserConfig> = [
     clean: true,
     fixedExtension: false,
   },
+  {
+    entry: ["src/v6/index.ts"],
+    outDir: "dist/v6",
+    format: ["esm", "cjs"],
+    dts: true,
+    clean: true,
+    fixedExtension: false,
+  },
 ];
 
 export default config;

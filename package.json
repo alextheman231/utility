@@ -25,6 +25,11 @@
       "types": "./dist/node/index.d.ts",
       "import": "./dist/node/index.js",
       "require": "./dist/node/index.cjs"
+    },
+    "./v6": {
+      "types": "./dist/v6/index.d.ts",
+      "import": "./dist/v6/index.js",
+      "require": "./dist/v6/index.cjs"
     }
   },
   "files": [

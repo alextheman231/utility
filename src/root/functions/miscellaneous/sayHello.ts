@@ -1,4 +1,4 @@
-import { normaliseIndents } from "src/root/functions/taggedTemplate";
+import normaliseIndents from "src/root/functions/taggedTemplate/normaliseIndents";
 
 /**
  * Returns a string representing the lyrics to the package's theme song, Commit To You
