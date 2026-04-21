@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, test } from "vitest";
 
-import { CodeError } from "src/root/types";
+import { CodeError } from "src/v6";
 
 describe("CodeError", () => {
   test("Takes an error with the given data", () => {
