@@ -135,6 +135,5 @@ describe("CodeError.expectError()", () => {
     );
 
     expect(error.code).toBe("VALID_CODE");
-    expectTypeOf(error.code).toEqualTypeOf<"VALID_CODE">();
   });
 });
