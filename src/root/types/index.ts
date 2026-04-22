@@ -1,5 +1,4 @@
 export { default as APIError, httpErrorCodeLookup } from "src/root/types/APIError";
-export { default as DataError } from "src/root/types/DataError";
 export { default as VersionNumber, zodVersionNumber } from "src/root/types/VersionNumber";
 
 export type { HTTPErrorCode } from "src/root/types/APIError";
