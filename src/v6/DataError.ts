@@ -59,7 +59,10 @@ class DataError<
    *
    * @returns `true` if the input is a DataError, and `false` otherwise. The type of the input will also be narrowed down to DataError if `true`.
    */
-  public static override check(input: unknown): input is DataError {
+  public static override check<
+    DataType extends object = Record<PropertyKey, unknown>,
+    ErrorCode extends string = DataErrorCode,
+  >(input: unknown): input is DataError<DataType, ErrorCode> {
     if (input instanceof DataError) {
       return true;
     }

@@ -9,6 +9,8 @@ export interface ExpectErrorOptions {
  *
  * @category Types
  *
+ * @deprecated Please use `DataError` from `@alextheman/utility/v6` instead.
+ *
  * @template DataType - The type of the data that caused the error.
  */
 class DataError<

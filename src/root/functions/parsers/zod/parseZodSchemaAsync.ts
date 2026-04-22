@@ -1,6 +1,6 @@
 import type { z, ZodError, ZodType } from "zod";
 
-import type { DataError } from "src/root/types";
+import type { DataError } from "src/v6";
 
 import _parseZodSchema from "src/root/functions/parsers/zod/_parseZodSchema";
 

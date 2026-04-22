@@ -1,6 +1,6 @@
 import type { z, ZodError, ZodType } from "zod";
 
-import type { DataError } from "src/root/types";
+import type { DataError } from "src/v6";
 
 import _parseZodSchema from "src/root/functions/parsers/zod/_parseZodSchema";
 
@@ -18,7 +18,7 @@ import _parseZodSchema from "src/root/functions/parsers/zod/_parseZodSchema";
  * @param input - The data to parse.
  * @param onError - A custom error to throw on invalid data (defaults to `DataError`). May either be the error itself, or a function that returns the error or nothing. If nothing is returned, the default error is thrown instead.
  *
- * @throws {DataError} If the given data cannot be parsed according to the schema.
+ * @throws {DataErrorCode} If the given data cannot be parsed according to the schema.
  *
  * @returns The parsed data from the Zod schema.
  */

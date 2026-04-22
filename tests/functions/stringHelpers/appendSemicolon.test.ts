@@ -1,7 +1,8 @@
 import { describe, expect, test } from "vitest";
 
-import { DataError, normaliseIndents } from "src/root";
+import { normaliseIndents } from "src/root";
 import appendSemicolon from "src/root/functions/stringHelpers/appendSemicolon";
+import { DataError } from "src/v6";
 
 describe("appendSemicolon", () => {
   test("Appends a semicolon to the end of string if not present", () => {

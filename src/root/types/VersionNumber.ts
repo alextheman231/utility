@@ -2,7 +2,7 @@ import z from "zod";
 
 import { VERSION_NUMBER_REGEX } from "src/root/constants";
 import { normaliseIndents, parseIntStrict, VersionType } from "src/root/functions";
-import DataError from "src/root/types/DataError";
+import { DataError } from "src/v6";
 
 /**
  * Options to apply to the stringification of the version number.
@@ -175,7 +175,10 @@ class VersionNumber {
     try {
       return new VersionNumber(calculatedRawVersion);
     } catch (error) {
-      if (DataError.check(error) && error.code === "NEGATIVE_INPUTS") {
+      if (
+        DataError.check<Record<PropertyKey, unknown>, "NEGATIVE_INPUTS">(error) &&
+        error.code === "NEGATIVE_INPUTS"
+      ) {
         throw new DataError(
           {
             currentVersion: this.toString(),
