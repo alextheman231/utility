@@ -36,11 +36,33 @@ class CodeError<ErrorCode extends string = string> extends Error {
     Object.setPrototypeOf(this, new.target.prototype);
   }
 
-  private static checkCaughtError<ErrorCode extends string = string>(
+  /**
+   * Checks whether the given input may have been caused by a CodeError.
+   *
+   * @param input - The input to check.
+   *
+   * @returns `true` if the input is a CodeError, and `false` otherwise. The type of the input will also be narrowed down to CodeError if `true`.
+   */
+  public static check(input: unknown): input is CodeError<string> {
+    if (input instanceof CodeError) {
+      return true;
+    }
+
+    return (
+      typeof input === "object" &&
+      input !== null &&
+      "message" in input &&
+      typeof input.message === "string" &&
+      "code" in input &&
+      typeof input.code === "string"
+    );
+  }
+  protected static checkCaughtError<ErrorCode extends string = string>(
+    this: typeof CodeError,
     error: unknown,
     options?: ExpectErrorOptions<ErrorCode>,
-  ): CodeError<ErrorCode> {
-    if (CodeError.check<ErrorCode>(error)) {
+  ): CodeError {
+    if (this.check(error)) {
       if (options?.expectedCode && error.code !== options.expectedCode) {
         throw new Error(
           normaliseIndents`The error code on the thrown error does not match the expected error code.
@@ -55,30 +77,6 @@ class CodeError<ErrorCode extends string = string> extends Error {
     }
     throw error;
   }
-
-  /**
-   * Checks whether the given input may have been caused by a CodeError.
-   *
-   * @param input - The input to check.
-   *
-   * @returns `true` if the input is a CodeError, and `false` otherwise. The type of the input will also be narrowed down to CodeError if `true`.
-   */
-  public static check<ErrorCode extends string = string>(
-    input: unknown,
-  ): input is CodeError<ErrorCode> {
-    if (input instanceof CodeError) {
-      return true;
-    }
-
-    return (
-      typeof input === "object" &&
-      input !== null &&
-      "message" in input &&
-      typeof input.message === "string" &&
-      "code" in input &&
-      typeof input.code === "string"
-    );
-  }
   /**
    * Gets the thrown `CodeError` from a given function if one was thrown, and re-throws any other errors, or throws a default `CodeError` if no error thrown.
    *
@@ -91,15 +89,16 @@ class CodeError<ErrorCode extends string = string> extends Error {
    * @returns The `CodeError` that was thrown by the `errorFunction`
    */
   public static expectError<ErrorCode extends string = string>(
+    this: typeof CodeError,
     errorFunction: () => unknown,
     options?: ExpectErrorOptions<ErrorCode>,
-  ): CodeError<ErrorCode> {
+  ): CodeError {
     try {
       errorFunction();
     } catch (error) {
-      return CodeError.checkCaughtError(error, options);
+      return this.checkCaughtError(error, options);
     }
-    throw new Error("Expected a CodeError to be thrown but none was thrown");
+    throw new Error(`Expected a ${this.name} to be thrown but none was thrown`);
   }
   /**
    * Gets the thrown `CodeError` from a given asynchronous function if one was thrown, and re-throws any other errors, or throws a default `CodeError` if no error thrown.
@@ -113,15 +112,16 @@ class CodeError<ErrorCode extends string = string> extends Error {
    * @returns The `CodeError` that was thrown by the `errorFunction`
    */
   public static async expectErrorAsync<ErrorCode extends string = string>(
+    this: typeof CodeError,
     errorFunction: () => Promise<unknown>,
     options?: ExpectErrorOptions<ErrorCode>,
-  ): Promise<CodeError<ErrorCode>> {
+  ): Promise<CodeError> {
     try {
       await errorFunction();
     } catch (error) {
-      return CodeError.checkCaughtError(error, options);
+      return this.checkCaughtError(error, options);
     }
-    throw new Error("Expected a CodeError to be thrown but none was thrown");
+    throw new Error(`Expected a ${this.name} to be thrown but none was thrown`);
   }
 }
 

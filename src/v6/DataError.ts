@@ -1,8 +1,18 @@
-import { normaliseIndents } from "src/root/functions";
+import type { CreateEnumType } from "src/root";
 
-export interface ExpectErrorOptions {
-  expectedCode?: string;
+import CodeError from "src/v6/CodeError";
+
+type DefaultDataErrorCode = "INVALID_DATA";
+
+export interface ExpectErrorOptions<ErrorCode extends string = DefaultDataErrorCode> {
+  expectedCode?: ErrorCode | DefaultDataErrorCode;
 }
+
+export const DataErrorCode = {
+  INVALID_DATA: "INVALID_DATA",
+} as const;
+
+export type DataErrorCode = CreateEnumType<typeof DataErrorCode>;
 
 /**
  * Represents errors you may get that may've been caused by a specific piece of data.
@@ -13,8 +23,8 @@ export interface ExpectErrorOptions {
  */
 class DataError<
   DataType extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
-> extends Error {
-  public code: string;
+  ErrorCode extends string = DataErrorCode,
+> extends CodeError<ErrorCode | DataErrorCode> {
   public data: DataType;
 
   /**
@@ -25,11 +35,11 @@ class DataError<
    */
   public constructor(
     data: DataType,
-    code: string = "INVALID_DATA",
+    code: ErrorCode | DefaultDataErrorCode = "INVALID_DATA",
     message: string = "The data provided is invalid",
     options?: ErrorOptions,
   ) {
-    super(message, options);
+    super(code, message, options);
     if (Error.captureStackTrace) {
       Error.captureStackTrace(this, new.target);
     }
@@ -42,23 +52,6 @@ class DataError<
     Object.setPrototypeOf(this, new.target.prototype);
   }
 
-  private static checkCaughtError(error: unknown, options?: ExpectErrorOptions): DataError {
-    if (DataError.check(error)) {
-      if (options?.expectedCode && error.code !== options.expectedCode) {
-        throw new Error(
-          normaliseIndents`The error code on the thrown error does not match the expected error code.
-            
-            Expected: ${options.expectedCode}
-            Received: ${error.code}
-            `,
-          { cause: error },
-        );
-      }
-      return error;
-    }
-    throw error;
-  }
-
   /**
    * Checks whether the given input may have been caused by a DataError.
    *
@@ -66,9 +59,7 @@ class DataError<
    *
    * @returns `true` if the input is a DataError, and `false` otherwise. The type of the input will also be narrowed down to DataError if `true`.
    */
-  public static check<DataType extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>>(
-    input: unknown,
-  ): input is DataError<DataType> {
+  public static override check(input: unknown): input is DataError {
     if (input instanceof DataError) {
       return true;
     }
@@ -93,13 +84,14 @@ class DataError<
    *
    * @returns The `DataError` that was thrown by the `errorFunction`
    */
-  public static expectError(errorFunction: () => unknown, options?: ExpectErrorOptions): DataError {
-    try {
-      errorFunction();
-    } catch (error) {
-      return DataError.checkCaughtError(error, options);
-    }
-    throw new Error("Expected a DataError to be thrown but none was thrown");
+  public static override expectError<
+    DataType extends Record<PropertyKey, unknown>,
+    ErrorCode extends string = DefaultDataErrorCode,
+  >(
+    errorFunction: () => unknown,
+    options?: ExpectErrorOptions<ErrorCode>,
+  ): DataError<DataType, ErrorCode> {
+    return super.expectError(errorFunction, options) as DataError<DataType, ErrorCode>;
   }
   /**
    * Gets the thrown `DataError` from a given asynchronous function if one was thrown, and re-throws any other errors, or throws a default `DataError` if no error thrown.
@@ -112,16 +104,14 @@ class DataError<
    *
    * @returns The `DataError` that was thrown by the `errorFunction`
    */
-  public static async expectErrorAsync(
+  public static override async expectErrorAsync<
+    DataType extends Record<PropertyKey, unknown>,
+    ErrorCode extends string = DefaultDataErrorCode,
+  >(
     errorFunction: () => Promise<unknown>,
-    options?: ExpectErrorOptions,
-  ): Promise<DataError> {
-    try {
-      await errorFunction();
-    } catch (error) {
-      return DataError.checkCaughtError(error, options);
-    }
-    throw new Error("Expected a DataError to be thrown but none was thrown");
+    options?: ExpectErrorOptions<ErrorCode>,
+  ): Promise<DataError<DataType, ErrorCode>> {
+    return (await super.expectErrorAsync(errorFunction, options)) as DataError<DataType, ErrorCode>;
   }
 }
 
