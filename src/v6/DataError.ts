@@ -64,13 +64,14 @@ class DataError<
       return true;
     }
 
-    const data: any = input;
     return (
-      typeof data === "object" &&
-      data !== null &&
-      typeof data.message === "string" &&
-      typeof data.code === "string" &&
-      "data" in data
+      typeof input === "object" &&
+      input !== null &&
+      "message" in input &&
+      typeof input.message === "string" &&
+      "code" in input &&
+      typeof input.code === "string" &&
+      "data" in input
     );
   }
   /**
