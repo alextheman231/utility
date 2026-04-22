@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 
-import { DataError } from "src/root";
 import range from "src/root/functions/arrayHelpers/range";
+import { DataError } from "src/v6";
 
 describe("range", () => {
   describe("Positive step sizes", () => {

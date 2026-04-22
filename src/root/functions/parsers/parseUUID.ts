@@ -1,5 +1,5 @@
 import { UUID_REGEX } from "src/root/constants";
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 /**
  * Parses the input and verifies it is a valid UUID.

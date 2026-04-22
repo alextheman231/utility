@@ -15,7 +15,7 @@ import {
   setupPackageEndToEnd,
 } from "src/internal";
 import { normaliseIndents, omitProperties, parseBoolean } from "src/root/functions";
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 import utilityPackageInfo from "package.json" with { type: "json" };
 import tsConfig from "tsconfig.json" with { type: "json" };

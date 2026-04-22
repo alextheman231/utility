@@ -2,8 +2,8 @@ import { describe, expect, test } from "vitest";
 
 import { randomUUID } from "node:crypto";
 
-import { DataError } from "src/root";
 import parseUUID from "src/root/functions/parsers/parseUUID";
+import { DataError } from "src/v6";
 
 describe("parseUUID", () => {
   test("Return the UUID if it is valid", () => {

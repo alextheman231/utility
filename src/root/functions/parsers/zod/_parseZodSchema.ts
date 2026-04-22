@@ -2,7 +2,7 @@ import type { ZodError, ZodSafeParseResult, ZodType } from "zod";
 
 import z from "zod";
 
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 // No need for JSDoc on this one - it is only an internal helper function.
 // eslint-disable-next-line jsdoc/require-jsdoc

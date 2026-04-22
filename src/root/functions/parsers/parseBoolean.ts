@@ -1,4 +1,4 @@
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 /**
  * Takes a stringly-typed boolean and converts it to an actual boolean type.

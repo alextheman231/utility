@@ -1,4 +1,4 @@
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 export type FormDataNullableResolutionStrategy = "stringify" | "empty" | "omit";
 export type FormDataArrayResolutionStrategy = "stringify" | "multiple";

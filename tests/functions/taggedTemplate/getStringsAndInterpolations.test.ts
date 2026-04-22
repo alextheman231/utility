@@ -6,7 +6,7 @@ import {
   getStringsAndInterpolations,
   interpolate,
 } from "src/root/functions";
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 describe("getStringsAndInterpolations", () => {
   test("Returns the strings and interpolations from a given template string separately", () => {

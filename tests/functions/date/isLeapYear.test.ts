@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 
 import { isLeapYear } from "src/root/functions/date";
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 describe("isLeapYear", () => {
   test("Returns false if the year is not a leap year", () => {
