@@ -3,7 +3,7 @@ import type { CreateEnumType } from "src/root/types";
 import { z } from "zod";
 
 import parseZodSchema from "src/root/functions/parsers/zod/parseZodSchema";
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 /**
  * Represents the three common development environments.

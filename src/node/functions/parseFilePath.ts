@@ -1,7 +1,7 @@
 import path from "node:path";
 
 import { FILE_PATH_REGEX } from "src/root/constants";
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 export interface FilePathData {
   /** The file path without the final part. */

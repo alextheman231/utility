@@ -1,4 +1,4 @@
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 /**
  * Asynchronously converts a file to a base 64 string

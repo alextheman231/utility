@@ -1,6 +1,6 @@
 import type { DotenvParseOutput } from "dotenv";
 
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 export type QuoteStyle = "double" | "single" | "none";
 

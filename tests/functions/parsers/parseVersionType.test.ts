@@ -3,7 +3,7 @@ import type { VersionType } from "src/root/functions";
 import { describe, expect, test } from "vitest";
 
 import { parseVersionType } from "src/root/functions";
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 describe("parseVersionType", () => {
   test("Is successful when input is a valid version type", () => {

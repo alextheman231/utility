@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 
 import { parseIntStrict } from "src/root/functions";
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 describe("parseIntStrict", () => {
   test("Returns the parsed integer", () => {

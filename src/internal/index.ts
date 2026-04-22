@@ -11,3 +11,4 @@ export { default as sayHello } from "src/internal/sayHello";
 export { default as setupPackageEndToEnd } from "src/internal/setupPackageEndToEnd";
 
 export type { IsTypeArgumentString } from "src/internal/IsTypeArgumentString";
+export type { PackageJsonNotFoundErrorPayload } from "src/internal/packageJsonNotFoundError";

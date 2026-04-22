@@ -1,5 +1,5 @@
 import createTemplateStringsArray from "src/root/functions/taggedTemplate/createTemplateStringsArray";
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 /**
  *

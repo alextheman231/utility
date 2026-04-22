@@ -1,4 +1,4 @@
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 function parseJsonFromStdout(stdout: string): Record<string, unknown> {
   const start = Math.min(

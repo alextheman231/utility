@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, test } from "vitest";
 
 import { createTemplateStringsArray, deepFreeze, isTemplateStringsArray } from "src/root/functions";
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 describe("isTemplateStringsArray", () => {
   test("Returns true for inputs that were directly created with `createTemplateStringsArray`", () => {

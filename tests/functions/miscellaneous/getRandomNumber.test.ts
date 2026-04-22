@@ -1,7 +1,7 @@
 import { describe, expect, test, vi } from "vitest";
 
-import { DataError } from "src/root";
 import getRandomNumber from "src/root/functions/miscellaneous/getRandomNumber";
+import { DataError } from "src/v6";
 
 describe("getRandomNumber", () => {
   test("Returns an integer", () => {

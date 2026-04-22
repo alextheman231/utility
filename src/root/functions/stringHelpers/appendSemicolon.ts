@@ -1,4 +1,4 @@
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 /**
  * Appends a semicolon to the end of a string, trimming where necessary first.

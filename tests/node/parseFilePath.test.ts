@@ -3,7 +3,7 @@ import { describe, expect, test } from "vitest";
 import path from "node:path";
 
 import parseFilePath from "src/node/functions/parseFilePath";
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 describe("parseFilePath", () => {
   test("When given a valid file path, it should return an object that gives the directory name, base name, and the full path.", () => {

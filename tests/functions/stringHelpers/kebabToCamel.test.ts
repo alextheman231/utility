@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 
-import { DataError } from "src/root";
 import kebabToCamel from "src/root/functions/stringHelpers/kebabToCamel";
+import { DataError } from "src/v6";
 
 describe("kebabToCamel", () => {
   test("Converts a string from kebab-case to camelCase", () => {

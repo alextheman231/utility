@@ -3,7 +3,7 @@ import { describe, expect, test } from "vitest";
 
 import { normaliseIndents } from "src/root/functions";
 import stringifyDotenv from "src/root/functions/miscellaneous/stringifyDotenv";
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 describe("stringifyDotenv", () => {
   test("Stringifies an object into .env file format, using double-quotes by default", () => {

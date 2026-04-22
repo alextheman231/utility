@@ -22,7 +22,7 @@ export type DataErrorCode = CreateEnumType<typeof DataErrorCode>;
  * @template DataType - The type of the data that caused the error.
  */
 class DataError<
-  DataType extends Record<PropertyKey, unknown> = Record<PropertyKey, unknown>,
+  DataType extends object = Record<PropertyKey, unknown>,
   ErrorCode extends string = DataErrorCode,
 > extends CodeError<ErrorCode | DataErrorCode> {
   public data: DataType;

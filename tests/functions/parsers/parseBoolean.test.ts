@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 
 import { parseBoolean } from "src/root/functions/parsers";
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 describe("parseBoolean", () => {
   test("Returns true when given a string of true", () => {

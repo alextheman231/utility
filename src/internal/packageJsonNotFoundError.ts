@@ -1,7 +1,13 @@
 import getPackageJsonPath from "src/internal/getPackageJsonPath";
-import { DataError } from "src/root";
+import { DataError } from "src/v6";
 
-function packageJsonNotFoundError(packagePath: string): DataError {
+export interface PackageJsonNotFoundErrorPayload {
+  packagePath: string;
+}
+
+function packageJsonNotFoundError(
+  packagePath: string,
+): DataError<PackageJsonNotFoundErrorPayload, "PACKAGE_JSON_NOT_FOUND"> {
   return new DataError(
     { packagePath: getPackageJsonPath(packagePath) },
     "PACKAGE_JSON_NOT_FOUND",

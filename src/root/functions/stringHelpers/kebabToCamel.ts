@@ -1,5 +1,5 @@
 import parseIntStrict from "src/root/functions/parsers/parseIntStrict";
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 /**
  * Options to apply to the conversion from kebab-case to camelCase

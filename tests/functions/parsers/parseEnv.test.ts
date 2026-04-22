@@ -3,7 +3,7 @@ import type { Env } from "src/root/functions/parsers/parseEnv";
 import { describe, expect, test } from "vitest";
 
 import parseEnv from "src/root/functions/parsers/parseEnv";
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 describe("parseEnv", () => {
   test("Is successful when input is a valid environment", () => {

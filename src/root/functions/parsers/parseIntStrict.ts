@@ -1,4 +1,4 @@
-import { DataError } from "src/root/types";
+import { DataError } from "src/v6";
 
 /**
  * Converts a string to an integer and throws an error if it cannot be converted.
