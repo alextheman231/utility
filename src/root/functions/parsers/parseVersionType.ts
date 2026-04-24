@@ -2,7 +2,7 @@ import type { CreateEnumType } from "src/root/types";
 
 import z from "zod";
 
-import parseZodSchema from "src/root/zod/parseZodSchema";
+import { az } from "src/root/zod";
 import { DataError } from "src/v6";
 
 /**
@@ -30,15 +30,16 @@ export type VersionType = CreateEnumType<typeof VersionType>;
  * @returns The given version type if allowed.
  */
 function parseVersionType(input: unknown): VersionType {
-  return parseZodSchema(
-    z.enum(VersionType),
-    input,
-    new DataError(
-      { input },
-      "INVALID_VERSION_TYPE",
-      "The provided version type must be one of `major | minor | patch`",
-    ),
-  );
+  return az
+    .with(z.enum(VersionType))
+    .parse(
+      input,
+      new DataError(
+        { input },
+        "INVALID_VERSION_TYPE",
+        "The provided version type must be one of `major | minor | patch`",
+      ),
+    );
 }
 
 export default parseVersionType;

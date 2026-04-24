@@ -2,7 +2,7 @@ import { execa } from "execa";
 import z from "zod";
 
 import { parseJsonFromStdout } from "src/internal";
-import { parseZodSchema } from "src/root/zod";
+import { az } from "src/root/zod";
 import { DataError } from "src/v6";
 
 async function getExpectedTgzName(packagePath: string, packageManager: string): Promise<string> {
@@ -10,17 +10,20 @@ async function getExpectedTgzName(packagePath: string, packageManager: string): 
     cwd: packagePath,
   })`${packageManager} pack --json --dry-run`;
   const packedTgzData = parseJsonFromStdout(rawPackedTgzData);
-  const parsedPackedTgzData = parseZodSchema(
-    packageManager === "pnpm"
-      ? z.object({ filename: z.string() })
-      : z.array(z.object({ filename: z.string() })),
-    packedTgzData,
-    new DataError(
+  const parsedPackedTgzData = az
+    .with(
+      packageManager === "pnpm"
+        ? z.object({ filename: z.string() })
+        : z.array(z.object({ filename: z.string() })),
+    )
+    .parse(
       packedTgzData,
-      "AMBIGUOUS_EXPECTED_FILE_NAME",
-      "Could not figure out the expected filename.",
-    ),
-  );
+      new DataError(
+        packedTgzData,
+        "AMBIGUOUS_EXPECTED_FILE_NAME",
+        "Could not figure out the expected filename.",
+      ),
+    );
 
   const [normalisedTgzMetadata] = Array.isArray(parsedPackedTgzData)
     ? parsedPackedTgzData
