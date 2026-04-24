@@ -2,7 +2,7 @@ import type { DependencyGroup } from "src/internal/DependencyGroup";
 
 import z from "zod";
 
-import { parseZodSchema } from "src/root/functions";
+import { parseZodSchema } from "src/root/zod";
 
 /**
  * Get the dependencies from a given dependency group in `package.json`.

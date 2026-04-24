@@ -7,5 +7,3 @@ export {
   default as parseVersionType,
   VersionType,
 } from "src/root/functions/parsers/parseVersionType";
-
-export * from "src/root/functions/parsers/zod";

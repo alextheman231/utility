@@ -2,10 +2,12 @@ import type { z, ZodError, ZodType } from "zod";
 
 import type { DataError } from "src/v6";
 
-import _parseZodSchema from "src/root/functions/parsers/zod/_parseZodSchema";
+import _parseZodSchema from "src/root/zod/_parseZodSchema";
 
 /**
- * An alternative function to zodSchema.parseAsync() that can be used to strictly parse asynchronous Zod schemas.
+ * An alternative function to zodSchema.parse() that can be used to strictly parse Zod schemas.
+ *
+ * NOTE: Use `parseZodSchemaAsync` if your schema includes an asynchronous function.
  *
  * @category Parsers
  *
@@ -16,17 +18,17 @@ import _parseZodSchema from "src/root/functions/parsers/zod/_parseZodSchema";
  * @param input - The data to parse.
  * @param onError - A custom error to throw on invalid data (defaults to `DataError`). May either be the error itself, or a function that returns the error or nothing. If nothing is returned, the default error is thrown instead.
  *
- * @throws {DataError} If the given data cannot be parsed according to the schema.
+ * @throws {DataErrorCode} If the given data cannot be parsed according to the schema.
  *
  * @returns The parsed data from the Zod schema.
  */
-async function parseZodSchemaAsync<SchemaType extends ZodType, ErrorType extends Error = DataError>(
+function parseZodSchema<SchemaType extends ZodType, ErrorType extends Error = DataError>(
   schema: SchemaType,
   input: unknown,
   onError?: ErrorType | ((zodError: ZodError) => ErrorType | void),
-): Promise<z.infer<SchemaType>> {
-  const parsedResult = await schema.safeParseAsync(input);
+): z.infer<SchemaType> {
+  const parsedResult = schema.safeParse(input);
   return _parseZodSchema<SchemaType, ErrorType>(parsedResult, input, onError);
 }
 
-export default parseZodSchemaAsync;
+export default parseZodSchema;
