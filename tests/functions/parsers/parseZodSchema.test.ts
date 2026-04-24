@@ -1,16 +1,16 @@
 import { describe, expect, test } from "vitest";
 import z from "zod";
 
-import { parseZodSchema } from "src/root/zod";
+import { az, parseZodSchema } from "src/root/zod";
 import { DataError } from "src/v6";
 
-describe("parseZodSchema", () => {
+describe("az.with().parse()", () => {
   test("Returns the data if data is valid according to Zod schema", () => {
-    expect(parseZodSchema(z.string(), "Hello")).toBe("Hello");
+    expect(az.with(z.string()).parse("Hello")).toBe("Hello");
   });
   test("Throws a DataError if Zod schema is invalid", () => {
     const error = DataError.expectError(() => {
-      parseZodSchema(z.string(), 1);
+      az.with(z.string()).parse(1);
     });
 
     expect(error.data.input).toBe(1);
@@ -18,7 +18,7 @@ describe("parseZodSchema", () => {
   });
   test("Takes an optional error argument to allow us to customise the error", () => {
     const error = DataError.expectError(() => {
-      parseZodSchema(z.string(), 1, new DataError({ input: 1 }, "TEST_CODE", "Test message"));
+      az.with(z.string()).parse(1, new DataError({ input: 1 }, "TEST_CODE", "Test message"));
     });
 
     expect(error.data.input).toBe(1);
@@ -29,7 +29,7 @@ describe("parseZodSchema", () => {
     // Must use the old pattern as it throws a regular error.
     try {
       const input = { hello: 1 };
-      parseZodSchema(z.object({ hello: z.string() }), input, (zodError) => {
+      az.with(z.object({ hello: z.string() })).parse(input, (zodError) => {
         return new Error(zodError.issues[0].code.toUpperCase());
       });
       throw new Error("DID_NOT_THROW");
@@ -44,7 +44,7 @@ describe("parseZodSchema", () => {
   test("The error function can return nothing but still gets run if an error is expected", () => {
     let wasCalled = false;
     const error = DataError.expectError(() => {
-      parseZodSchema(z.string(), 1, () => {
+      az.with(z.string()).parse(1, () => {
         wasCalled = true;
       });
     });
@@ -55,7 +55,7 @@ describe("parseZodSchema", () => {
   });
   test("The error function must not be run if parsing was successful", () => {
     let wasCalled = false;
-    const result = parseZodSchema(z.string(), "hello", () => {
+    const result = az.with(z.string()).parse("hello", () => {
       wasCalled = true;
     });
 

@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import z from "zod";
 
-import { az, isSameDate, parseZodSchema } from "src/root";
+import { az, isSameDate } from "src/root";
 
 describe("zodFieldWrapper", () => {
   test("Converts an empty string to null", () => {
@@ -11,7 +11,7 @@ describe("zodFieldWrapper", () => {
   });
   test("Converts a coerced field number into a number", () => {
     const schema = az.field(az.fieldNumber().int());
-    const result = parseZodSchema(schema, "1");
+    const result = az.with(schema).parse("1");
     expect(result).toBe(1);
   });
   test("Converts a coerced field date into a date", () => {
