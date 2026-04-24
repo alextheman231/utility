@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import z from "zod";
 
-import { parseZodSchema } from "src/root/functions";
+import { parseZodSchema } from "src/root/zod";
 import { DataError } from "src/v6";
 
 describe("parseZodSchema", () => {

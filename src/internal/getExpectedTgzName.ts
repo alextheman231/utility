@@ -2,7 +2,7 @@ import { execa } from "execa";
 import z from "zod";
 
 import { parseJsonFromStdout } from "src/internal";
-import { parseZodSchema } from "src/root/functions";
+import { parseZodSchema } from "src/root/zod";
 import { DataError } from "src/v6";
 
 async function getExpectedTgzName(packagePath: string, packageManager: string): Promise<string> {

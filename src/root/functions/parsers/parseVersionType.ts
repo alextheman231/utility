@@ -2,7 +2,7 @@ import type { CreateEnumType } from "src/root/types";
 
 import z from "zod";
 
-import parseZodSchema from "src/root/functions/parsers/zod/parseZodSchema";
+import parseZodSchema from "src/root/zod/parseZodSchema";
 import { DataError } from "src/v6";
 
 /**
