@@ -2,7 +2,7 @@ import type { CreateEnumType } from "src/root/types";
 
 import { z } from "zod";
 
-import parseZodSchema from "src/root/zod/parseZodSchema";
+import { az } from "src/root/zod";
 import { DataError } from "src/v6";
 
 /**
@@ -30,15 +30,16 @@ export type Env = CreateEnumType<typeof Env>;
  * @returns The specified environment if allowed.
  */
 function parseEnv(input: unknown): Env {
-  return parseZodSchema(
-    z.enum(Env),
-    input,
-    new DataError(
-      { input },
-      "INVALID_ENV",
-      "The provided environment type must be one of `test | development | production`",
-    ),
-  );
+  return az
+    .with(z.enum(Env))
+    .parse(
+      input,
+      new DataError(
+        { input },
+        "INVALID_ENV",
+        "The provided environment type must be one of `test | development | production`",
+      ),
+    );
 }
 
 export default parseEnv;

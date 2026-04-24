@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import z from "zod";
 
-import { az, parseZodSchema } from "src/root/zod";
+import { az } from "src/root/zod";
 import { DataError } from "src/v6";
 
 describe("az.with().parse()", () => {
@@ -69,13 +69,12 @@ describe("az.with().parse()", () => {
       extraProperty: "hi",
     };
     const error = DataError.expectError(() => {
-      parseZodSchema(
+      az.with(
         z.strictObject({
           hello: z.string(),
           shouldBeNumber: z.number(),
         }),
-        input,
-      );
+      ).parse(input);
     });
 
     expect(error.data.input).toEqual(input);
