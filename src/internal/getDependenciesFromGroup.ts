@@ -2,7 +2,7 @@ import type { DependencyGroup } from "src/internal/DependencyGroup";
 
 import z from "zod";
 
-import { parseZodSchema } from "src/root/zod";
+import { az } from "src/root/zod";
 
 /**
  * Get the dependencies from a given dependency group in `package.json`.
@@ -19,11 +19,10 @@ function getDependenciesFromGroup(
   dependencyGroup: DependencyGroup,
 ): Record<string, string> {
   return {
-    dependencies: parseZodSchema(z.record(z.string(), z.string()), packageInfo.dependencies ?? {}),
-    devDependencies: parseZodSchema(
-      z.record(z.string(), z.string()),
-      packageInfo.devDependencies ?? {},
-    ),
+    dependencies: az.with(z.record(z.string(), z.string())).parse(packageInfo.dependencies ?? {}),
+    devDependencies: az
+      .with(z.record(z.string(), z.string()))
+      .parse(packageInfo.devDependencies ?? {}),
   }[dependencyGroup];
 }
 
