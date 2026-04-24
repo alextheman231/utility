@@ -6,7 +6,7 @@ import { az, isSameDate } from "src/root";
 describe("zodFieldWrapper", () => {
   test("Converts an empty string to null", () => {
     const schema = az.field(z.string().nullable());
-    const result = az.parse(schema, "");
+    const result = az.with(schema).parse("");
     expect(result).toBeNull();
   });
   test("Converts a coerced field number into a number", () => {
@@ -17,7 +17,7 @@ describe("zodFieldWrapper", () => {
   test("Converts a coerced field date into a date", () => {
     const today = new Date();
     const schema = az.field(az.fieldDate());
-    const result = az.parse(schema, today.toISOString());
+    const result = az.with(schema).parse(today.toISOString());
     expect(result).toBeInstanceOf(Date);
     expect(isSameDate(today, result)).toBe(true);
   });

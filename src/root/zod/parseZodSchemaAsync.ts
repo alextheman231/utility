@@ -9,6 +9,8 @@ import _parseZodSchema from "src/root/zod/_parseZodSchema";
  *
  * @category Parsers
  *
+ * @deprecated Please use `az.with(schema).parseAsync(input)` instead.
+ *
  * @template SchemaType - The Zod schema type.
  * @template ErrorType - The type of error to throw on invalid data.
  *
