@@ -1,5 +1,5 @@
 /**
- * Resolves to `never` if the given type may be undefined.
+ * Removes `undefined` from a type.
  *
  * @category Types
  *
