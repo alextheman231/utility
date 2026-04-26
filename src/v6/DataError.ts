@@ -33,7 +33,6 @@ class DataError<
     }
 
     this.name = new.target.name;
-    this.code = code;
     this.data = data;
 
     Object.defineProperty(this, "message", { enumerable: true });
@@ -64,6 +63,24 @@ class DataError<
       typeof input.code === "string" &&
       "data" in input
     );
+  }
+  /**
+   * Check a `DataError` against its error code
+   *
+   * This will also automatically narrow down the type of the input to be `DataError`, with its error code properly typed if this function returns true.
+   *
+   * @template ErrorCode The type of the error code
+   *
+   * @param input - The input to check.
+   * @param code - The expected code of the resulting error.
+   *
+   * @returns `true` if the error code matches the expected code, and `false` otherwise. The type of the input will also be narrowed down to `DataError`, and its code will be narrowed to the expected code's type if the function returns `true`.
+   */
+  public static checkWithCode<
+    DataType extends object = Record<PropertyKey, unknown>,
+    ErrorCode extends string = string,
+  >(input: unknown, code: ErrorCode): input is DataError<DataType, ErrorCode> {
+    return this.check(input) && input.code === code;
   }
   /**
    * Gets the thrown `DataError` from a given function if one was thrown, and re-throws any other errors, or throws a default `DataError` if no error thrown.

@@ -43,7 +43,9 @@ class CodeError<ErrorCode extends string = string> extends Error {
    *
    * @returns `true` if the input is a CodeError, and `false` otherwise. The type of the input will also be narrowed down to CodeError if `true`.
    */
-  public static check(input: unknown): input is CodeError<string> {
+  public static check<ErrorCode extends string = string>(
+    input: unknown,
+  ): input is CodeError<ErrorCode> {
     if (input instanceof CodeError) {
       return true;
     }
@@ -61,8 +63,8 @@ class CodeError<ErrorCode extends string = string> extends Error {
     this: typeof CodeError,
     error: unknown,
     options?: ExpectErrorOptions<ErrorCode>,
-  ): CodeError {
-    if (this.check(error)) {
+  ): CodeError<ErrorCode> {
+    if (this.check<ErrorCode>(error)) {
       if (options?.expectedCode && error.code !== options.expectedCode) {
         throw new Error(
           normaliseIndents`The error code on the thrown error does not match the expected error code.
@@ -76,6 +78,24 @@ class CodeError<ErrorCode extends string = string> extends Error {
       return error;
     }
     throw error;
+  }
+  /**
+   * Check a `CodeError` against its error code
+   *
+   * This will also automatically narrow down the type of the input to be `CodeError`, with its error code properly typed if this function returns true.
+   *
+   * @template ErrorCode The type of the error code
+   *
+   * @param input - The input to check.
+   * @param code - The expected code of the resulting error.
+   *
+   * @returns `true` if the error code matches the expected code, and `false` otherwise. The type of the input will also be narrowed down to CodeError, and its code will be narrowed to the expected code's type if the function returns `true`.
+   */
+  public static checkWithCode<ErrorCode extends string = string>(
+    input: unknown,
+    code: ErrorCode,
+  ): input is CodeError<ErrorCode> {
+    return this.check(input) && input.code === code;
   }
   /**
    * Gets the thrown `CodeError` from a given function if one was thrown, and re-throws any other errors, or throws a default `CodeError` if no error thrown.
@@ -92,11 +112,11 @@ class CodeError<ErrorCode extends string = string> extends Error {
     this: typeof CodeError,
     errorFunction: () => unknown,
     options?: ExpectErrorOptions<ErrorCode>,
-  ): CodeError {
+  ): CodeError<ErrorCode> {
     try {
       errorFunction();
     } catch (error) {
-      return this.checkCaughtError(error, options);
+      return this.checkCaughtError<ErrorCode>(error, options);
     }
     throw new Error(`Expected a ${this.name} to be thrown but none was thrown`);
   }

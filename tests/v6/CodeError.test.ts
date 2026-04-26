@@ -135,5 +135,27 @@ describe("CodeError.expectError()", () => {
     );
 
     expect(error.code).toBe("VALID_CODE");
+    expectTypeOf(error.code).toEqualTypeOf<"VALID_CODE">();
+  });
+});
+
+describe("CodeError.checkWithCode()", () => {
+  test("Returns true if the error contains the correct code", () => {
+    const error = new CodeError("TEST_CODE");
+    expect(CodeError.checkWithCode(error, "TEST_CODE")).toBe(true);
+  });
+  test("Returns false if the error does not contain the correct code", () => {
+    const error = new CodeError("INVALID_CODE");
+    expect(CodeError.checkWithCode(error, "VALID_CODE")).toBe(false);
+  });
+  test("Narrows down the type of the code if the error's code is correct, but does not if the error's code is incorrect", () => {
+    const error: CodeError = new CodeError("VALID_CODE");
+    if (CodeError.checkWithCode(error, "VALID_CODE")) {
+      expectTypeOf(error).toEqualTypeOf<CodeError<"VALID_CODE">>();
+      expectTypeOf(error.code).toEqualTypeOf<"VALID_CODE">();
+    } else {
+      expectTypeOf(error).not.toEqualTypeOf<CodeError<"VALID_CODE">>();
+      expectTypeOf(error.code).not.toEqualTypeOf<"VALID_CODE">();
+    }
   });
 });

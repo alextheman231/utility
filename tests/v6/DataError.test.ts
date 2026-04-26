@@ -112,14 +112,25 @@ describe("DataError.expectError()", () => {
     }
   });
   test("Can assert against an error code", () => {
-    const testDataError = new DataError({ input: "Test" }, "INVALID_CODE");
+    const error = DataError.expectError(
+      () => {
+        throw new DataError({ input: "Test" }, "VALID_CODE");
+      },
+      { expectedCode: "VALID_CODE" },
+    );
+    expect(error.data.input).toBe("Test");
+    expect(error.code).toBe("VALID_CODE");
+  });
+  test("Can assert against an error code and error if they don't match", () => {
     try {
-      DataError.expectError(
+      const error = DataError.expectError(
         () => {
-          throw testDataError;
+          throw new DataError({ input: "Test" }, "INVALID_CODE");
         },
         { expectedCode: "VALID_CODE" },
       );
+      // Assert that the error code type contains VALID_CODE and not INVALID_CODE, even if we don't get there at runtime.
+      expectTypeOf(error.code).toEqualTypeOf<"VALID_CODE">();
       throw new Error("No thrown error");
     } catch (error) {
       if (error instanceof Error) {
