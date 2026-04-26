@@ -165,6 +165,19 @@ class APIError<
     const code: APIErrorCode = httpErrorCodeLookup[status];
     return new APIError<DataType, APIErrorCode>(status, code, message, data, options);
   }
+
+  /**
+   * Converts the `APIError` instance to a serialised JSON payload.
+   *
+   * @returns A JSON serialised version of the current `APIError` instance.
+   */
+  public override toJSON(): Omit<APIError<DataType, ErrorCode>, "toJSON" | "name"> {
+    return {
+      ...super.toJSON(),
+      status: this.status,
+      data: this.data,
+    };
+  }
 }
 
 export default APIError;

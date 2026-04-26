@@ -159,3 +159,13 @@ describe("CodeError.checkWithCode()", () => {
     }
   });
 });
+
+describe("this.toJSON()", () => {
+  test("Returns the current instance of `CodeError` as a JSON object.", () => {
+    const error = new CodeError("TEST_CODE", "Test message").toJSON();
+    expect(error.code).toBe("TEST_CODE");
+    expect(error.message).toBe("Test message");
+    expect("name" in error).toBe(false);
+    expect("toJSON" in error).toBe(false);
+  });
+});
