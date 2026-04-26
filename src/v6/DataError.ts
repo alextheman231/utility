@@ -7,7 +7,8 @@ import CodeError from "src/v6/CodeError";
  *
  * @category Types
  *
- * @template DataType - The type of the data that caused the error.
+ * @template DataType The type of the data that caused the error.
+ * @template ErrorCode The type of the standardised error code.
  */
 class DataError<
   DataType extends object = Record<PropertyKey, unknown>,
