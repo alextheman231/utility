@@ -63,7 +63,8 @@ class DataError<
       "code" in input &&
       typeof input.code === "string" &&
       "data" in input &&
-      typeof input.data === "object"
+      typeof input.data === "object" &&
+      input.data !== null
     );
   }
   /**
