@@ -12,9 +12,12 @@ describe("assertNotNull", () => {
     assertNotNull("hello");
   });
   test("Throws a DataError if the input is null", () => {
-    const error = DataError.expectError(() => {
-      assertNotNull(null);
-    });
+    const error = DataError.expectError(
+      () => {
+        assertNotNull(null);
+      },
+      { expectedCode: "NULL_INPUT" },
+    );
 
     expect(error.data.input).toBeNull();
     expect(error.code).toBe("NULL_INPUT");
