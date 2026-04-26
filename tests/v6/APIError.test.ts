@@ -119,3 +119,15 @@ describe("APIError.check()", () => {
     ).toBe(false);
   });
 });
+
+describe("this.toJSON()", () => {
+  test("Returns the current instance of `APIError` as a JSON object.", () => {
+    const error = new APIError(404, "NOT_FOUND", "Not found", { resourceId: "test_id" }).toJSON();
+    expect(error.status).toBe(404);
+    expect(error.data?.resourceId).toBe("test_id");
+    expect(error.code).toBe("NOT_FOUND");
+    expect(error.message).toBe("Not found");
+    expect("name" in error).toBe(false);
+    expect("toJSON" in error).toBe(false);
+  });
+});

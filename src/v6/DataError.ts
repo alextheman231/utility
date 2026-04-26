@@ -125,6 +125,18 @@ class DataError<
   ): Promise<DataError<DataType, ErrorCode>> {
     return (await super.expectErrorAsync(errorFunction, options)) as DataError<DataType, ErrorCode>;
   }
+
+  /**
+   * Converts the `DataError` instance to a serialised JSON payload.
+   *
+   * @returns A JSON serialised version of the current `DataError` instance.
+   */
+  public override toJSON(): Omit<DataError<DataType, ErrorCode>, "toJSON" | "name"> {
+    return {
+      ...super.toJSON(),
+      data: this.data,
+    };
+  }
 }
 
 export default DataError;

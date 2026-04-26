@@ -143,6 +143,18 @@ class CodeError<ErrorCode extends string = string> extends Error {
     }
     throw new Error(`Expected a ${this.name} to be thrown but none was thrown`);
   }
+
+  /**
+   * Converts the `CodeError` instance to a serialised JSON payload.
+   *
+   * @returns A JSON serialised version of the current `CodeError` instance.
+   */
+  public toJSON(): Omit<CodeError<ErrorCode>, "toJSON" | "name"> {
+    return {
+      code: this.code,
+      message: this.message,
+    };
+  }
 }
 
 export default CodeError;
