@@ -12,9 +12,10 @@ describe("assertNotNull", () => {
     assertNotNull("hello");
   });
   test("Throws a DataError if the input is null", () => {
-    const error = DataError.expectError<Record<PropertyKey, unknown>, "NULL_INPUT">(() => {
+    const error = DataError.expectError(() => {
       assertNotNull(null);
     });
+
     expect(error.data.input).toBeNull();
     expect(error.code).toBe("NULL_INPUT");
     expect(typeof error.message).toBe("string");

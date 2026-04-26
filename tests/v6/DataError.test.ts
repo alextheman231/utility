@@ -11,9 +11,9 @@ describe("DataError", () => {
     expect(error.code).toBe("NOT_VALID");
     expect(error.message).toBe("This is not valid");
   });
-  test("Provides sensible default message and code", () => {
+  test("Provides sensible default message ", () => {
     const error = DataError.expectError(() => {
-      throw new DataError({ testData: "Hello" });
+      throw new DataError({ testData: "Hello" }, "INVALID_DATA");
     });
     expect(error.code).toBe("INVALID_DATA");
     expect(error.message).toBe("The data provided is invalid");
@@ -23,13 +23,13 @@ describe("DataError", () => {
 describe("DataError.check()", () => {
   test("Returns true if given an actual instance of DataError", () => {
     const error = DataError.expectError(() => {
-      throw new DataError({ hello: "world" });
+      throw new DataError({ hello: "world" }, "INVALID_DATA");
     });
     expect(DataError.check(error)).toBe(true);
   });
   test("The error type is narrowed down after checking", () => {
     try {
-      throw new DataError({ httpErrorCode: 404 });
+      throw new DataError({ httpErrorCode: 404 }, "NOT_FOUND");
     } catch (error) {
       if (DataError.check(error)) {
         expectTypeOf(error).toEqualTypeOf<DataError>();
