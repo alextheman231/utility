@@ -59,12 +59,15 @@ function getTypeCodeString(expectedStatus: "error" | "success", entrypoint: Entr
 }
 
 function versionMismatchError(packageName: string, expectedVersion: string, actualVersion: string) {
-  return new DataError({
-    [packageName]: {
-      actualVersion,
-      expectedVersion,
+  return new DataError(
+    {
+      [packageName]: {
+        actualVersion,
+        expectedVersion,
+      },
     },
-  });
+    "VERSION_MISMATCH",
+  );
 }
 
 function assert(exitCode: number | undefined, result: string) {

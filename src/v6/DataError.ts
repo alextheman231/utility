@@ -1,18 +1,6 @@
-import type { CreateEnumType } from "src/root";
+import type { ExpectErrorOptions } from "src/v6/CodeError";
 
 import CodeError from "src/v6/CodeError";
-
-type DefaultDataErrorCode = "INVALID_DATA";
-
-export interface ExpectErrorOptions<ErrorCode extends string = DefaultDataErrorCode> {
-  expectedCode?: ErrorCode | DefaultDataErrorCode;
-}
-
-export const DataErrorCode = {
-  INVALID_DATA: "INVALID_DATA",
-} as const;
-
-export type DataErrorCode = CreateEnumType<typeof DataErrorCode>;
 
 /**
  * Represents errors you may get that may've been caused by a specific piece of data.
@@ -23,8 +11,8 @@ export type DataErrorCode = CreateEnumType<typeof DataErrorCode>;
  */
 class DataError<
   DataType extends object = Record<PropertyKey, unknown>,
-  ErrorCode extends string = DataErrorCode,
-> extends CodeError<ErrorCode | DataErrorCode> {
+  ErrorCode extends string = string,
+> extends CodeError<ErrorCode> {
   public data: DataType;
 
   /**
@@ -35,7 +23,7 @@ class DataError<
    */
   public constructor(
     data: DataType,
-    code: ErrorCode | DefaultDataErrorCode = "INVALID_DATA",
+    code: ErrorCode,
     message: string = "The data provided is invalid",
     options?: ErrorOptions,
   ) {
@@ -61,7 +49,7 @@ class DataError<
    */
   public static override check<
     DataType extends object = Record<PropertyKey, unknown>,
-    ErrorCode extends string = DataErrorCode,
+    ErrorCode extends string = string,
   >(input: unknown): input is DataError<DataType, ErrorCode> {
     if (input instanceof DataError) {
       return true;
@@ -90,7 +78,7 @@ class DataError<
    */
   public static override expectError<
     DataType extends Record<PropertyKey, unknown>,
-    ErrorCode extends string = DefaultDataErrorCode,
+    ErrorCode extends string = string,
   >(
     errorFunction: () => unknown,
     options?: ExpectErrorOptions<ErrorCode>,
@@ -110,7 +98,7 @@ class DataError<
    */
   public static override async expectErrorAsync<
     DataType extends Record<PropertyKey, unknown>,
-    ErrorCode extends string = DefaultDataErrorCode,
+    ErrorCode extends string = string,
   >(
     errorFunction: () => Promise<unknown>,
     options?: ExpectErrorOptions<ErrorCode>,
