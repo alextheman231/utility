@@ -18,7 +18,7 @@ class DataError<
   /**
    * @param data - The data that caused the error.
    * @param code - A standardised code (e.g. UNEXPECTED_DATA).
-   * @param message  - A human-readable error message (e.g. The data provided is invalid).
+   * @param message - A human-readable error message (e.g. The data provided is invalid).
    * @param options - Extra options to pass to super Error constructor.
    */
   public constructor(
@@ -61,7 +61,8 @@ class DataError<
       typeof input.message === "string" &&
       "code" in input &&
       typeof input.code === "string" &&
-      "data" in input
+      "data" in input &&
+      typeof input.data === "object"
     );
   }
   /**
