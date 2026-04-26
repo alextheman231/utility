@@ -15,6 +15,8 @@ export const httpErrorCodeLookup: Record<HTTPErrorCode, string> = {
  * Represents common errors you may get from a HTTP API request.
  *
  * @category Types
+ *
+ * @deprecated Please use `APIError` from `@alextheman/utility/v6` instead.
  */
 class APIError extends Error {
   public status: number;
