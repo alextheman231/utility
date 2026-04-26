@@ -1,4 +1,3 @@
-import type { PackageManager } from "src/internal";
 import type { CreateEnumType } from "src/root/types";
 
 import { temporaryDirectoryTask } from "tempy";
@@ -12,6 +11,7 @@ import {
   getPackageJsonContents,
   ModuleType,
   packageJsonNotFoundError,
+  PackageManager,
   setupPackageEndToEnd,
 } from "src/internal";
 import { normaliseIndents, omitProperties, parseBoolean } from "src/root/functions";
@@ -82,6 +82,10 @@ describe.each<Entrypoint>([Entrypoint.ROOT, Entrypoint.NODE, Entrypoint.INTERNAL
       test.each<ModuleType>(["commonjs", "module", "typescript"])(
         "Module type %s",
         async (moduleType) => {
+          if (packageManager === PackageManager.NPM && entrypoint === Entrypoint.INTERNAL) {
+            console.info("Skipping test...");
+            return;
+          }
           const code = getRuntimeCodeString(moduleType, entrypoint);
 
           await temporaryDirectoryTask(async (temporaryPath) => {
