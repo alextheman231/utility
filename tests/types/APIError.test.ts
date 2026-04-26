@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-deprecated */
 import { describe, expect, expectTypeOf, test } from "vitest";
 
-import APIError from "src/root/types/APIError";
+import APIError from "src/root/deprecated/APIError";
 
 function testAPIError(error: APIError, expectedStatus: number, expectedMessage: string) {
   try {

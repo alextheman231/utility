@@ -1,7 +1,5 @@
-export { default as APIError, httpErrorCodeLookup } from "src/root/types/APIError";
 export { default as VersionNumber, zodVersionNumber } from "src/root/types/VersionNumber";
 
-export type { HTTPErrorCode } from "src/root/types/APIError";
 export type { ArrayElement } from "src/root/types/ArrayElement";
 export type { CallReturnType } from "src/root/types/CallReturnType";
 export type { CreateEnumType } from "src/root/types/CreateEnumType";
