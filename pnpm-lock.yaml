@@ -14,13 +14,10 @@ importers:
       execa:
         specifier: 9.6.1
         version: 9.6.1
-      zod:
-        specifier: 4.4.2
-        version: 4.4.2
     devDependencies:
       '@alextheman/eslint-plugin':
         specifier: 5.14.0
-        version: 5.14.0(e2b2a45acc4bff708d43b9a109f2ec21)
+        version: 5.14.0(36ba0db847444f5893ccd184c9572e20)
       '@types/node':
         specifier: 25.6.0
         version: 25.6.0
@@ -78,6 +75,9 @@ importers:
       vitest:
         specifier: 4.1.5
         version: 4.1.5(@types/node@25.6.0)(jsdom@29.1.1)(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
+      zod:
+        specifier: 4.4.2
+        version: 4.4.2
 
 packages:
 
@@ -1594,15 +1594,15 @@ packages:
     peerDependencies:
       eslint: '>=8.23.0'
 
-  eslint-plugin-package-json@0.91.1:
-    resolution: {integrity: sha512-rxmCAcuTvDqrtywsmVHcFxEZdJUTByetAelAZiAcjMqo0BS1090KbjTeyEOiEdpEqxwa83c+xHCjFoZX9OKEcA==}
+  eslint-plugin-package-json@0.91.2:
+    resolution: {integrity: sha512-tuPjHVYOjqEJtErmzuYiQY6o877l9Kb7+lfLhR/mAzHuy9CBqhRreIGPsQmVM/dMJ8yQVg92Bz1vBAgugELIXw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     peerDependencies:
       eslint: '>=8.0.0'
       jsonc-eslint-parser: '>=2.0.0'
 
-  eslint-plugin-perfectionist@5.8.0:
-    resolution: {integrity: sha512-k8uIptWIxkUclonCFGyDzgYs9NI+Qh0a7cUXS3L7IYZDEsjXuimFBVbxXPQQngWqMiaxJRwbtYB4smMGMqF+cw==}
+  eslint-plugin-perfectionist@5.9.0:
+    resolution: {integrity: sha512-8TWzg02zmnBdZwCkWLi8jhzqXI+fE7Z/RwV8SL6xD45tJ8Bp3wGuYL2XtQgfe/Wd0eBqOUX+s6ey73IyszvKTA==}
     engines: {node: ^20.0.0 || >=22.0.0}
     peerDependencies:
       eslint: ^8.45.0 || ^9.0.0 || ^10.0.0
@@ -1621,11 +1621,11 @@ packages:
       eslint-config-prettier:
         optional: true
 
-  eslint-plugin-react-hooks@7.0.1:
-    resolution: {integrity: sha512-O0d0m04evaNzEPoSW+59Mezf8Qt0InfgGIBJnpC0h3NH/WjUAR7BIKUfysC6todmtiZ/A0oUVS8Gce0WhBrHsA==}
+  eslint-plugin-react-hooks@7.1.1:
+    resolution: {integrity: sha512-f2I7Gw6JbvCexzIInuSbZpfdQ44D7iqdWX01FKLvrPgqxoE7oMj8clOfto8U6vYiz4yd5oKu39rRSVOe1zRu0g==}
     engines: {node: '>=18'}
     peerDependencies:
-      eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
+      eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0 || ^10.0.0
 
   eslint-plugin-react-refresh@0.5.2:
     resolution: {integrity: sha512-hmgTH57GfzoTFjVN0yBwTggnsVUF2tcqi7RJZHqi9lIezSs4eFyAMktA68YD4r5kNw1mxyY4dmkyoFDb3FIqrA==}
@@ -3170,7 +3170,7 @@ packages:
 
 snapshots:
 
-  '@alextheman/eslint-plugin@5.14.0(e2b2a45acc4bff708d43b9a109f2ec21)':
+  '@alextheman/eslint-plugin@5.14.0(36ba0db847444f5893ccd184c9572e20)':
     dependencies:
       '@alextheman/utility': 5.14.0
       '@eslint/compat': 2.0.5(eslint@10.3.0(jiti@2.6.1))
@@ -3186,11 +3186,11 @@ snapshots:
       eslint-plugin-jsx-a11y: 6.10.2(eslint@10.3.0(jiti@2.6.1))
       eslint-plugin-markdownlint: 0.9.0(eslint@10.3.0(jiti@2.6.1))
       eslint-plugin-n: 17.24.0(eslint@10.3.0(jiti@2.6.1))(typescript@6.0.3)
-      eslint-plugin-package-json: 0.91.1(@types/estree@1.0.8)(eslint@10.3.0(jiti@2.6.1))(jsonc-eslint-parser@3.1.0)
-      eslint-plugin-perfectionist: 5.8.0(eslint@10.3.0(jiti@2.6.1))(typescript@6.0.3)
+      eslint-plugin-package-json: 0.91.2(@types/estree@1.0.8)(eslint@10.3.0(jiti@2.6.1))(jsonc-eslint-parser@3.1.0)
+      eslint-plugin-perfectionist: 5.9.0(eslint@10.3.0(jiti@2.6.1))(typescript@6.0.3)
       eslint-plugin-prettier: 5.5.5(eslint-config-prettier@10.1.8(eslint@10.3.0(jiti@2.6.1)))(eslint@10.3.0(jiti@2.6.1))(prettier@3.8.3)
       eslint-plugin-react: 7.37.5(eslint@10.3.0(jiti@2.6.1))
-      eslint-plugin-react-hooks: 7.0.1(eslint@10.3.0(jiti@2.6.1))
+      eslint-plugin-react-hooks: 7.1.1(eslint@10.3.0(jiti@2.6.1))
       eslint-plugin-react-refresh: 0.5.2(eslint@10.3.0(jiti@2.6.1))
       prettier: 3.8.3
       typescript-eslint: 8.59.1(eslint@10.3.0(jiti@2.6.1))(typescript@6.0.3)
@@ -3860,8 +3860,8 @@ snapshots:
 
   '@typescript-eslint/project-service@8.59.0(typescript@6.0.3)':
     dependencies:
-      '@typescript-eslint/tsconfig-utils': 8.59.0(typescript@6.0.3)
-      '@typescript-eslint/types': 8.59.0
+      '@typescript-eslint/tsconfig-utils': 8.59.1(typescript@6.0.3)
+      '@typescript-eslint/types': 8.59.1
       debug: 4.4.3
       typescript: 6.0.3
     transitivePeerDependencies:
@@ -4712,7 +4712,7 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  eslint-plugin-package-json@0.91.1(@types/estree@1.0.8)(eslint@10.3.0(jiti@2.6.1))(jsonc-eslint-parser@3.1.0):
+  eslint-plugin-package-json@0.91.2(@types/estree@1.0.8)(eslint@10.3.0(jiti@2.6.1))(jsonc-eslint-parser@3.1.0):
     dependencies:
       '@altano/repository-tools': 2.0.3
       change-case: 5.4.4
@@ -4729,7 +4729,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/estree'
 
-  eslint-plugin-perfectionist@5.8.0(eslint@10.3.0(jiti@2.6.1))(typescript@6.0.3):
+  eslint-plugin-perfectionist@5.9.0(eslint@10.3.0(jiti@2.6.1))(typescript@6.0.3):
     dependencies:
       '@typescript-eslint/utils': 8.59.1(eslint@10.3.0(jiti@2.6.1))(typescript@6.0.3)
       eslint: 10.3.0(jiti@2.6.1)
@@ -4747,7 +4747,7 @@ snapshots:
     optionalDependencies:
       eslint-config-prettier: 10.1.8(eslint@10.3.0(jiti@2.6.1))
 
-  eslint-plugin-react-hooks@7.0.1(eslint@10.3.0(jiti@2.6.1)):
+  eslint-plugin-react-hooks@7.1.1(eslint@10.3.0(jiti@2.6.1)):
     dependencies:
       '@babel/core': 7.29.0
       '@babel/parser': 7.29.3
