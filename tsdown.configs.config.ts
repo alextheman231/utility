@@ -7,6 +7,9 @@ const config: UserConfig = {
   dts: true,
   clean: true,
   fixedExtension: false,
+  deps: {
+    neverBundle: ["typescript"],
+  },
 };
 
 export default config;
