@@ -97,7 +97,7 @@ class DataError<
    * @returns The `DataError` that was thrown by the `errorFunction`
    */
   public static override expectError<
-    DataType extends Record<PropertyKey, unknown>,
+    DataType extends object = Record<PropertyKey, unknown>,
     ErrorCode extends string = string,
   >(
     errorFunction: () => unknown,
@@ -117,7 +117,7 @@ class DataError<
    * @returns The `DataError` that was thrown by the `errorFunction`
    */
   public static override async expectErrorAsync<
-    DataType extends Record<PropertyKey, unknown>,
+    DataType extends object = Record<PropertyKey, unknown>,
     ErrorCode extends string = string,
   >(
     errorFunction: () => Promise<unknown>,
