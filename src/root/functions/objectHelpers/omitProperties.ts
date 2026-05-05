@@ -11,16 +11,13 @@
  *
  * @returns An object with a new reference in memory, with the properties omitted.
  */
-function omitProperties<
-  ObjectType extends Record<string, unknown> | Readonly<Record<string, unknown>>,
-  KeysToOmit extends keyof ObjectType,
->(
+function omitProperties<ObjectType extends object, KeysToOmit extends keyof ObjectType>(
   object: ObjectType,
   keysToOmit: KeysToOmit | ReadonlyArray<KeysToOmit>,
 ): Omit<ObjectType, KeysToOmit> {
-  const outputObject: Record<string, unknown> = { ...object };
+  const outputObject = { ...object };
   const keysArray = Array.isArray(keysToOmit) ? keysToOmit : [keysToOmit];
-  keysArray.forEach((key) => {
+  keysArray.forEach((key: keyof ObjectType) => {
     delete outputObject[key];
   });
   return outputObject as Omit<ObjectType, KeysToOmit>;
