@@ -96,7 +96,12 @@ describe.each<Entrypoint>([Entrypoint.ROOT, Entrypoint.NODE, Entrypoint.INTERNAL
               moduleType,
             );
 
-            await cp(path.join(process.cwd(), ".npmrc"), path.join(temporaryPath, ".npmrc"));
+            if (packageManager === PackageManager.PNPM) {
+              await cp(
+                path.join(process.cwd(), "pnpm-workspace.yaml"),
+                path.join(temporaryPath, "pnpm-workspace.yaml"),
+              );
+            }
 
             console.info("Writing the code file into temporary directory...");
             const codeFileName = `sayHello.${moduleType === ModuleType.TYPESCRIPT ? "ts" : "js"}`;
@@ -108,7 +113,12 @@ describe.each<Entrypoint>([Entrypoint.ROOT, Entrypoint.NODE, Entrypoint.INTERNAL
               console.info("Installing TypeScript dependencies");
               const { tsx: tsxVersionUtility, typescript: typescriptVersionUtility } =
                 getDependenciesFromGroup(utilityPackageInfo, "devDependencies");
-              await runCommandInTempDirectory`${packageManager} install --save-dev tsx@${tsxVersionUtility} typescript@${typescriptVersionUtility}`;
+
+              if (packageManager === PackageManager.PNPM) {
+                await runCommandInTempDirectory`${packageManager} install --save-dev tsx@${tsxVersionUtility} typescript@${typescriptVersionUtility}`;
+              } else {
+                await runCommandInTempDirectory`${packageManager} install --save-dev --save-exact tsx@${tsxVersionUtility} typescript@${typescriptVersionUtility}`;
+              }
 
               const testPackageInfo = await getPackageJsonContents(temporaryPath);
 
