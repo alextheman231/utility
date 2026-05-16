@@ -1,3 +1,5 @@
+import type { ZodParsingErrorData } from "src/root/zod/_parseZodSchema";
+
 import { describe, expect, test } from "vitest";
 import z from "zod";
 
@@ -9,15 +11,23 @@ describe("az.with().parse()", () => {
     expect(az.with(z.string()).parse("Hello")).toBe("Hello");
   });
   test("Throws a DataError if Zod schema is invalid", () => {
-    const error = DataError.expectError(() => {
-      az.with(z.string()).parse(1);
-    });
+    const error = DataError.expectError<ZodParsingErrorData, "ZOD_ERROR">(
+      () => {
+        az.with(z.string()).parse(1);
+      },
+      { expectedCode: "ZOD_ERROR" },
+    );
 
     expect(error.data.input).toBe(1);
-    expect(error.code).toBe("INVALID_TYPE");
+    expect(
+      error.data.issues.map((issue) => {
+        return issue.code;
+      }),
+    ).toContain("invalid_type");
+    expect(error.code).toBe("ZOD_ERROR");
   });
   test("Takes an optional error argument to allow us to customise the error", () => {
-    const error = DataError.expectError(() => {
+    const error = DataError.expectError<ZodParsingErrorData, "ZOD_ERROR">(() => {
       az.with(z.string()).parse(1, new DataError({ input: 1 }, "TEST_CODE", "Test message"));
     });
 
@@ -43,15 +53,18 @@ describe("az.with().parse()", () => {
   });
   test("The error function can return nothing but still gets run if an error is expected", () => {
     let wasCalled = false;
-    const error = DataError.expectError(() => {
-      az.with(z.string()).parse(1, () => {
-        wasCalled = true;
-      });
-    });
+    const error = DataError.expectError<ZodParsingErrorData, "ZOD_ERROR">(
+      () => {
+        az.with(z.string()).parse(1, () => {
+          wasCalled = true;
+        });
+      },
+      { expectedCode: "ZOD_ERROR" },
+    );
 
     expect(wasCalled).toBe(true);
     expect(error.data.input).toBe(1);
-    expect(error.code).toBe("INVALID_TYPE");
+    expect(error.code).toBe("ZOD_ERROR");
   });
   test("The error function must not be run if parsing was successful", () => {
     let wasCalled = false;
@@ -62,22 +75,32 @@ describe("az.with().parse()", () => {
     expect(wasCalled).toBe(false);
     expect(result).toBe("hello");
   });
-  test("If multiple Zod errors found, the error code should be a comma-separated string list sorted by frequency", () => {
+  test("If multiple Zod errors found, the issues data should contain all issues", () => {
     const input = {
       hello: 1,
       shouldBeNumber: "But is not",
       extraProperty: "hi",
     };
-    const error = DataError.expectError(() => {
-      az.with(
-        z.strictObject({
-          hello: z.string(),
-          shouldBeNumber: z.number(),
-        }),
-      ).parse(input);
-    });
+    const error = DataError.expectError<ZodParsingErrorData, "ZOD_ERROR">(
+      () => {
+        az.with(
+          z.strictObject({
+            hello: z.string(),
+            shouldBeNumber: z.number(),
+          }),
+        ).parse(input);
+      },
+      { expectedCode: "ZOD_ERROR" },
+    );
 
     expect(error.data.input).toEqual(input);
-    expect(error.code).toBe("INVALID_TYPE×2,UNRECOGNIZED_KEYS×1");
+
+    const zodErrorCodes = error.data.issues.map((issue) => {
+      return issue.code;
+    });
+
+    expect(zodErrorCodes).toContain("invalid_type");
+    expect(zodErrorCodes).toContain("unrecognized_keys");
+    expect(error.code).toBe("ZOD_ERROR");
   });
 });

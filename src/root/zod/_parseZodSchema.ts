@@ -4,8 +4,12 @@ import z from "zod";
 
 import { DataError } from "src/v6";
 
-// No need for JSDoc on this one - it is only an internal helper function.
-// eslint-disable-next-line jsdoc/require-jsdoc
+export interface ZodParsingErrorData {
+  input: unknown;
+  issues: Array<z.core.$ZodIssue>;
+}
+
+// eslint-disable-next-line jsdoc/require-jsdoc -- No need for JSDoc on this one - it is only an internal helper function.
 function _parseZodSchema<SchemaType extends ZodType, ErrorType extends Error = DataError>(
   parsedResult: ZodSafeParseResult<z.infer<SchemaType>>,
   input: unknown,
@@ -23,23 +27,9 @@ function _parseZodSchema<SchemaType extends ZodType, ErrorType extends Error = D
       }
     }
 
-    const allErrorCodes: Record<string, number> = {};
-
-    for (const issue of parsedResult.error.issues) {
-      const code = issue.code.toUpperCase();
-      allErrorCodes[code] = (allErrorCodes[code] ?? 0) + 1;
-    }
-
-    throw new DataError(
-      { input },
-      Object.entries(allErrorCodes)
-        .toSorted(([_, firstCount], [__, secondCount]) => {
-          return secondCount - firstCount;
-        })
-        .map(([code, count], _, allErrorCodes) => {
-          return allErrorCodes.length === 1 && count === 1 ? code : `${code}×${count}`;
-        })
-        .join(","),
+    throw new DataError<ZodParsingErrorData, "ZOD_ERROR">(
+      { input, issues: parsedResult.error.issues },
+      "ZOD_ERROR",
       `\n\n${z.prettifyError(parsedResult.error)}\n`,
     );
   }
