@@ -1,7 +1,9 @@
 # Contributing
 
 ## Creating a function
+
 ### Setup
+
 To create a new function in the package, you must first checkout a new branch. Do **not** commit directly on main.
 
 From there, create the skeleton of the function. This is just the function declaration itself, along with the arguments and their types, along with the return type.
@@ -138,7 +140,7 @@ function myFunction<FirstTypeArg, SecondTypeArg>(firstArg: FirstTypeArg, secondA
 
 For classes, the message and parameters may need to be broken down such that the summary annotates the class declaration, and the template, params, throws, and returns annotates the constructor.
 
-```
+```typescript
 /**
  * A high-level summary of the class
  *
@@ -169,9 +171,11 @@ In order for a release of the package to be made, a release note must be created
 ```bash
 pnpm run create-release-note-major # Creates a release note template for the next major version (v1.2.3 → v2.0.0)
 ```
+
 ```bash
 pnpm run create-release-note-minor # Creates a release note template for the next minor version (v1.2.3 → v1.3.0)
 ```
+
 ```bash
 pnpm run create-release-note-patch # Creates a release note template for the next minor version (v1.2.3 → v1.2.4)
 ```
@@ -179,6 +183,7 @@ pnpm run create-release-note-patch # Creates a release note template for the nex
 From there, you should edit the **Description of Changes** section, the **Migration Notes** section if it's a major version (or a minor version that deprecates things), and optionally the **Additional Notes** section.
 
 Never manually edit anything else beyond that. This includes:
+
 - The main header
 - **Status**: In progress (**VERY IMPORTANT** you do not edit this! This will mess with the automation otherwise.)
 - The summary paragraph below the **Status** but above **Description of Changes**

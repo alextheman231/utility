@@ -7,7 +7,6 @@
 [![CI](https://github.com/alextheman231/utility/actions/workflows/ci.yml/badge.svg)](https://github.com/alextheman231/utility/actions/workflows/ci.yml)
 [![Publish to NPM Registry and GitHub Releases/Pages](https://github.com/alextheman231/utility/actions/workflows/publish.yml/badge.svg)](https://github.com/alextheman231/utility/actions/workflows/publish.yml)
 
-
 This is my personal utility package. It provides custom utility functions that can be used in more or less any TypeScript or JavaScript project, using either the browser or Node environment.
 
 ## Installation
@@ -35,6 +34,6 @@ const myVariable: NonUndefined<string> = formatDateAndTime(new Date());
 
 ## Documentation
 
-You can find the relevant documentation of all features of the package in the hosted documentation site [here](https://alextheman231.github.io/utility/).
+You can find the relevant documentation of all features of the package in [the hosted documentation site](https://alextheman231.github.io/utility/).
 
-See the GitHub repository [here](https://github.com/alextheman231/utility).
+See [the GitHub repository](https://github.com/alextheman231/utility).
