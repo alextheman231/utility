@@ -73,7 +73,7 @@
     "execa": "9.6.1"
   },
   "devDependencies": {
-    "@alextheman/eslint-plugin": "5.15.0",
+    "@alextheman/eslint-plugin": "5.16.1",
     "@types/node": "25.9.1",
     "alex-c-line": "2.8.1",
     "cross-env": "10.1.0",
@@ -85,13 +85,13 @@
     "markdownlint-cli2": "0.22.1",
     "prettier": "3.8.3",
     "tempy": "3.2.0",
-    "tsdown": "0.22.0",
+    "tsdown": "0.22.1",
     "tsx": "4.22.3",
     "typedoc": "0.28.19",
     "typedoc-plugin-markdown": "4.11.0",
     "typedoc-rhineai-theme": "1.2.0",
     "typescript": "6.0.3",
-    "typescript-eslint": "8.59.4",
+    "typescript-eslint": "8.60.0",
     "vite": "8.0.14",
     "vitest": "4.1.7",
     "zod": "4.4.3"
