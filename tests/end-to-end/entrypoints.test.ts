@@ -14,7 +14,9 @@ import {
   PackageManager,
   setupPackageEndToEnd,
 } from "src/internal";
-import { normaliseIndents, omitProperties, parseBoolean } from "src/root/functions";
+import omitProperties from "src/root/functions/objectHelpers/omitProperties";
+import parseBoolean from "src/root/functions/parsers/parseBoolean";
+import normaliseIndents from "src/root/functions/taggedTemplate/normaliseIndents";
 import { DataError } from "src/v6";
 
 import utilityPackageInfo from "package.json" with { type: "json" };
