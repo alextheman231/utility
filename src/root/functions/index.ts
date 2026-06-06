@@ -6,3 +6,4 @@ export * from "src/root/functions/parsers";
 export * from "src/root/functions/recursive";
 export * from "src/root/functions/stringHelpers";
 export * from "src/root/functions/taggedTemplate";
+export * from "src/root/functions/typeAssertions";
