@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf, test } from "vitest";
 
-import assertNotNull from "src/root/errors/assertNotNull";
+import { assertNotNull } from "src/root";
 import { DataError } from "src/v6";
 
 function assignStringForTest(input: string): string | null {

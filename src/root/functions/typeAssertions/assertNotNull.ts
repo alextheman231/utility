@@ -7,6 +7,8 @@ import { DataError } from "src/v6";
  *
  * If no error is thrown from this, the input type gets narrowed down to not include `null`.
  *
+ * @category Type Assertions
+ *
  * @template InputType The type of the input.
  *
  * @param input - The input to assert against
