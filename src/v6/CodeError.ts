@@ -1,4 +1,4 @@
-import { normaliseIndents } from "src/root/functions";
+import { containsKeys, normaliseIndents } from "src/root/functions";
 
 export interface ExpectErrorOptions<ErrorCode extends string = string> {
   expectedCode?: ErrorCode;
@@ -51,11 +51,8 @@ class CodeError<ErrorCode extends string = string> extends Error {
     }
 
     return (
-      typeof input === "object" &&
-      input !== null &&
-      "message" in input &&
+      containsKeys(input, ["message", "code"]) &&
       typeof input.message === "string" &&
-      "code" in input &&
       typeof input.code === "string"
     );
   }

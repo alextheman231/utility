@@ -1,5 +1,6 @@
 import fillArray from "src/root/functions/arrayHelpers/fillArray";
 import interpolate from "src/root/functions/taggedTemplate/interpolate";
+import { isNonNullableObject } from "src/root/functions/typeAssertions";
 
 /**
  * Options to apply to the normalisation of indents in multi-line template strings
@@ -120,7 +121,7 @@ function normaliseIndents(
   first: TemplateStringsArray | NormaliseIndentsOptions,
   ...args: Array<unknown>
 ): string | NormaliseIndentsFunction {
-  if (typeof first === "object" && first !== null && !Array.isArray(first)) {
+  if (isNonNullableObject(first) && !Array.isArray(first)) {
     const options = first as NormaliseIndentsOptions;
     return (strings: TemplateStringsArray, ...interpolations: Array<unknown>) => {
       return normaliseIndents(strings, ...interpolations, options);

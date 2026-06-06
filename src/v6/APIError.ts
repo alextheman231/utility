@@ -1,6 +1,7 @@
 import type { CreateEnumType } from "src/root";
 import type { ExpectErrorOptions } from "src/v6/CodeError";
 
+import { containsKeys, isNonNullableObject, objectContainsKeys } from "src/root";
 import CodeError from "src/v6/CodeError";
 
 export const httpErrorCodeLookup = {
@@ -75,17 +76,13 @@ class APIError<
     }
 
     return (
-      typeof input === "object" &&
-      input !== null &&
-      "status" in input &&
+      containsKeys(input, ["status", "code", "message"]) &&
       typeof input.status === "number" &&
-      "code" in input &&
       typeof input.code === "string" &&
-      "message" in input &&
       typeof input.message === "string" &&
-      (!("data" in input) ||
+      (!objectContainsKeys(input, "data") ||
         input.data === undefined ||
-        (typeof input.data === "object" && input.data !== null))
+        isNonNullableObject(input.data))
     );
   }
   /**

@@ -1,5 +1,7 @@
+import { isNonNullableObject } from "src/root/functions/typeAssertions";
+
 function callDeepCopy<ObjectType>(input: ObjectType) {
-  return typeof input === "object" && input !== null ? deepCopy(input) : input;
+  return isNonNullableObject(input) ? deepCopy(input) : input;
 }
 
 /**
