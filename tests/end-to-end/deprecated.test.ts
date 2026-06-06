@@ -9,8 +9,9 @@ import {
   getPackageJsonContents,
   setupPackageEndToEnd,
 } from "src/internal";
-import { normaliseIndents, omitProperties } from "src/root";
+import omitProperties from "src/root/functions/objectHelpers/omitProperties";
 import parseBoolean from "src/root/functions/parsers/parseBoolean";
+import normaliseIndents from "src/root/functions/taggedTemplate/normaliseIndents";
 
 import utilityPackageInfo from "package.json" with { type: "json" };
 import tsConfig from "tsconfig.json" with { type: "json" };
