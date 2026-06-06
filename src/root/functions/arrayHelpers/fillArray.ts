@@ -1,4 +1,5 @@
 import range from "src/root/functions/arrayHelpers/range";
+import { containsKeys } from "src/root/functions/typeAssertions";
 
 export interface FillArrayAsyncOptions {
   /** Resolve each array item sequentially rather than in parallel (defaults to parallel). */
@@ -80,11 +81,7 @@ function fillArray<ItemType>(
 
   const isAsync = outputArray.some((item) => {
     return (
-      item instanceof Promise ||
-      (typeof item === "object" &&
-        item !== null &&
-        "then" in item &&
-        typeof item.then === "function")
+      item instanceof Promise || (containsKeys(item, "then") && typeof item.then === "function")
     );
   });
   if (isAsync) {

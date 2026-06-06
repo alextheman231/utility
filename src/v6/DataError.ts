@@ -1,5 +1,6 @@
 import type { ExpectErrorOptions } from "src/v6/CodeError";
 
+import { containsKeys, isNonNullableObject } from "src/root";
 import CodeError from "src/v6/CodeError";
 
 /**
@@ -56,15 +57,10 @@ class DataError<
     }
 
     return (
-      typeof input === "object" &&
-      input !== null &&
-      "message" in input &&
+      containsKeys(input, ["data", "code", "message"]) &&
       typeof input.message === "string" &&
-      "code" in input &&
       typeof input.code === "string" &&
-      "data" in input &&
-      typeof input.data === "object" &&
-      input.data !== null
+      isNonNullableObject(input.data)
     );
   }
   /**

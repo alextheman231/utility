@@ -1,3 +1,4 @@
+import { isNonNullableObject } from "src/root/functions/typeAssertions";
 import { DataError } from "src/v6";
 
 export type FormDataNullableResolutionStrategy = "stringify" | "empty" | "omit";
@@ -76,7 +77,7 @@ function getNullableResolutionStrategy(
     | FormDataNullableResolutionStrategy
     | Partial<Record<PropertyKey, FormDataNullableResolutionStrategy>>,
 ) {
-  return (typeof strategy === "object" ? strategy[key] : strategy) ?? "empty";
+  return (isNonNullableObject(strategy) ? strategy[key] : strategy) ?? "empty";
 }
 
 function isPrimitive(item: unknown): boolean {
