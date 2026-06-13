@@ -1,3 +1,4 @@
+export { SortDirection } from "src/root/types/SortDirection";
 export { default as VersionNumber, zodVersionNumber } from "src/root/types/VersionNumber";
 
 export type { ArrayElement } from "src/root/types/ArrayElement";

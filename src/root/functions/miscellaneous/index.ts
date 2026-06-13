@@ -4,6 +4,7 @@ export { default as getRandomNumber } from "src/root/functions/miscellaneous/get
 export { default as identity } from "src/root/functions/miscellaneous/identity";
 export { default as isOrdered } from "src/root/functions/miscellaneous/isOrdered";
 export { default as sayHello } from "src/root/functions/miscellaneous/sayHello";
+export { default as sortBy } from "src/root/functions/miscellaneous/sortBy";
 export { default as stringifyDotenv } from "src/root/functions/miscellaneous/stringifyDotenv";
 export { default as stringListToArray } from "src/root/functions/miscellaneous/stringListToArray";
 export { default as wait } from "src/root/functions/miscellaneous/wait";
