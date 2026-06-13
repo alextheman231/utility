@@ -1,6 +1,7 @@
 export { default as convertFileToBase64 } from "src/root/functions/miscellaneous/convertFileToBase64";
 export { default as createFormData } from "src/root/functions/miscellaneous/createFormData";
 export { default as getRandomNumber } from "src/root/functions/miscellaneous/getRandomNumber";
+export { default as identity } from "src/root/functions/miscellaneous/identity";
 export { default as isOrdered } from "src/root/functions/miscellaneous/isOrdered";
 export { default as sayHello } from "src/root/functions/miscellaneous/sayHello";
 export { default as stringifyDotenv } from "src/root/functions/miscellaneous/stringifyDotenv";
