@@ -1,5 +1,6 @@
 export { default as appendSemicolon } from "src/root/functions/stringHelpers/appendSemicolon";
 export { default as camelToKebab } from "src/root/functions/stringHelpers/camelToKebab";
+export { default as escapeHTML } from "src/root/functions/stringHelpers/escapeHTML";
 export { default as escapeRegexPattern } from "src/root/functions/stringHelpers/escapeRegexPattern";
 export { default as kebabToCamel } from "src/root/functions/stringHelpers/kebabToCamel";
 export { default as toTitleCase } from "src/root/functions/stringHelpers/toTitleCase";
