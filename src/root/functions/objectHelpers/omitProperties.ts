@@ -16,10 +16,14 @@ function omitProperties<ObjectType extends object, KeysToOmit extends keyof Obje
   keysToOmit: KeysToOmit | ReadonlyArray<KeysToOmit>,
 ): Omit<ObjectType, KeysToOmit> {
   const outputObject = { ...object };
-  const keysArray = Array.isArray(keysToOmit) ? keysToOmit : [keysToOmit];
+  const keysArray: ReadonlyArray<KeysToOmit> = Array.isArray(keysToOmit)
+    ? keysToOmit
+    : [keysToOmit];
+
   keysArray.forEach((key: keyof ObjectType) => {
     delete outputObject[key];
   });
+
   return outputObject as Omit<ObjectType, KeysToOmit>;
 }
 
