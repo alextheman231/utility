@@ -15,13 +15,20 @@ describe("omitProperties", () => {
       thirdKey: "Third property",
       fourthKey: "Fourth property",
     };
-    const outputObject: Record<string, string> = { ...inputObject };
-    delete outputObject.firstKey;
-    delete outputObject.thirdKey;
     expect(omitProperties(inputObject, ["firstKey", "thirdKey"])).toEqual({
       secondKey: "Second property",
       fourthKey: "Fourth property",
     });
+  });
+  test("The return type is the input object with the specified key", () => {
+    const inputObject = {
+      firstKey: "First property",
+      secondKey: "Second property",
+      keyToOmit: "Omit me",
+    };
+    expectTypeOf(omitProperties(inputObject, "keyToOmit")).toEqualTypeOf<
+      Omit<typeof inputObject, "keyToOmit">
+    >();
   });
   test("The return type is the input object without the specified keys", () => {
     const inputObject = {
