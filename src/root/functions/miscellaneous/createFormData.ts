@@ -14,8 +14,7 @@ export type FormDataArrayResolutionStrategy = "stringify" | "multiple";
 export interface CreateFormDataOptionsBase<Key extends PropertyKey> {
   /** How to resolve any arrays provided in the data (can either stringify them or add them multiple times). */
   arrayResolution?:
-    | FormDataArrayResolutionStrategy
-    | Partial<Record<Key, FormDataArrayResolutionStrategy>>;
+    FormDataArrayResolutionStrategy | Partial<Record<Key, FormDataArrayResolutionStrategy>>;
 }
 
 /**
@@ -30,12 +29,10 @@ export interface CreateFormDataOptionsUndefinedOrNullResolution<
 > extends CreateFormDataOptionsBase<Key> {
   /** How to resolve undefined data (May either stringify to 'undefined', resolve to an empty string, or omit entirely). */
   undefinedResolution?:
-    | FormDataNullableResolutionStrategy
-    | Partial<Record<Key, FormDataNullableResolutionStrategy>>;
+    FormDataNullableResolutionStrategy | Partial<Record<Key, FormDataNullableResolutionStrategy>>;
   /** How to resolve null data (May either stringify to 'null', resolve to an empty string, or omit entirely). */
   nullResolution?:
-    | FormDataNullableResolutionStrategy
-    | Partial<Record<Key, FormDataNullableResolutionStrategy>>;
+    FormDataNullableResolutionStrategy | Partial<Record<Key, FormDataNullableResolutionStrategy>>;
   /** @note This must not be provided at the same time as undefinedResolution and/or nullResolution. */
   nullableResolution?: never;
 }
@@ -56,8 +53,7 @@ export interface CreateFormDataOptionsNullableResolution<
   nullResolution?: never;
   /** How to resolve nullable data (May either stringify to 'undefined | null', resolve to an empty string, or omit entirely). */
   nullableResolution:
-    | FormDataNullableResolutionStrategy
-    | Partial<Record<Key, FormDataNullableResolutionStrategy>>;
+    FormDataNullableResolutionStrategy | Partial<Record<Key, FormDataNullableResolutionStrategy>>;
 }
 
 /**
