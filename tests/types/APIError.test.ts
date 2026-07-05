@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-deprecated */
+/* eslint-disable @typescript-eslint/no-deprecated -- This test file is testing a deprecated class. */
 import { describe, expect, expectTypeOf, test } from "vitest";
 
 import APIError from "src/root/deprecated/APIError";
@@ -89,3 +89,4 @@ describe("APIError.check()", () => {
     expect(APIError.check({ status: 420, message: 69 })).toBe(false);
   });
 });
+/* eslint-enable -- Re-enable */

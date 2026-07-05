@@ -1,7 +1,7 @@
 import { describe, expect, test, vi } from "vitest";
 
 import randomiseArray from "src/root/functions/arrayHelpers/randomiseArray";
-// eslint-disable-next-line @alextheman/no-namespace-imports
+// eslint-disable-next-line @alextheman/no-namespace-imports -- Needed for mocking.
 import * as getRandomNumber from "src/root/functions/miscellaneous/getRandomNumber";
 
 describe("randomiseArray", () => {
