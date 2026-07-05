@@ -113,7 +113,7 @@ describe("VersionNumber", () => {
     test("Implemented in a [Symbol.toPrimitive] method to allow it to nicely be coerced to the right string", () => {
       const version = new VersionNumber([1, 2, 3]);
       expect(`Version: ${version}`).toBe("Version: v1.2.3");
-      // eslint-disable-next-line prefer-template
+      // eslint-disable-next-line prefer-template -- This is specifically testing string concatenation.
       expect("Version: " + version).toBe("Version: v1.2.3");
       expect(String(version)).toBe("v1.2.3");
 

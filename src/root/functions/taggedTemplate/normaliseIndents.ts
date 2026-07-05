@@ -82,6 +82,8 @@ function normaliseIndents(options: NormaliseIndentsOptions): NormaliseIndentsFun
  *     and another new line`;
  * ```
  *
+ * @category Tagged Template
+ *
  * @template InterpolationsType - The type of the interpolations.
  *
  * @param strings - The strings from the template to process.
@@ -139,7 +141,6 @@ function normaliseIndents(
   return reduceLines(fullString.split("\n"), options);
 }
 
-/* eslint-disable jsdoc/require-tags */
 /**
  * Applies any options if provided, then removes any extraneous indents from a multi-line template string.
  *
@@ -159,12 +160,13 @@ function normaliseIndents(
  *     and another new line`.
  * ```
  *
+ * @category Tagged Template
+ *
  * @param first - The strings from the template to process, or the options to apply.
  * @param args - An array of all interpolations from the template.
  *
  * @returns An additional function to invoke, or a new string with the strings and interpolations from the template applied, and extraneous indents removed.
  */
 export const normalizeIndents = normaliseIndents;
-/* eslint-enable */
 
 export default normaliseIndents;
