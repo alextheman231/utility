@@ -48,7 +48,7 @@
     "format-prettier-javascript": "prettier --write \"./**/*.js\"",
     "format-prettier-typescript": "prettier --write --parser typescript \"./**/*.ts\"",
     "format-prettier-yml": "prettier --write \"./**/*.{yml,yaml}\"",
-    "lint": "pnpm run lint-tsc && pnpm run lint-eslint && pnpm run lint-markdownlint pnpm run lint-prettier && pnpm run lint-pre-release",
+    "lint": "pnpm run lint-tsc && pnpm run lint-eslint && pnpm run lint-markdownlint && pnpm run lint-prettier && pnpm run lint-pre-release",
     "lint-eslint": "eslint \"package.json\" \"{src,tests,configs}/**/*.ts\"",
     "lint-markdownlint": "bash -o pipefail -c 'pnpm exec markdownlint-cli2 \"**/*.md\" \"!{node_modules,dist}/**\"| grep -v \"^Finding:\"'",
     "lint-pre-release": "alex-c-line package-json check --rules no-pre-release-dependencies",
