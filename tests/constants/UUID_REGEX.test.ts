@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 
 import { randomUUID } from "node:crypto";
 
-import { UUID_PATTERN, UUID_REGEX } from "src/root";
+import { UUID_REGEX, UUID_REGEX_PATTERN } from "src/root";
 
 describe("UUID_REGEX", () => {
   test("Matches a valid UUID", () => {
@@ -20,9 +20,9 @@ describe("UUID_REGEX", () => {
   });
 });
 
-describe("UUID_PATTERN", () => {
+describe("UUID_REGEX_PATTERN", () => {
   test("Can be embedded inside larger regexes", () => {
-    const routeRegex = new RegExp(`/users/(?<id>${UUID_PATTERN})/`);
+    const routeRegex = new RegExp(`/users/(?<id>${UUID_REGEX_PATTERN})/`);
     const uuid = randomUUID();
     const path = `/users/${uuid}/`;
 
