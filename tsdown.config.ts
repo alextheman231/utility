@@ -32,6 +32,14 @@ const config: Array<UserConfig> = [
     clean: true,
     fixedExtension: false,
   },
+  {
+    entry: ["src/temporal/index.ts"],
+    outDir: "dist/temporal",
+    format: ["esm", "cjs"],
+    dts: true,
+    clean: true,
+    fixedExtension: false,
+  },
 ];
 
 export default config;

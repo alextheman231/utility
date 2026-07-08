@@ -26,6 +26,11 @@
       "import": "./dist/node/index.js",
       "require": "./dist/node/index.cjs"
     },
+    "./temporal": {
+      "types": "./dist/temporal/index.d.ts",
+      "import": "./dist/temporal/index.js",
+      "require": "./dist/temporal/index.cjs"
+    },
     "./v6": {
       "types": "./dist/v6/index.d.ts",
       "import": "./dist/v6/index.js",
