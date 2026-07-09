@@ -59,4 +59,16 @@ describe("formatRelativeDateAndTime", () => {
     const formattedDate = formatRelativeDateAndTime(reference.subtract({ days: 3 }), reference);
     expect(formattedDate).toBe("05/07/2026, 23:27");
   });
+  test("Accepts a ZonedDateTime as the input and reference", () => {
+    const reference = Temporal.ZonedDateTime.from({
+      year: 2026,
+      month: 7,
+      day: 8,
+      hour: 23,
+      minute: 27,
+      timeZone: "UTC",
+    });
+    const formattedDate = formatRelativeDateAndTime(reference.subtract({ days: 3 }), reference);
+    expect(formattedDate).toBe("05/07/2026, 23:27");
+  });
 });
