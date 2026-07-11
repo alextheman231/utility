@@ -3,6 +3,7 @@ export { default as createFormData } from "src/root/functions/miscellaneous/crea
 export { default as getRandomNumber } from "src/root/functions/miscellaneous/getRandomNumber";
 export { default as identity } from "src/root/functions/miscellaneous/identity";
 export { default as isOrdered } from "src/root/functions/miscellaneous/isOrdered";
+export { default as memoizeAsync } from "src/root/functions/miscellaneous/memoizeAsync";
 export { default as sayHello } from "src/root/functions/miscellaneous/sayHello";
 export { default as sortBy } from "src/root/functions/miscellaneous/sortBy";
 export { default as stringifyDotenv } from "src/root/functions/miscellaneous/stringifyDotenv";
