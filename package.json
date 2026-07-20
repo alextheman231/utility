@@ -45,6 +45,7 @@
     "build-configs": "tsdown --config tsdown.configs.config.ts",
     "create-feature-docs": "typedoc",
     "create-local-package": "pnpm run build && rm -f alextheman-utility-*.tgz && pnpm pack",
+    "create-release": "bash -c 'git pull origin main && alex-c-line template release-note create $@ --status \"Released\" --update-version' --",
     "create-release-note": "bash -c 'git pull origin main && alex-c-line template release-note create $@' --",
     "format": "pnpm run format-prettier && pnpm run format-eslint && pnpm run format-markdownlint",
     "format-eslint": "eslint --fix --suppress-all \"package.json\" \"{src,tests,configs}/**/*.ts\" && rm -f eslint-suppressions.json",
@@ -80,7 +81,7 @@
   "devDependencies": {
     "@alextheman/eslint-plugin": "5.18.0",
     "@types/node": "26.1.1",
-    "alex-c-line": "2.12.4",
+    "alex-c-line": "2.13.0",
     "cross-env": "10.1.0",
     "dotenv-cli": "11.0.0",
     "eslint": "10.7.0",
