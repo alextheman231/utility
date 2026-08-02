@@ -5,3 +5,4 @@ export { default as parseZodSchemaAsync } from "src/root/zod/parseZodSchemaAsync
 /* eslint-enable -- Re-enable */
 
 export type { ZodParsingErrorData } from "src/root/zod/_parseZodSchema";
+export type { AzParsingErrorHandler } from "src/root/zod/az";
