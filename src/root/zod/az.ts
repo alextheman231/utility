@@ -10,6 +10,9 @@ import parseZodSchema from "src/root/zod/parseZodSchema";
 import parseZodSchemaAsync from "src/root/zod/parseZodSchemaAsync";
 import zodFieldWrapper from "src/root/zod/zodFieldWrapper";
 
+export type AzParsingErrorHandler<ErrorType extends Error = DataError> =
+  ErrorType | ((zodError: z.ZodError<unknown>) => void | ErrorType);
+
 const az = {
   field: zodFieldWrapper,
   fieldNumber: (): ZodCoercedNumber<string | null> => {
@@ -29,7 +32,7 @@ const az = {
     return {
       parse: <ErrorType extends Error = DataError>(
         input: unknown,
-        error?: ErrorType | ((zodError: z.ZodError<unknown>) => void | ErrorType),
+        error?: AzParsingErrorHandler<ErrorType>,
         // eslint-disable-next-line @typescript-eslint/no-deprecated -- This wrapper needs the base implementation to work. The base parseZodSchema will be demoted to a non-exported internal function in v6.
       ): ReturnType<typeof parseZodSchema<SchemaType, ErrorType>> => {
         // eslint-disable-next-line @typescript-eslint/no-deprecated -- This wrapper needs the base implementation to work. The base parseZodSchema will be demoted to a non-exported internal function in v6.
@@ -37,7 +40,7 @@ const az = {
       },
       parseAsync: async <ErrorType extends Error = DataError>(
         input: unknown,
-        error?: ErrorType | ((zodError: z.ZodError<unknown>) => void | ErrorType),
+        error?: AzParsingErrorHandler<ErrorType>,
         // eslint-disable-next-line @typescript-eslint/no-deprecated -- This wrapper is expected to replace this implementation. The base parseZodSchemaAsync will be demoted to a non-exported internal function in v6.
       ): ReturnType<typeof parseZodSchemaAsync<SchemaType, ErrorType>> => {
         // eslint-disable-next-line @typescript-eslint/no-deprecated -- This wrapper is expected to replace this implementation. The base parseZodSchemaAsync will be demoted to a non-exported internal function in v6.
