@@ -5,3 +5,5 @@ export { default as isAnniversary } from "src/root/functions/date/isAnniversary"
 export { default as isLeapYear } from "src/root/functions/date/isLeapYear";
 export { default as isMonthlyMultiple } from "src/root/functions/date/isMonthlyMultiple";
 export { default as isSameDate } from "src/root/functions/date/isSameDate";
+export { default as minutesToMs } from "src/root/functions/date/minutesToMs";
+export { default as secondsToMs } from "src/root/functions/date/secondsToMs";
