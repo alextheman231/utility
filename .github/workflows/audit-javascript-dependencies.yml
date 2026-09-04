@@ -11,7 +11,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-    uses: alextheman231/github-actions/.github/workflows/audit-javascript-dependencies.yml@bba094b0c09dda59228db6437a5231ba0538d09a # v12.7.0
+    uses: alextheman231/github-actions/.github/workflows/audit-javascript-dependencies.yml@77ec4714869dc7574206ff9142a156dd8d49b671 # v12.7.5
     with:
       pull-request-number: ${{ github.event.pull_request.number }}
       node-version: 26
