@@ -6,7 +6,7 @@ on:
 
 jobs:
   add-risk-label:
-    uses: alextheman231/github-actions/.github/workflows/add-risk-label.yml@bba094b0c09dda59228db6437a5231ba0538d09a # v12.7.0
+    uses: alextheman231/github-actions/.github/workflows/add-risk-label.yml@77ec4714869dc7574206ff9142a156dd8d49b671 # v12.7.5
     permissions:
       pull-requests: write
     with:
