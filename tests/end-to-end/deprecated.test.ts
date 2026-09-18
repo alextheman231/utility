@@ -23,11 +23,9 @@ const describe = parseBoolean(process.env.RUN_END_TO_END ?? "false")
 describe("Deprecated folder", () => {
   test("Can import from the deprecated folder, but it marks as deprecated", async () => {
     await temporaryDirectoryTask(async (temporaryPath) => {
-      const {
-        typescript: typescriptVersionUtility,
-        eslint: eslintVersionUtility,
-        "typescript-eslint": tseslintVersionUtility,
-      } = getDependenciesFromGroup(utilityPackageInfo, "devDependencies");
+      const { eslint: eslintVersionUtility, "typescript-eslint": tseslintVersionUtility } =
+        getDependenciesFromGroup(utilityPackageInfo, "devDependencies");
+      const typescriptVersionUtility = "6.0.3";
       const runCommandInTempDirectory = await setupPackageEndToEnd(
         temporaryPath,
         "pnpm",

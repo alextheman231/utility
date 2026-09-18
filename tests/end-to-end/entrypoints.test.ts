@@ -113,8 +113,11 @@ describe.each<Entrypoint>([Entrypoint.ROOT, Entrypoint.NODE, Entrypoint.INTERNAL
 
             if (moduleType === ModuleType.TYPESCRIPT) {
               console.info("Installing TypeScript dependencies");
-              const { tsx: tsxVersionUtility, typescript: typescriptVersionUtility } =
-                getDependenciesFromGroup(utilityPackageInfo, "devDependencies");
+              const { tsx: tsxVersionUtility } = getDependenciesFromGroup(
+                utilityPackageInfo,
+                "devDependencies",
+              );
+              const typescriptVersionUtility = "6.0.3";
 
               if (packageManager === PackageManager.PNPM) {
                 await runCommandInTempDirectory`${packageManager} install --save-dev tsx@${tsxVersionUtility} typescript@${typescriptVersionUtility}`;
