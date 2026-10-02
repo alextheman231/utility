@@ -43,7 +43,7 @@ jobs:
       node-version: 26
 
   create-github-release:
-    needs: [npm-registry-publish, check-version-tag, check-release-note]
+    needs: [check-version-tag, check-release-note]
     permissions:
       contents: write
     if: ${{ needs.check-version-tag.outputs.tag-exists == 'false' && needs.check-release-note.outputs.release-note-found == 'true' }}
