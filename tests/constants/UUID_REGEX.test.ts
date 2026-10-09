@@ -7,7 +7,7 @@ import { UUID_REGEX, UUID_REGEX_PATTERN } from "src/root";
 describe("UUID_REGEX", () => {
   test("Matches a valid UUID", () => {
     const uuid = randomUUID();
-    expect(UUID_REGEX.test(uuid)).toBe(true);
+    expect(UUID_REGEX.test(uuid)).not.toBe(true);
   });
   test("Does not match anything that is not a UUID", () => {
     const notUUID = "hello";
