@@ -1,4 +1,4 @@
-import type { CreateEnumType } from "src/root/types/CreateEnumType";
+import type { ObjectValue } from "src/root/types/ObjectValue";
 
 import { describe, expectTypeOf, test } from "vitest";
 
@@ -7,9 +7,9 @@ const TestObject = {
   WORLD: "WORLD",
 } as const;
 
-type TestObject = CreateEnumType<typeof TestObject>;
+type TestObject = ObjectValue<typeof TestObject>;
 
-describe("CreateEnumType", () => {
+describe("ObjectValue", () => {
   test("Allows values from the object", () => {
     expectTypeOf(TestObject.HELLO).toExtend<TestObject>();
     expectTypeOf(TestObject.WORLD).toExtend<TestObject>();

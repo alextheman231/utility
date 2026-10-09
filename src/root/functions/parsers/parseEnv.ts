@@ -1,4 +1,4 @@
-import type { CreateEnumType } from "src/root/types";
+import type { ObjectValue } from "src/root/types";
 
 import { z } from "zod";
 
@@ -16,7 +16,7 @@ export const Env = {
   PRODUCTION: "production",
 } as const;
 
-export type Env = CreateEnumType<typeof Env>;
+export type Env = ObjectValue<typeof Env>;
 
 /**
  * Parses the input and verifies it matches one of the environments allowed by the Env types ("test" | "development" | "production").

@@ -1,8 +1,8 @@
-import type { CreateEnumType } from "src/root/types/CreateEnumType";
+import type { ObjectValue } from "src/root/types/ObjectValue";
 
 export const SortDirection = {
   DESC: "desc",
   ASC: "asc",
 } as const;
 
-export type SortDirection = CreateEnumType<typeof SortDirection>;
+export type SortDirection = ObjectValue<typeof SortDirection>;

@@ -5,4 +5,5 @@ export { default as UUID_PATTERN } from "src/root/deprecated/UUID_PATTERN";
 export { default as VERSION_NUMBER_PATTERN } from "src/root/deprecated/VERSION_NUMBER_PATTERN";
 
 export type { HTTPErrorCode } from "src/root/deprecated/APIError";
+export type { CreateEnumType } from "src/root/deprecated/CreateEnumType";
 export type { RecordKey } from "src/root/deprecated/RecordKey";
