@@ -1,4 +1,4 @@
-import type { CreateEnumType } from "src/root/types";
+import type { ObjectValue } from "src/root/types";
 
 import z from "zod";
 
@@ -16,7 +16,7 @@ export const VersionType = {
   PATCH: "patch",
 } as const;
 
-export type VersionType = CreateEnumType<typeof VersionType>;
+export type VersionType = ObjectValue<typeof VersionType>;
 
 /**
  * Parses the input and verifies it is a valid software version type (i.e. `"major" | "minor" | "patch"`)

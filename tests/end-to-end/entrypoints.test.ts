@@ -1,4 +1,4 @@
-import type { CreateEnumType } from "src/root/types";
+import type { ObjectValue } from "src/root/types";
 
 import { temporaryDirectoryTask } from "tempy";
 import { describe as describeVitest, expect, test } from "vitest";
@@ -29,7 +29,7 @@ const Entrypoint = {
   V6: "@alextheman/utility/v6",
 } as const;
 
-type Entrypoint = CreateEnumType<typeof Entrypoint>;
+type Entrypoint = ObjectValue<typeof Entrypoint>;
 
 const describe = parseBoolean(process.env.RUN_END_TO_END ?? "false")
   ? describeVitest

@@ -1,4 +1,4 @@
-import type { CreateEnumType } from "src/root";
+import type { ObjectValue } from "src/root";
 
 export const ModuleType = {
   COMMON_JS: "commonjs",
@@ -6,4 +6,4 @@ export const ModuleType = {
   TYPESCRIPT: "typescript",
 } as const;
 
-export type ModuleType = CreateEnumType<typeof ModuleType>;
+export type ModuleType = ObjectValue<typeof ModuleType>;

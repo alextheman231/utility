@@ -1,4 +1,4 @@
-import type { CreateEnumType } from "src/root";
+import type { ObjectValue } from "src/root";
 import type { ExpectErrorOptions } from "src/v6/CodeError";
 
 import { containsKeys, isNonNullableObject, objectContainsKeys } from "src/root";
@@ -16,7 +16,7 @@ export const httpErrorCodeLookup = {
 } as const;
 
 export type HTTPErrorCode = keyof typeof httpErrorCodeLookup;
-export type APIErrorCode = CreateEnumType<typeof httpErrorCodeLookup>;
+export type APIErrorCode = ObjectValue<typeof httpErrorCodeLookup>;
 
 /**
  * Represents common errors you may get from a HTTP API request.
