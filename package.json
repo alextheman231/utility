@@ -75,12 +75,12 @@
     "use-local-eslint-plugin": "pnpm run prepare-local-eslint-plugin && pnpm run lint"
   },
   "dependencies": {
-    "dotenv": "18.0.6",
+    "dotenv": "18.0.7",
     "execa": "10.1.0"
   },
   "devDependencies": {
     "@alextheman/eslint-plugin": "5.18.5",
-    "@types/node": "26.6.4",
+    "@types/node": "26.6.5",
     "alex-c-line": "2.16.4",
     "cross-env": "10.1.0",
     "dotenv-cli": "11.0.0",
