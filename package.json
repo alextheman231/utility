@@ -75,19 +75,19 @@
     "use-local-eslint-plugin": "pnpm run prepare-local-eslint-plugin && pnpm run lint"
   },
   "dependencies": {
-    "dotenv": "18.0.5",
-    "execa": "10.0.1"
+    "dotenv": "18.0.6",
+    "execa": "10.1.0"
   },
   "devDependencies": {
-    "@alextheman/eslint-plugin": "5.18.4",
+    "@alextheman/eslint-plugin": "5.18.5",
     "@types/node": "26.6.4",
-    "alex-c-line": "2.13.3",
+    "alex-c-line": "2.16.4",
     "cross-env": "10.1.0",
     "dotenv-cli": "11.0.0",
-    "eslint": "10.11.0",
+    "eslint": "10.12.0",
     "globals": "17.13.0",
     "husky": "9.1.7",
-    "jsdom": "30.1.1",
+    "jsdom": "30.1.2",
     "markdownlint-cli2": "0.23.3",
     "prettier": "3.9.9",
     "tempy": "3.2.0",
@@ -97,8 +97,8 @@
     "typedoc-plugin-markdown": "4.13.1",
     "typedoc-rhineai-theme": "1.2.0",
     "typescript": "7.0.2",
-    "typescript-eslint": "8.71.0",
-    "vite": "8.3.2",
+    "typescript-eslint": "8.71.1",
+    "vite": "8.3.4",
     "vitest": "5.0.3",
     "zod": "4.6.5"
   },
