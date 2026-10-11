@@ -4,6 +4,11 @@ import type { ExpectErrorOptions } from "src/v6/CodeError";
 import { containsKeys, isNonNullableObject, objectContainsKeys } from "src/root";
 import CodeError from "src/v6/CodeError";
 
+/**
+ * @category Deprecated  
+ *
+ * @deprecated This is no longer being supported in this package and will be removed in the next major release.
+ */
 export const httpErrorCodeLookup = {
   400: "BAD_REQUEST",
   401: "UNAUTHORISED",
@@ -15,13 +20,25 @@ export const httpErrorCodeLookup = {
   500: "INTERNAL_SERVER_ERROR",
 } as const;
 
+/**
+ * @category Deprecated  
+ *
+ * @deprecated This is no longer being supported in this package and will be removed in the next major release.
+ */
 export type HTTPErrorCode = keyof typeof httpErrorCodeLookup;
+/**
+ * @category Deprecated  
+ *
+ * @deprecated This is no longer being supported in this package and will be removed in the next major release.
+ */
 export type APIErrorCode = ObjectValue<typeof httpErrorCodeLookup>;
 
 /**
  * Represents common errors you may get from a HTTP API request.
  *
  * @category Types
+ *
+ * @deprecated This is no longer being supported in this package and will be removed in the next major release.
  *
  * @template DataType The type of the data that caused the error.
  * @template ErrorCode The type of the standardised error code.
