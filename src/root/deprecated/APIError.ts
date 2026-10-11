@@ -1,5 +1,15 @@
+/**
+ * @category Deprecated
+ *
+ * @deprecated This is no longer being supported in this package and will be removed in the next major release.
+ */
 export type HTTPErrorCode = 400 | 401 | 403 | 404 | 418 | 500;
 
+/**
+ * @category Deprecated  
+ *
+ * @deprecated This is no longer being supported in this package and will be removed in the next major release.
+ */
 export const httpErrorCodeLookup: Record<HTTPErrorCode, string> = {
   400: "BAD_REQUEST",
   401: "UNAUTHORISED",
@@ -16,7 +26,7 @@ export const httpErrorCodeLookup: Record<HTTPErrorCode, string> = {
  *
  * @category Types
  *
- * @deprecated Please use `APIError` from `@alextheman/utility/v6` instead.
+ * @deprecated This is no longer being supported in this package and will be removed in the next major release.
  */
 class APIError extends Error {
   public status: number;
