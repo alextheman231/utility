@@ -89,18 +89,18 @@
     "husky": "9.1.7",
     "jsdom": "30.1.2",
     "markdownlint-cli2": "0.23.3",
-    "prettier": "3.9.9",
+    "prettier": "3.9.10",
     "tempy": "3.2.0",
-    "tsdown": "0.23.0",
+    "tsdown": "0.23.1",
     "tsx": "4.23.15",
     "typedoc": "0.28.20",
     "typedoc-plugin-markdown": "4.13.1",
     "typedoc-rhineai-theme": "1.2.0",
     "typescript": "7.0.2",
-    "typescript-eslint": "8.71.1",
+    "typescript-eslint": "8.71.2",
     "vite": "8.3.4",
-    "vitest": "5.0.3",
-    "zod": "4.6.5"
+    "vitest": "5.0.4",
+    "zod": "4.6.7"
   },
   "packageManager": "pnpm@12.11.2+sha512.25a51652a196785af5f28bda6dfe8dc582ebefa4ac1d180221ce1390231c5fb76637822ea4b6e4633ce74acdcb0a77f725af11bad38177fdeddaee818a955cb9",
   "engines": {
