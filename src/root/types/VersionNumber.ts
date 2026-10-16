@@ -167,22 +167,33 @@ class VersionNumber {
    */
   public increment(incrementType: VersionType, incrementAmount: number = 1): VersionNumber {
     const incrementBy = parseIntStrict(String(incrementAmount));
-    const calculatedRawVersion = {
-      major: [this.major + incrementBy, 0, 0],
-      minor: [this.major, this.minor + incrementBy, 0],
-      patch: [this.major, this.minor, this.patch + incrementBy],
-    }[incrementType] as [number, number, number];
+
     try {
-      return new VersionNumber(calculatedRawVersion);
+      switch (incrementType) {
+        case "major": {
+          return new VersionNumber([this.major + incrementBy, 0, 0]);
+        }
+        case "minor": {
+          return new VersionNumber([this.major, this.minor + incrementBy, 0]);
+        }
+        case "patch": {
+          return new VersionNumber([this.major, this.minor, this.patch + incrementBy]);
+        }
+        default: {
+          throw incrementType satisfies never;
+        }
+      }
     } catch (error) {
       if (
-        DataError.check<Record<PropertyKey, unknown>, "NEGATIVE_INPUTS">(error) &&
-        error.code === "NEGATIVE_INPUTS"
+        DataError.checkWithCode<{ input: [number, number, number] }, "NEGATIVE_INPUTS">(
+          error,
+          "NEGATIVE_INPUTS",
+        )
       ) {
         throw new DataError(
           {
             currentVersion: this.toString(),
-            calculatedRawVersion: `v${calculatedRawVersion.join(".")}`,
+            calculatedRawVersion: `v${error.data.input.join(".")}`,
             incrementAmount,
           },
           "NEGATIVE_VERSION",
