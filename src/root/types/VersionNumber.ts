@@ -120,19 +120,45 @@ class VersionNumber {
   }
 
   /**
+   * Compares two given `VersionNumber` instances depending on order.
+   *
+   * @param first - The first version number to compare.
+   * @param second - The second version number to compare.
+   *
+   * @returns 0 if the version numbers are equal, 1 if the first version number is bigger than the second, and -1 if the first version number is smaller than the second.
+   */
+  public static compare(first: VersionNumber, second: VersionNumber): number {
+    if (first.major > second.major) {
+      return 1;
+    } else if (first.major < second.major) {
+      return -1;
+    }
+
+    if (first.minor > second.minor) {
+      return 1;
+    } else if (first.minor < second.minor) {
+      return -1;
+    }
+
+    if (first.patch > second.patch) {
+      return 1;
+    } else if (first.patch < second.patch) {
+      return -1;
+    }
+
+    // All three parts are the same.
+    return 0;
+  }
+  /**
    * Checks if the provided version numbers have the exact same major, minor, and patch numbers.
    *
-   * @param firstVersion - The first version number to compare.
-   * @param secondVersion - The second version number to compare.
+   * @param first - The first version number to compare.
+   * @param second - The second version number to compare.
    *
    * @returns `true` if the provided version numbers have exactly the same major, minor, and patch numbers, and returns `false` otherwise.
    */
-  public static isEqual(firstVersion: VersionNumber, secondVersion: VersionNumber): boolean {
-    return (
-      firstVersion.major === secondVersion.major &&
-      firstVersion.minor === secondVersion.minor &&
-      firstVersion.patch === secondVersion.patch
-    );
+  public static isEqual(first: VersionNumber, second: VersionNumber): boolean {
+    return VersionNumber.compare(first, second) === 0;
   }
 
   /**
@@ -203,6 +229,26 @@ class VersionNumber {
         throw error;
       }
     }
+  }
+  /**
+   * Checks if the current `VersionNumber` instance is bigger than the input `VersionNumber`.
+   *
+   * @param comparator - The `VersionNumber` to compare against.
+   *
+   * @returns `true` if the instance is bigger than the input, and `false` otherwise
+   */
+  public isGreaterThan(comparator: VersionNumber): boolean {
+    return VersionNumber.compare(this, comparator) === 1;
+  }
+  /**
+   * Checks if the current `VersionNumber` instance is smaller than the input `VersionNumber`.
+   *
+   * @param comparator - The `VersionNumber` to compare against.
+   *
+   * @returns `true` if the instance is smaller than the input, and `false` otherwise
+   */
+  public isLessThan(comparator: VersionNumber): boolean {
+    return VersionNumber.compare(this, comparator) === -1;
   }
   /**
    * Ensures that the VersionNumber behaves correctly when attempted to be coerced to a string.

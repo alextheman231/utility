@@ -223,4 +223,32 @@ describe("VersionNumber", () => {
       expect(newVersion).not.toBe(inputVersion);
     });
   });
+
+  describe("VersionNumber.compare()", () => {
+    test.each<[VersionNumber, VersionNumber]>([
+      [new VersionNumber([2, 3, 4]), new VersionNumber([1, 2, 3])],
+      [new VersionNumber([1, 3, 0]), new VersionNumber([1, 2, 3])],
+      [new VersionNumber([1, 2, 4]), new VersionNumber([1, 2, 3])],
+    ])(
+      "Returns 1 if the first version number is greater than the second (%s is greater than %s)",
+      (first, second) => {
+        expect(VersionNumber.compare(first, second)).toBe(1);
+      },
+    );
+    test.each<[VersionNumber, VersionNumber]>([
+      [new VersionNumber([1, 2, 3]), new VersionNumber([2, 3, 4])],
+      [new VersionNumber([1, 2, 3]), new VersionNumber([1, 3, 0])],
+      [new VersionNumber([1, 2, 3]), new VersionNumber([1, 2, 4])],
+    ])(
+      "Returns -1 if the first version number is less than the second (%s is less than %s)",
+      (first, second) => {
+        expect(VersionNumber.compare(first, second)).toBe(-1);
+      },
+    );
+    test("Returns 0 if the two version numbers are equal", () => {
+      expect(
+        VersionNumber.compare(new VersionNumber([1, 2, 3]), new VersionNumber([1, 2, 3])),
+      ).toBe(0);
+    });
+  });
 });
