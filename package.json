@@ -79,7 +79,7 @@
     "execa": "10.2.0"
   },
   "devDependencies": {
-    "@alextheman/eslint-plugin": "5.18.5",
+    "@alextheman/eslint-plugin": "5.18.6",
     "@types/node": "26.6.5",
     "alex-c-line": "2.16.5",
     "cross-env": "10.1.0",
