@@ -2,7 +2,7 @@ import type { SortDirection } from "src/root";
 
 import { describe, expect, expectTypeOf, test } from "vitest";
 
-import { identity, sortBy } from "src/root";
+import { identity, sortBy, VersionNumber } from "src/root";
 
 type MessageSortDirection = "ascending" | "descending";
 
@@ -62,5 +62,43 @@ describe("sortBy", () => {
         }, direction),
       ),
     ).toEqual(expected);
+  });
+  test.each<[MessageSortDirection, SortDirection, Array<VersionNumber>]>([
+    [
+      "ascending",
+      "asc",
+      [
+        new VersionNumber([1, 2, 3]),
+        new VersionNumber([1, 2, 3]),
+        new VersionNumber([1, 3, 5]),
+        new VersionNumber([1, 3, 6]),
+        new VersionNumber([2, 3, 4]),
+        new VersionNumber([2, 3, 5]),
+      ],
+    ],
+    [
+      "descending",
+      "desc",
+      [
+        new VersionNumber([2, 3, 5]),
+        new VersionNumber([2, 3, 4]),
+        new VersionNumber([1, 3, 6]),
+        new VersionNumber([1, 3, 5]),
+        new VersionNumber([1, 2, 3]),
+        new VersionNumber([1, 2, 3]),
+      ],
+    ],
+  ])("Sorts version numbers in %s order", (_, direction, expected) => {
+    const initialArray = [
+      new VersionNumber([1, 3, 6]),
+      new VersionNumber([2, 3, 5]),
+      new VersionNumber([1, 2, 3]),
+      new VersionNumber([2, 3, 4]),
+      new VersionNumber([1, 2, 3]),
+      new VersionNumber([1, 3, 5]),
+    ];
+
+    const sortedArray = initialArray.toSorted(sortBy(identity, direction));
+    expect(sortedArray).toEqual(expected);
   });
 });

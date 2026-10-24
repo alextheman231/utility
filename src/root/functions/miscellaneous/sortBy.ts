@@ -1,4 +1,6 @@
-import type { SortDirection } from "src/root/types";
+import type { SortDirection } from "src/root/types/SortDirection";
+
+import VersionNumber from "src/root/types/VersionNumber";
 
 type SortFunction<ItemType> = (first: ItemType, second: ItemType) => number;
 
@@ -13,7 +15,7 @@ type SortFunction<ItemType> = (first: ItemType, second: ItemType) => number;
  *
  * @returns A function to pass into the `.sort()` or `.toSorted()` methods on arrays.
  */
-function sortBy<ItemType, SortValue extends string | number | Date>(
+function sortBy<ItemType, SortValue extends string | number | Date | VersionNumber>(
   selector: (item: ItemType) => SortValue,
   direction: SortDirection = "asc",
 ): SortFunction<ItemType> {
@@ -26,6 +28,13 @@ function sortBy<ItemType, SortValue extends string | number | Date>(
       const secondTime = secondValue.getTime();
 
       return direction === "asc" ? firstTime - secondTime : secondTime - firstTime;
+    }
+
+    if (firstValue instanceof VersionNumber && secondValue instanceof VersionNumber) {
+      if (direction === "asc") {
+        return VersionNumber.compare(firstValue, secondValue);
+      }
+      return VersionNumber.compare(secondValue, firstValue);
     }
 
     if (firstValue < secondValue) {
