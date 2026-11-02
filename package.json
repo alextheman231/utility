@@ -79,13 +79,13 @@
     "execa": "10.2.1"
   },
   "devDependencies": {
-    "@alextheman/eslint-plugin": "5.18.6",
+    "@alextheman/eslint-plugin": "5.18.7",
     "@types/node": "26.6.6",
-    "alex-c-line": "2.16.7",
+    "alex-c-line": "2.16.9",
     "cross-env": "10.1.0",
     "dotenv-cli": "11.1.0",
-    "eslint": "10.13.0",
-    "globals": "17.13.0",
+    "eslint": "10.14.0",
+    "globals": "17.14.0",
     "husky": "9.1.7",
     "jsdom": "30.1.3",
     "markdownlint-cli2": "0.24.0",
