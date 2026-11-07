@@ -11,7 +11,7 @@ permissions:
 jobs:
   update-dependencies:
     if: ${{ github.repository == 'alextheman231/utility' }}
-    uses: alextheman231/github-actions/.github/workflows/update-dependencies.yml@6303ccc55913d70a641b50c97dc36475c5053c99 # v14.4.0
+    uses: alextheman231/github-actions/.github/workflows/update-dependencies.yml@a4cd17127c4594f368ca998731dc825f3dbd051b # v14.5.0
     secrets:
       APP_PRIVATE_KEY: ${{ secrets.ALEX_UP_BOT_PRIVATE_KEY }}
     with:
