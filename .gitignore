@@ -6,6 +6,8 @@ alextheman-utility-*.tgz
 .alex-c-line.private.config.js
 .alex-c-line
 
+.pdm-python
+
 # Local Netlify folder
 .netlify
 docs/features
