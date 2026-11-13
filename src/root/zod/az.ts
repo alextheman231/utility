@@ -11,7 +11,8 @@ import parseZodSchemaAsync from "src/root/zod/parseZodSchemaAsync";
 import zodFieldWrapper from "src/root/zod/zodFieldWrapper";
 
 export type AzParsingErrorHandler<ErrorType extends Error = DataError> =
-  ErrorType | ((zodError: z.ZodError<unknown>) => void | ErrorType);
+  | ErrorType
+  | ((zodError: z.ZodError<unknown>) => void | ErrorType);
 
 const az = {
   field: zodFieldWrapper,
