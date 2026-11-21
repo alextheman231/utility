@@ -1,24 +1,24 @@
-import { afterAll, beforeAll, describe, expect, test, vi } from "vitest";
+import { afterAll, beforeAll, describe, expect, test, vitest } from "vitest";
 
 import wait from "src/root/functions/miscellaneous/wait";
 
 beforeAll(() => {
-  vi.useFakeTimers();
+  vitest.useFakeTimers();
 });
 
 afterAll(() => {
-  vi.useRealTimers();
+  vitest.useRealTimers();
 });
 
 describe("wait", () => {
   test("Resolves after the given amount of time", async () => {
-    const mockFunction = vi.fn();
-    wait(2).then(mockFunction);
+    const mockFunction = vitest.fn();
+    void wait(2).then(mockFunction);
 
-    vi.advanceTimersByTime(1000);
+    vitest.advanceTimersByTime(1000);
     expect(mockFunction).not.toHaveBeenCalled();
 
-    vi.advanceTimersByTime(1000);
+    vitest.advanceTimersByTime(1000);
     await Promise.resolve();
     expect(mockFunction).toHaveBeenCalled();
   });

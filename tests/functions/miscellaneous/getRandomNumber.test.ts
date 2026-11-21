@@ -1,4 +1,4 @@
-import { describe, expect, test, vi } from "vitest";
+import { describe, expect, test, vitest } from "vitest";
 
 import getRandomNumber from "src/root/functions/miscellaneous/getRandomNumber";
 import { DataError } from "src/v6";
@@ -13,7 +13,7 @@ describe("getRandomNumber", () => {
     expect(randomNumber >= 0 && randomNumber <= 10).toBe(true);
   });
   test("Gives a random number", () => {
-    const spy = vi.spyOn(Math, "random");
+    const spy = vitest.spyOn(Math, "random");
     spy.mockImplementationOnce(() => {
       return 0.5;
     });

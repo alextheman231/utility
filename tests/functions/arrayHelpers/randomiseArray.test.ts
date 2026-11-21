@@ -1,7 +1,7 @@
-import { describe, expect, test, vi } from "vitest";
+import { describe, expect, test, vitest } from "vitest";
 
 import randomiseArray from "src/root/functions/arrayHelpers/randomiseArray";
-// eslint-disable-next-line @alextheman/no-namespace-imports -- Needed for mocking.
+// oxlint-disable oxlint/no-namespace -- Needed for mocking.
 import * as getRandomNumber from "src/root/functions/miscellaneous/getRandomNumber";
 
 describe("randomiseArray", () => {
@@ -18,7 +18,7 @@ describe("randomiseArray", () => {
     });
   });
   test("Returns the items in a random order", () => {
-    const spy = vi.spyOn(getRandomNumber, "default");
+    const spy = vitest.spyOn(getRandomNumber, "default");
     spy.mockImplementationOnce(() => {
       return 1;
     });

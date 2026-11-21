@@ -24,7 +24,7 @@ function omitProperties<ObjectType extends object, KeysToOmit extends keyof Obje
     delete outputObject[key];
   });
 
-  return outputObject as Omit<ObjectType, KeysToOmit>;
+  return outputObject;
 }
 
 export default omitProperties;

@@ -11,7 +11,7 @@ describe("DataError", () => {
     expect(error.code).toBe("NOT_VALID");
     expect(error.message).toBe("This is not valid");
   });
-  test("Provides sensible default message ", () => {
+  test("Provides sensible default message", () => {
     const error = DataError.expectError(() => {
       throw new DataError({ testData: "Hello" }, "INVALID_DATA");
     });

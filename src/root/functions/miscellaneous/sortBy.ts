@@ -20,8 +20,8 @@ function sortBy<ItemType, SortValue extends string | number | Date | VersionNumb
   direction: SortDirection = "asc",
 ): SortFunction<ItemType> {
   return (first, second) => {
-    const firstValue = selector(first);
-    const secondValue = selector(second);
+    const firstValue: SortValue = selector(first);
+    const secondValue: SortValue = selector(second);
 
     if (firstValue instanceof Date && secondValue instanceof Date) {
       const firstTime = firstValue.getTime();

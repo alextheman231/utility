@@ -38,7 +38,8 @@ function kebabToCamel(input: string, options?: KebabToCamelOptions): string {
 
   let outputString = "";
   let skip = false;
-  for (const stringIndex in [...input]) {
+
+  for (const stringIndex in input.split("")) {
     if (skip) {
       skip = false;
       continue;

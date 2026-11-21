@@ -3,7 +3,7 @@
     "target": "ES6",
     "useDefineForClassFields": true,
     "lib": ["ESNext", "DOM"],
-    "types": ["eslint", "node", "vitest"],
+    "types": ["node", "vitest"],
     "module": "ESNext",
     "skipLibCheck": true,
     "paths": {

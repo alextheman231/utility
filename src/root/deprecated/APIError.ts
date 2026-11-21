@@ -1,3 +1,4 @@
+/* oxlint-disable -- Deprecated */
 /**
  * @category Deprecated
  *

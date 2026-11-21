@@ -1,14 +1,14 @@
-import { afterAll, beforeAll, describe, expect, test, vi } from "vitest";
+import { afterAll, beforeAll, describe, expect, test, vitest } from "vitest";
 
 import { addDaysToDate, formatDateAndTime, isSameDate } from "src/root/functions/date";
 
 beforeAll(() => {
-  vi.useFakeTimers();
-  vi.setSystemTime(new Date("2025-06-07T23:27:17.403"));
+  vitest.useFakeTimers();
+  vitest.setSystemTime(new Date("2025-06-07T23:27:17.403"));
 });
 
 afterAll(() => {
-  vi.useRealTimers();
+  vitest.useRealTimers();
 });
 
 describe("formatDateAndTime", () => {

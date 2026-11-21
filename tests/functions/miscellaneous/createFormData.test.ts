@@ -32,8 +32,9 @@ describe("createFormData", () => {
   });
   test("Can take a blob", async () => {
     const formData = createFormData({ blobKey: new Blob(["Hello"]) });
-    const blob = formData.get("blobKey") as any;
+    const blob = formData.get("blobKey");
     expect(blob).toBeTruthy();
+    // oxlint-disable-next-line typescript/no-base-to-string -- This is specifically meant to test the Object's default stringification.
     expect(["[object Blob]", "[object File]"]).toContain(String(blob));
   });
   test("Resolves undefined to be an empty string", () => {
@@ -105,6 +106,7 @@ describe("createFormData", () => {
 
     const formData = createFormData(data, { arrayResolution: "multiple" });
     formData.getAll("blobs").forEach((item) => {
+      // oxlint-disable-next-line typescript/no-base-to-string -- We are specifically testing the default stringification format here.
       expect(["[object Blob]", "[object File]"]).toContain(String(item));
     });
   });

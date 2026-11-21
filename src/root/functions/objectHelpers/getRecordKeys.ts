@@ -12,7 +12,7 @@
 function getRecordKeys<InputRecordType extends Record<PropertyKey, unknown>>(
   record: InputRecordType & object,
 ): Array<keyof InputRecordType> {
-  return Object.keys(record) as Array<keyof InputRecordType>;
+  return Object.keys(record);
 }
 
 export default getRecordKeys;

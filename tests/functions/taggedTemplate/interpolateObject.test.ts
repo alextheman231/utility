@@ -1,3 +1,4 @@
+/* oxlint-disable no-unnecessary-template-expression -- The tests here needs to do this to test certain edge cases. */
 import { describe, expect, test } from "vitest";
 
 import { interpolateObjects } from "src/root/functions/taggedTemplate";

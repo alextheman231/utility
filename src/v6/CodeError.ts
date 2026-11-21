@@ -25,9 +25,6 @@ class CodeError<ErrorCode extends string = string> extends Error {
     options?: ErrorOptions,
   ) {
     super(message, options);
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, new.target);
-    }
 
     this.name = new.target.name;
     this.code = code;

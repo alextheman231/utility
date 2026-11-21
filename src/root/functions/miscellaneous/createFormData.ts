@@ -1,3 +1,4 @@
+/* oxlint-disable typescript/no-base-to-string -- It can be avoided but I will refactor later. */
 import { isNonNullableObject } from "src/root/functions/typeAssertions";
 import { DataError } from "src/v6";
 
