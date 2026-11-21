@@ -38,6 +38,9 @@ const config: OxfmtConfig = {
     specialCharacters: "keep",
     type: "alphabetical",
   },
+  sortPackageJson: {
+    sortScripts: true,
+  },
 };
 
 export default config;
