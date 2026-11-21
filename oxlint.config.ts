@@ -9,12 +9,33 @@ const config: OxlintConfig = {
     typeAware: true,
     typeCheck: true,
   },
+  overrides: [
+    {
+      files: ["**/deprecated/**"],
+      rules: {
+        "typescript/no-deprecated": "off",
+      },
+    },
+    {
+      files: ["*.config.{js,ts}", "configs/**/*.{ts}"],
+      rules: {
+        "sort-keys": [
+          "error",
+          "asc",
+          {
+            natural: true,
+          },
+        ],
+      },
+    },
+  ],
   plugins: ["eslint", "typescript", "unicorn", "import", "node", "vitest"],
   rules: {
     "arrow-body-style": ["error", "always"],
     "capitalized-comments": "off",
     eqeqeq: "error",
     "func-style": ["error", "declaration"],
+    "import/no-named-as-default": "off",
     "import/no-namespace": "error",
     "no-console": ["error", { allow: ["warn", "error", "info", "table"] }],
     "no-duplicate-imports": ["error", { allowSeparateTypeImports: true }],
@@ -37,6 +58,17 @@ const config: OxlintConfig = {
         ],
       },
     ],
+    "no-shadow": "off",
+    "no-underscore-dangle": "off",
+    "no-unused-vars": [
+      "error",
+      {
+        argsIgnorePattern: "^_",
+        caughtErrorsIgnorePattern: "^_",
+        destructuredArrayIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
+      },
+    ],
     "node/no-sync": "error",
     "typescript/adjacent-overload-signatures": "off",
     "typescript/array-type": ["error", { default: "generic" }],
@@ -56,16 +88,13 @@ const config: OxlintConfig = {
     "typescript/consistent-type-imports": ["error", { fixStyle: "separate-type-imports" }],
     "typescript/dot-notation": "error",
     "typescript/no-deprecated": "warn",
+    "typescript/no-for-in-array": "off",
     "typescript/no-require-imports": "error",
     "typescript/no-unnecessary-template-expression": "error",
     "typescript/no-unnecessary-type-assertion": "error",
+    "typescript/no-unnecessary-type-parameters": "off",
+    "typescript/no-unsafe-type-assertion": "off", // I would like to re-enable this at some point, however we do this in a lot of places and a lot of them are hard to avoid. As such, I will disable for now and see if we can avoid type assertions wherever we are currently doing them.
     "typescript/prefer-function-type": "error",
-    /* I would like to re-enable this at some point, however we do this in a lot of places and a lot of them are hard to avoid.
-    As such, I will disable for now and see if we can avoid type assertions wherever we are currently doing them. */
-    "typescript/no-unsafe-type-assertion": "off",
-    "unicorn/no-instanceof-array": "error",
-    "unicorn/no-process-exit": "error",
-    "unicorn/no-typeof-undefined": "error",
     "typescript/restrict-template-expressions": [
       "error",
       {
@@ -77,7 +106,9 @@ const config: OxlintConfig = {
         ],
       },
     ],
-    "typescript/no-unnecessary-type-parameters": "off",
+    "unicorn/no-instanceof-array": "error",
+    "unicorn/no-process-exit": "error",
+    "unicorn/no-typeof-undefined": "error",
     "vitest/consistent-each-for": [
       "error",
       {
@@ -87,37 +118,16 @@ const config: OxlintConfig = {
     ],
     "vitest/consistent-test-it": ["error", { fn: "test" }],
     "vitest/consistent-vitest-vi": ["error", { fn: "vitest" }],
+    "vitest/expect-expect": "off",
+    "vitest/no-conditional-expect": "off",
     "vitest/no-focused-tests": "error",
+    "vitest/no-import-node-test": "error",
     "vitest/no-importing-vitest-globals": "off",
     "vitest/no-test-prefixes": "error",
-    "vitest/prefer-importing-vitest-globals": "error",
-    "vitest/no-import-node-test": "error",
     "vitest/prefer-describe-function-title": "off",
-    "vitest/no-conditional-expect": "off",
-    "import/no-named-as-default": "off",
-    "vitest/expect-expect": "off",
-    "no-unused-vars": [
-      "error",
-      {
-        argsIgnorePattern: "^_",
-        caughtErrorsIgnorePattern: "^_",
-        destructuredArrayIgnorePattern: "^_",
-        varsIgnorePattern: "^_",
-      },
-    ],
-    "no-underscore-dangle": "off",
-    "no-shadow": "off",
-    "typescript/no-for-in-array": "off",
+    "vitest/prefer-importing-vitest-globals": "error",
     "vitest/require-mock-type-parameters": "off",
   },
-  overrides: [
-    {
-      files: ["**/deprecated/**"],
-      rules: {
-        "typescript/no-deprecated": "off",
-      },
-    },
-  ],
 };
 
 export default config;
