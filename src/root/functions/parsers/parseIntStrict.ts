@@ -32,7 +32,6 @@ function parseIntStrict(string: string, radix?: number): number {
   if (
     radix &&
     radix < 10 &&
-    // oxlint-disable-next-line typescript/no-misused-spread -- It is recommended to use Intl.Segmenter rather than spread a string due to handling of special characters, but this is something I will revisit some other time.
     trimmedString
       .replace(/^[+-]/, "")
       .split("")

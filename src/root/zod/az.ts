@@ -25,26 +25,22 @@ const az = {
   fieldDate: (): ZodCoercedDate<string | null> => {
     return z.coerce.date<string | null>();
   },
-  /* eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types -- 
-    The typing here is already very clear and explicit as is.
-    I don't feel there's any benefit to typing the return of the with method further as I feel it would become harder to read. 
-  */
   with: <SchemaType extends ZodType>(schema: SchemaType) => {
     return {
       parse: <ErrorType extends Error = DataError>(
         input: unknown,
         error?: AzParsingErrorHandler<ErrorType>,
-        // eslint-disable-next-line @typescript-eslint/no-deprecated -- This wrapper needs the base implementation to work. The base parseZodSchema will be demoted to a non-exported internal function in v6.
+        // oxlint-disable-next-line typescript/no-deprecated -- This wrapper needs the base implementation to work. The base parseZodSchema will be demoted to a non-exported internal function in v6.
       ): ReturnType<typeof parseZodSchema<SchemaType, ErrorType>> => {
-        // eslint-disable-next-line @typescript-eslint/no-deprecated -- This wrapper needs the base implementation to work. The base parseZodSchema will be demoted to a non-exported internal function in v6.
+        // oxlint-disable-next-line typescript/no-deprecated -- This wrapper needs the base implementation to work. The base parseZodSchema will be demoted to a non-exported internal function in v6.
         return parseZodSchema<SchemaType, ErrorType>(schema, input, error);
       },
       parseAsync: async <ErrorType extends Error = DataError>(
         input: unknown,
         error?: AzParsingErrorHandler<ErrorType>,
-        // eslint-disable-next-line @typescript-eslint/no-deprecated -- This wrapper is expected to replace this implementation. The base parseZodSchemaAsync will be demoted to a non-exported internal function in v6.
+        // oxlint-disable-next-line typescript/no-deprecated -- This wrapper is expected to replace this implementation. The base parseZodSchemaAsync will be demoted to a non-exported internal function in v6.
       ): ReturnType<typeof parseZodSchemaAsync<SchemaType, ErrorType>> => {
-        // eslint-disable-next-line @typescript-eslint/no-deprecated -- This wrapper is expected to replace this implementation. The base parseZodSchemaAsync will be demoted to a non-exported internal function in v6.
+        // oxlint-disable-next-line typescript/no-deprecated -- This wrapper is expected to replace this implementation. The base parseZodSchemaAsync will be demoted to a non-exported internal function in v6.
         return await parseZodSchemaAsync<SchemaType, ErrorType>(schema, input, error);
       },
     };
