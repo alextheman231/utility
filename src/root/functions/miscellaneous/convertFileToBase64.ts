@@ -1,3 +1,4 @@
+/* oxlint-disable unicorn/prefer-add-event-listener -- Is worth addressing this at some point but would require a larger refactor that I'd like to do some other time. */
 import { DataError } from "src/v6";
 
 /**
@@ -26,7 +27,12 @@ function convertFileToBase64(file: File): Promise<string> {
         );
         return;
       }
-      resolve(reader.result as string);
+      if (reader.result instanceof ArrayBuffer) {
+        const decoder = new TextDecoder();
+        resolve(decoder.decode(reader.result));
+      } else {
+        resolve(reader.result);
+      }
     };
     reader.onerror = () => {
       reject(new Error("FILE_READER_ERROR"));

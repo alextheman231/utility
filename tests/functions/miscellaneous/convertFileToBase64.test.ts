@@ -1,4 +1,4 @@
-import { describe, expect, test, vi } from "vitest";
+import { describe, expect, test, vitest } from "vitest";
 
 import convertFileToBase64 from "src/root/functions/miscellaneous/convertFileToBase64";
 
@@ -19,7 +19,7 @@ describe("convertFileToBase64", () => {
   test("Throws an error if file reading fails", async () => {
     const file = new File([""], "broken_file.pdf", { type: "application/pdf" });
 
-    vi.stubGlobal(
+    vitest.stubGlobal(
       "FileReader",
       class MockFileReader extends FileReader {
         public override onerror: ((this: FileReader, event: ProgressEvent) => any) | null = null;

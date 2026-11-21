@@ -49,7 +49,7 @@ describe("Deprecated folder", () => {
 
       const testPackageInfo = await getPackageJsonContents(temporaryPath);
       testPackageInfo.scripts = {
-        ...(testPackageInfo.scripts ?? {}),
+        ...testPackageInfo.scripts,
         "lint-tsc": "tsc --noEmit",
         "lint-eslint": "eslint src/RecordKey.ts",
       };

@@ -31,6 +31,7 @@ function camelToKebab(
 
     if (isUpper) {
       let innerIndex = outerIndex + 1;
+      // oxlint-disable no-unneeded-ternary -- I don't think removing the inner ternary helps with the readability in this specific case due to the complexity of the condition.
       while (
         innerIndex < string.length &&
         /[A-Z]/.test(string[innerIndex]) &&
@@ -39,6 +40,7 @@ function camelToKebab(
             ? false
             : true
           : true)
+        // oxlint-enable
       ) {
         innerIndex++;
       }

@@ -12,14 +12,14 @@ import zodFieldWrapper from "src/root/zod/zodFieldWrapper";
 
 export type AzParsingErrorHandler<ErrorType extends Error = DataError> =
   | ErrorType
-  | ((zodError: z.ZodError<unknown>) => void | ErrorType);
+  | ((zodError: z.ZodError) => void | ErrorType);
 
 const az = {
   field: zodFieldWrapper,
   fieldNumber: (): ZodCoercedNumber<string | null> => {
     return z.coerce.number<string | null>();
   },
-  versionNumber: (): ZodType<VersionNumber, unknown> => {
+  versionNumber: (): ZodType<VersionNumber> => {
     return zodVersionNumber;
   },
   fieldDate: (): ZodCoercedDate<string | null> => {

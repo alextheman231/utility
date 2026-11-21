@@ -1,3 +1,5 @@
-export type CallReturnType<Function, Arguments> = Function extends (arg: Arguments) => infer Return
+export type CallReturnType<FunctionType, Arguments> = FunctionType extends (
+  arg: Arguments,
+) => infer Return
   ? Return
   : never;

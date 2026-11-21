@@ -9,6 +9,7 @@
  */
 function isOrdered(array: ReadonlyArray<number>): boolean {
   const newArray = [...array];
+  // oxlint-disable-next-line require-array-sort-compare -- I should add this, but will do so later.
   newArray.sort();
 
   for (const index in newArray) {

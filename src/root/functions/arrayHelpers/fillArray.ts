@@ -75,9 +75,11 @@ function fillArray<ItemType>(
     })();
   }
 
-  const outputArray = new Array(length).fill(null).map((_, index) => {
-    return callback(index);
-  });
+  const outputArray = Array.from({ length })
+    .fill(null)
+    .map((_, index) => {
+      return callback(index);
+    });
 
   const isAsync = outputArray.some((item) => {
     return (
@@ -87,7 +89,6 @@ function fillArray<ItemType>(
   if (isAsync) {
     return Promise.all(outputArray);
   }
-
   return outputArray as Array<ItemType>;
 }
 

@@ -146,7 +146,7 @@ describe.each<Entrypoint>([Entrypoint.ROOT, Entrypoint.NODE, Entrypoint.INTERNAL
 
               console.info("Adding the relevant package scripts...");
               testPackageInfo.scripts = {
-                ...(testPackageInfo.scripts ?? {}),
+                ...testPackageInfo.scripts,
                 execute: "tsx",
                 lint: "tsc --noEmit",
               };

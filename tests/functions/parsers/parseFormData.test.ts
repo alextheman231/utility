@@ -35,7 +35,9 @@ describe("parseFormData", () => {
 
     const formData = createFormData(data);
 
-    const result = parseFormData(formData, dataSchema.parse);
+    const result = parseFormData(formData, (input) => {
+      return dataSchema.parse(input);
+    });
 
     expect(result.firstKey).toBe("Hello");
     expect(result.numberKey).toBe(2);
