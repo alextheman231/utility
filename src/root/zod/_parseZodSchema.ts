@@ -9,7 +9,6 @@ export interface ZodParsingErrorData {
   issues: Array<z.core.$ZodIssue>;
 }
 
-// eslint-disable-next-line jsdoc/require-jsdoc -- No need for JSDoc on this one - it is only an internal helper function.
 function _parseZodSchema<SchemaType extends ZodType, ErrorType extends Error = DataError>(
   parsedResult: ZodSafeParseResult<z.infer<SchemaType>>,
   input: unknown,

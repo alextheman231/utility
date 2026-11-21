@@ -6,6 +6,7 @@ const config: OxlintConfig = {
     suspicious: "error",
   },
   options: {
+    reportUnusedDisableDirectives: "error",
     typeAware: true,
     typeCheck: true,
   },

@@ -40,7 +40,7 @@ function camelToKebab(
             ? false
             : true
           : true)
-        // oxlint-enable
+        // oxlint-enable no-unneeded-ternary
       ) {
         innerIndex++;
       }
