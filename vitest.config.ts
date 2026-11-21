@@ -6,8 +6,8 @@ const vitestConfig: UserProjectConfigExport = {
   },
   test: {
     environment: "jsdom",
-    include: ["**/tests/**/*.test.ts"],
     globalSetup: ["tests/setup.ts"],
+    include: ["**/tests/**/*.test.ts"],
   },
 };
 
