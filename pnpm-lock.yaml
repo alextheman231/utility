@@ -186,8 +186,8 @@ importers:
         version: 10.2.1
     devDependencies:
       '@alextheman/configs':
-        specifier: 1.2.1
-        version: 1.2.1(oxfmt@0.79.0)(oxlint-tsgolint@7.0.2007)(oxlint@1.94.0(oxlint-tsgolint@7.0.2007))(zod@4.6.7)
+        specifier: 1.3.0
+        version: 1.3.0(oxfmt@0.79.0)(oxlint-tsgolint@7.0.2007)(oxlint@1.94.0(oxlint-tsgolint@7.0.2007))(zod@4.6.7)
       '@types/node':
         specifier: 26.6.6
         version: 26.6.6
@@ -254,8 +254,8 @@ importers:
 
 packages:
 
-  '@alextheman/configs@1.2.1':
-    resolution: {integrity: sha512-HhDIrsG3lnKpmMF3SqxWtFcJa/VsWW3xSBnN+NR660/2jCyQaj0x2KFgmSVFgBk8+Fp1/dgkuIh9W/wvgk6Xsg==}
+  '@alextheman/configs@1.3.0':
+    resolution: {integrity: sha512-DuVZMkxJO2pNFFSid+bQgAkg1RkfwKobGiTikcsb6SezMqx57dzCaDMvsSWzYaa71piO5hoTtY9WSOg8wP75Ew==}
     peerDependencies:
       oxfmt: '>=0.79.0'
       oxlint: '>=1.94.0'
@@ -2494,7 +2494,7 @@ packages:
 
 snapshots:
 
-  '@alextheman/configs@1.2.1(oxfmt@0.79.0)(oxlint-tsgolint@7.0.2007)(oxlint@1.94.0(oxlint-tsgolint@7.0.2007))(zod@4.6.7)':
+  '@alextheman/configs@1.3.0(oxfmt@0.79.0)(oxlint-tsgolint@7.0.2007)(oxlint@1.94.0(oxlint-tsgolint@7.0.2007))(zod@4.6.7)':
     dependencies:
       '@alextheman/utility': 5.32.2(zod@4.6.7)
     optionalDependencies:
