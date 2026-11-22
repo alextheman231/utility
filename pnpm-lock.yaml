@@ -186,8 +186,8 @@ importers:
         version: 10.2.1
     devDependencies:
       '@alextheman/configs':
-        specifier: 1.1.0
-        version: 1.1.0(oxfmt@0.79.0)(oxlint-tsgolint@7.0.2007)(oxlint@1.94.0(oxlint-tsgolint@7.0.2007))
+        specifier: 1.2.1
+        version: 1.2.1(oxfmt@0.79.0)(oxlint-tsgolint@7.0.2007)(oxlint@1.94.0(oxlint-tsgolint@7.0.2007))(zod@4.6.7)
       '@types/node':
         specifier: 26.6.6
         version: 26.6.6
@@ -254,8 +254,8 @@ importers:
 
 packages:
 
-  '@alextheman/configs@1.1.0':
-    resolution: {integrity: sha512-N7qjv0leVN9sLZsgqKHKJjQNJFXSXLHU6CTzGU9cH+qVyZTtiMc8gux9pk6RKRIbC6EWK21naYR27QFlwO39ZQ==}
+  '@alextheman/configs@1.2.1':
+    resolution: {integrity: sha512-HhDIrsG3lnKpmMF3SqxWtFcJa/VsWW3xSBnN+NR660/2jCyQaj0x2KFgmSVFgBk8+Fp1/dgkuIh9W/wvgk6Xsg==}
     peerDependencies:
       oxfmt: '>=0.79.0'
       oxlint: '>=1.94.0'
@@ -270,6 +270,12 @@ packages:
 
   '@alextheman/utility@5.32.0':
     resolution: {integrity: sha512-riQAelZt1JxiPjR10R0xkgAmyeqswRl+aa5Yu2mqA8mtxsCQh8Z3lNAk+CnDvwgXPLFkHF5G+WmdoAmKsW9o5Q==}
+    engines: {node: '>=22.3.0'}
+    peerDependencies:
+      zod: '>=4.6.6'
+
+  '@alextheman/utility@5.32.2':
+    resolution: {integrity: sha512-zRTyQJ+sm73xbsB1Uk8Dxq3e14327HRAPy/idFU/J54o2n1LsAyN6fXU+xKpXdRW56CLWHl342tcRfl1SDxyTw==}
     engines: {node: '>=22.3.0'}
     peerDependencies:
       zod: '>=4.6.6'
@@ -2488,15 +2494,25 @@ packages:
 
 snapshots:
 
-  '@alextheman/configs@1.1.0(oxfmt@0.79.0)(oxlint-tsgolint@7.0.2007)(oxlint@1.94.0(oxlint-tsgolint@7.0.2007))':
+  '@alextheman/configs@1.2.1(oxfmt@0.79.0)(oxlint-tsgolint@7.0.2007)(oxlint@1.94.0(oxlint-tsgolint@7.0.2007))(zod@4.6.7)':
+    dependencies:
+      '@alextheman/utility': 5.32.2(zod@4.6.7)
     optionalDependencies:
       oxfmt: 0.79.0
       oxlint: 1.94.0(oxlint-tsgolint@7.0.2007)
       oxlint-tsgolint: 7.0.2007
+    transitivePeerDependencies:
+      - zod
 
   '@alextheman/utility@5.32.0(zod@4.6.7)':
     dependencies:
       dotenv: 18.0.9
+      execa: 10.2.1
+      zod: 4.6.7
+
+  '@alextheman/utility@5.32.2(zod@4.6.7)':
+    dependencies:
+      dotenv: 18.0.10
       execa: 10.2.1
       zod: 4.6.7
 
