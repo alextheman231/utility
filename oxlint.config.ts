@@ -1,3 +1,3 @@
-import { oxlintConfigBase } from "@alextheman/configs";
+import { oxlintConfigBase } from "@alextheman/configs/oxlint";
 
 export default oxlintConfigBase;
