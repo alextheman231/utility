@@ -73,6 +73,7 @@
     "execa": "10.2.1"
   },
   "devDependencies": {
+    "@alextheman/configs": "1.0.1",
     "@types/node": "26.6.6",
     "alex-c-line": "2.18.2",
     "cross-env": "10.1.0",
@@ -103,4 +104,3 @@
     "zod": ">=4.6.6"
   }
 }
-
